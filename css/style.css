@@ -204,6 +204,7 @@ p {
     margin-bottom: 10px;
     font-size: 18px;
     letter-spacing: 0.15em;
+    text-transform: uppercase;
 }
 
 .info__text {
@@ -217,6 +218,11 @@ p {
     margin-bottom: 15px;
     font-size: 30px;
     letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.block__title.text-white {
+    color: white;
 }
 
 .block__link {
@@ -224,6 +230,7 @@ p {
     display: inline-block;
     letter-spacing: 0.15em;
     color: black;
+    text-transform: uppercase;
 }
 
 .block__link:hover {
@@ -308,6 +315,7 @@ p {
     position: absolute;
     bottom: 20px;
     left: 30px;
+    text-transform: uppercase;
 }
 
 .services__title {
@@ -315,4 +323,51 @@ p {
     font-weight: 600;
     letter-spacing: 0.23em;
     color: #000;
+    text-transform: uppercase;
+}
+
+/* about */
+
+.about {
+    padding: 115px 0; 
+    background-color: #171616;
+}
+
+.about__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about__block {
+    max-width: 505px;
+}
+
+.about__text {
+    margin: 35px 0 40px;
+    font-weight: 600;
+    color: #B7B7B7;
+    letter-spacing: 0.23em;
+}
+
+.about__link {
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.about__link:hover {
+    text-decoration: none;
+}
+
+.about__img {
+    height: 340px;
+} 
+
+/* process */
+
+.process__title {
+    
 }
