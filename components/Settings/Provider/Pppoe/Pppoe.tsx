@@ -1,8 +1,8 @@
-import { INetworkWanForm } from "types/types"
 import { UseFormRegister } from "react-hook-form"
+import { IWanSettingsForm } from "../Provider"
 
 interface IProps {
-    register: UseFormRegister<INetworkWanForm>
+    register: UseFormRegister<IWanSettingsForm>
 }
 
 export const Pppoe = ({register}: IProps) => {
