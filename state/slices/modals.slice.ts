@@ -10,6 +10,7 @@ export interface IState {
     isOpenSetWifi5Settings: boolean
     isOpenSetLanSettings: boolean
     isOpenSetProviderSettings: boolean
+    isOpenAddWhiteIp: boolean
 }
 
 const initialState: IState = {
@@ -22,6 +23,7 @@ const initialState: IState = {
     isOpenSetWifi5Settings: false,
     isOpenSetLanSettings: false,
     isOpenSetProviderSettings: false,
+    isOpenAddWhiteIp: false,
 }
 
 export const modals = createSlice({
@@ -82,6 +84,12 @@ export const modals = createSlice({
         closeSetProviderSettingsModal: (state) => {
             state.isOpenSetProviderSettings = false
         },
+        openAddWhiteIpModal: (state) => {
+            state.isOpenAddWhiteIp = true
+        },
+        closeAddWhiteIpModal: (state) => {
+            state.isOpenAddWhiteIp = false
+        },
     },
 })
 
@@ -104,6 +112,8 @@ export const {
     closeSetLanSettingsModal,
     openSetProviderSettingsModal,
     closeSetProviderSettingsModal,
+    openAddWhiteIpModal,
+    closeAddWhiteIpModal,
 } = modals.actions
 
 export default modals.reducer

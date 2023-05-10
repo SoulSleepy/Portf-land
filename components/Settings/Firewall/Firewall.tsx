@@ -2,6 +2,7 @@ import { useGetSettingsFirewallQuery } from 'state/rtk/settings.rtk'
 import { NewFirewall } from './NewFirewall'
 import { FirewallList } from './FirewallList/FirewallList'
 
+
 export const Firewall = () => {
     const { data, isLoading } = useGetSettingsFirewallQuery()
 

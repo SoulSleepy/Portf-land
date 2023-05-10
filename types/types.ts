@@ -629,6 +629,26 @@ export interface IFirewallItem {
     src: string
     dest: string
     type: string
+    src_neigh?: SrcNeighIp[]
+}
+
+export interface SrcNeighIp {
+    [x: string]: string | WTFIpItem
+}
+
+export interface WTFIpItem {
+    real_name: string
+    anonymous: boolean
+    src_dport: string
+    dest_ip: string
+    device: string
+    dest_port: string
+    index: number
+    name: string
+    target: string
+    src: string
+    dest: string
+    type: string
 }
 
 // setting => NewFirewall interfaces //
@@ -655,6 +675,31 @@ export interface IDellFirewallResponse {
     msg: string
     error: null
     explain: string
+}
+
+// setting => EditFirewall interfaces //
+export interface IEditFirewallResponse {
+    status: boolean
+    data: string
+    msg: string
+    error: null
+    explain: string
+}
+
+// setting => AddIpFirewall interfaces //
+export interface IAddIpFirewallResponse {
+    status: boolean
+    data: string
+    msg: string
+    error: null
+    explain: string
+}
+
+export interface IAddIpFirewallForm {
+    name: string
+    dest_ip: string
+    dest_port: string
+    src_dport: string
 }
 
 // setting => ChangeSettingWifi interfaces //

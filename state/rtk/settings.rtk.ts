@@ -16,6 +16,8 @@ import {
     IDellFirewallResponse,
     IResponseWiFiResponse,
     IResponseIWiFiItem,
+    IEditFirewallResponse,
+    IAddIpFirewallResponse,
 } from 'types/types'
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { fetchBase } from './config'
@@ -164,7 +166,7 @@ export const settingsApi = createApi({
             }),
             invalidatesTags: [{ type: 'Firewall', id: 'LIST' }],
         }),
-        SetDellFirewall: builder.query<
+        setDellFirewall: builder.mutation<
             IDellFirewallResponse,
             {[x: string]: string}
         >({
@@ -177,6 +179,31 @@ export const settingsApi = createApi({
                     token: 'DEBUG',
                 },
             }),
+            invalidatesTags: [{ type: 'Firewall', id: 'LIST' }],
+        }),
+        setEditSettingsFirewall: builder.mutation<IEditFirewallResponse, any>({
+            query: (params) => ({
+                url: `Setting-setSettingsFirewall`,
+                method: 'POST',
+                body: {
+                    args: { module: 'firewall', params},
+                    path: 'Setting/setSettingsFirewall',
+                    token: 'DEBUG',
+                },
+            }),
+            invalidatesTags: [{ type: 'Firewall', id: 'LIST' }],
+        }),
+        addSettingsIpFirewall: builder.mutation<IAddIpFirewallResponse, INewFirewallForm>({
+            query: (params) => ({
+                url: `Setting-addSettingsFirewall`,
+                method: 'POST',
+                body: {
+                    args: { module: 'firewall', params, type: 'redirect'},
+                    path: 'Setting/addSettingsFirewall',
+                    token: 'DEBUG',
+                },
+            }),
+            invalidatesTags: [{ type: 'Firewall', id: 'LIST' }],
         }),
     }),
 })
@@ -191,5 +218,8 @@ export const {
     useLazySetWanSettingsQuery,
     useLazySetDHCPSettingsQuery,
     useLazySetLanSettingsQuery,
-    useLazySetDellFirewallQuery,
+    useSetDellFirewallMutation,
+    useLazyGetSettingsFirewallQuery,
+    useSetEditSettingsFirewallMutation,
+    useAddSettingsIpFirewallMutation,
 } = settingsApi

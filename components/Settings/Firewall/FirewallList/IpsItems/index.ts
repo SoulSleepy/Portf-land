@@ -1,0 +1,1 @@
+export { IpsItems } from './IpsItems'

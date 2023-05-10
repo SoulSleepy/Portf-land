@@ -150,7 +150,7 @@ export const EventIcon = ({ fill = '#6C7281' }) => {
     )
 }
 
-export const DevicesIcon = ( {fill = 'black'}) => {
+export const DevicesIcon = ({ fill = 'black' }) => {
     return (
         <IconWrapper width={24} height={24} fill='none'>
             <path
@@ -541,6 +541,35 @@ export const UserIcon = ({ fill = '#6C7281' }) => {
             />
             <path
                 d='M12 12C14.2091 12 16 10.2091 16 8C16 5.79086 14.2091 4 12 4C9.79086 4 8 5.79086 8 8C8 10.2091 9.79086 12 12 12Z'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+        </IconWrapper>
+    )
+}
+
+export const DeleteIcon = ({ fill = '#6C7281' }) => {
+    return (
+        <IconWrapper width={24} height={24} fill='none'>
+            <path
+                d='M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z'
+                stroke={fill}
+                strokeWidth='2'
+                strokeMiterlimit='10'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+            <path
+                d='M9 9L14.9999 14.9999'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+            <path
+                d='M9 14.9999L14.9999 9'
                 stroke={fill}
                 strokeWidth='2'
                 strokeLinecap='round'
