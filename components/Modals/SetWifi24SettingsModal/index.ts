@@ -1,0 +1,1 @@
+export { SetWifi24SettingsModal } from './SetWifi24SettingsModal'

@@ -1,8 +1,8 @@
 export const VPN = () => {
-    const blockClasses = 'flex flex-col bg-white rounded-xl p-3 shadow-md gap-2'
-    const titleClasses = 'flex font-medium h-10 items-center'
-    const hrClasses = 'border-none bg-text h-[1.5px] w-full'
-    const btnClasses = 'bg-light-lighter rounded-sm h-8 px-1 hover:border' 
+    const blockClasses = 'flex flex-col bg-light rounded-xl p-3 shadow-dark gap-2'
+    const titleClasses = 'flex font-medium h-10 items-center text-lg'
+    const hrClasses = 'border-none bg-text-light h-[1.5px] w-full'
+    const btnClasses = 'flex flex-col items-center justify-center px-2 h-8 cursor-pointer outline outline-0 hover:outline-1 hover:font-medium bg-light-lighter rounded-sm' 
 
     return (
         <div className='grid grid-cols-2 gap-4 text-text-light'>

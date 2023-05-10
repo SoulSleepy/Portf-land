@@ -1,7 +1,7 @@
 import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useMemo, useState } from 'react'
+import { useState} from 'react'
 import {
     ZaglushLogoIcon,
     HomeIcon,
@@ -15,11 +15,13 @@ import {
     SystemIcon,
     LogoutIcon,
 } from '../Icons/Icons'
+import { useLazyLogoutUserQuery } from 'state/rtk/auth.rtk'
+import { useTheme } from 'helpers/hooks/useTheme'
 
 interface IMenuItem {
     id: number
     name: string
-    icon: () => JSX.Element
+    icon: ({fill} : {fill?: string | undefined}) => JSX.Element
     link: string
 }
 
@@ -29,46 +31,19 @@ const menuItems: IMenuItem[] = [
     { id: 3, name: 'VPN', icon: NetIcon, link: '/vpn' },
     { id: 4, name: 'Уязвимости', icon: DangerIcon, link: '/danger' },
     { id: 5, name: 'События', icon: EventIcon, link: '/event' },
-    { id: 6, name: 'Устройства', icon: DevicesIcon, link: '/' },
-    { id: 7, name: 'Пользователи', icon: UsersIcon, link: '/' },
-    { id: 8, name: 'Настройки', icon: SettingsIcon, link: '/' },
-    { id: 9, name: 'Система', icon: SystemIcon, link: '/' },
+    { id: 6, name: 'Устройства', icon: DevicesIcon, link: '/devices' },
+    { id: 7, name: 'Пользователи', icon: UsersIcon, link: '/users' },
+    { id: 8, name: 'Настройки', icon: SettingsIcon, link: '/settings' },
+    { id: 9, name: 'Система', icon: SystemIcon, link: '/system' },
 ]
 
 export const NavBar = () => {
+
+    const {theme} = useTheme()
+    const {route} = useRouter()
     const [toggleCollapse, setToggleCollapse] = useState(false)
     const [isCollapse, setIsCollapse] = useState(false)
-
-    const router = useRouter()
-
-    const activeMenu = useMemo<IMenuItem>(
-        () =>
-            menuItems.find(
-                (menu) => menu.link === router.pathname
-            ) as IMenuItem,
-        [router.pathname]
-    )
-
-    const wrapperClasses = cn(
-        'h-screen px-2 w-20 pt-8 pb-4 bg-light flex justify-between flex-col',
-        {
-            ['w-52']: !toggleCollapse,
-        }
-    )
-
-    const collapseIconClasses = cn(
-        'p-4 rounded bg-light-lighter absolute right-0',
-        {
-            'rotate-180': toggleCollapse,
-        }
-    )
-
-    const getNavBarItemsClasses = (menu: Omit<IMenuItem, 'icon'>) => {
-        return cn(
-            'flex items-center cursor-pointer hover:bg-light-lighter rounded w-full overflow-hidden whitespace-nowrap',
-            { ['bg-light-lighter']: activeMenu.id === menu.id }
-        )
-    }
+    const [postLogoutUser] = useLazyLogoutUserQuery()
 
     const onMouseOver = () => {
         setIsCollapse(!isCollapse)
@@ -76,6 +51,27 @@ export const NavBar = () => {
 
     const toggleNavBar = () => {
         setToggleCollapse(!toggleCollapse)
+    }
+
+    const wrapperClasses = cn(
+        'h-screen px-2 w-20 pt-8 pb-4 bg-light dark:bg-darkD flex justify-between flex-col sticky top-0 z-10',
+        {
+            ['w-52']: !toggleCollapse,
+        }
+    )
+
+    const collapseIconClasses = cn(
+        'p-4 rounded bg-light-lighter dark:bg-light-lighterD absolute right-0',
+        {
+            'rotate-180': toggleCollapse,
+        }
+    )
+
+    const getNavBarItemsClasses = (link: string) => {
+        return cn(
+            'flex items-center cursor-pointer hover:bg-light-lighter dark:hover:bg-light-lighterD rounded w-full overflow-hidden whitespace-nowrap',
+            { ['bg-light-lighter dark:bg-light-lighterD']: route === link }
+        )
     }
 
     return (
@@ -88,7 +84,7 @@ export const NavBar = () => {
             <div className='flex flex-col'>
                 <div className='flex items-center jastify-between relative'>
                     <div className='flex items-center pl-1 gap-4'>
-                        <ZaglushLogoIcon />
+                        <ZaglushLogoIcon fill={theme === 'dark' ? 'red' : 'black'}/>
                         <span
                             className={cn(
                                 'mt-2 text-lg font-medium text-text',
@@ -108,26 +104,23 @@ export const NavBar = () => {
                     )}
                 </div>
                 <div className='flex flex-col items-start mt-[40px]'>
-                    {menuItems.map(({ icon: Icon, ...menu }) => {
+                    {menuItems.map((item) => {
                         return (
                             <div
-                                className={getNavBarItemsClasses(menu)}
-                                key={menu.id}
+                                className={getNavBarItemsClasses(item.link)}
+                                key={item.id}
                             >
                                 <Link
-                                    href={menu.link}
+                                    href={item.link}
                                     className='flex py-[10px] px-4 gap-2 items-center w-full h-full'
                                 >
                                     <div>
-                                        <Icon />
+                                        <item.icon fill='black'/>
                                     </div>
                                     {!toggleCollapse && (
                                         <span
-                                            className={cn(
-                                                'text-md font-medium text-text-light'
-                                            )}
-                                        >
-                                            {menu.name}
+                                            className='text-md font-medium text-text-light'>
+                                            {item.name}
                                         </span>
                                     )}
                                 </Link>
@@ -137,14 +130,15 @@ export const NavBar = () => {
                 </div>
             </div>
             <Link
-                href={'/'}
-                className='flex items-center cursor-pointer hover:bg-light-lighter rounded w-full overflow-hidden whitespace-nowrap gap-2 px-4 py-[10px]'
+                href={'/login'}
+                onClick={() => postLogoutUser()}
+                className='flex items-center cursor-pointer hover:bg-light-lighter dark:hover:bg-light-lighterD rounded w-full overflow-hidden whitespace-nowrap gap-2 px-4 py-[10px]'
             >
                 <div>
                     <LogoutIcon />
                 </div>
                 {!toggleCollapse && (
-                    <span className={cn('text-md font-medium text-text-light')}>
+                    <span className='text-md font-medium text-text-light'>
                         Выход
                     </span>
                 )}

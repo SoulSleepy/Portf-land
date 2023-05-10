@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { NextPage } from 'next'
-import { HomeComponent } from '@/components/HomeComponent'
+import { HomeComponent } from 'components/HomeComponent'
 
 const Home: NextPage = () => {
 
@@ -8,6 +8,7 @@ const Home: NextPage = () => {
         <div>
             <Head>
                 <title>GAK-LINK</title>
+                <link rel="SHORTCUT ICON" href="favicon.ico" />
             </Head>
             <HomeComponent />
         </div>

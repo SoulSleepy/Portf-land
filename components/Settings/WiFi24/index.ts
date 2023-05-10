@@ -1,0 +1,1 @@
+export { WiFi24 } from './WiFi24'

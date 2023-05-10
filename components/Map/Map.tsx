@@ -105,7 +105,7 @@ export const Map = () => {
                             return (
                                 <div
                                     key={item.id}
-                                    className='flex flex-row items-center gap-2 p-2'
+                                    className='flex flex-row items-center gap-2 p-2 hover:bg-mapItemBG cursor-pointer'
                                 >
                                     <DevicesIcon />
                                     <div>
@@ -115,7 +115,7 @@ export const Map = () => {
                                         <p className='text-sm'>{item.ip}</p>
                                         <div className={devicePortClasses}>
                                             {item.ports.map((port) => {
-                                                return <p>{port}</p>
+                                                return <p key={port}>{port}</p>
                                             })}
                                         </div>
                                     </div>
@@ -131,7 +131,7 @@ export const Map = () => {
                             return (
                                 <div
                                     key={item.id}
-                                    className='flex flex-row items-center gap-2 p-2'
+                                    className='flex flex-row items-center gap-2 p-2 hover:bg-mapItemBG cursor-pointer'
                                 >
                                     <DevicesIcon />
                                     <div>
@@ -141,7 +141,7 @@ export const Map = () => {
                                         <p className='text-sm'>{item.ip}</p>
                                         <div className={devicePortClasses}>
                                             {item.ports.map((port) => {
-                                                return <p>{port}</p>
+                                                return <p key={port}>{port}</p>
                                             })}
                                         </div>
                                     </div>

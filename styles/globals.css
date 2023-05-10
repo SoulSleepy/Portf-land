@@ -2,6 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
+/* input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 50px rgb(59 129 246 / var(--tw-bg-opacity)) inset;
+  -webkit-text-fill-color: #fff;
+} */
+
+
+input[type=range]::-webkit-slider-thumb,
+input[type=range]::-moz-range-thumb {
+    position: relative;
+    display: block;
+    pointer-events: auto;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    -webkit-appearance: none;
+    @apply bg-primary;
+    transition: 0.1s;
+}
+
+input[type=range]::-webkit-slider-thumb:hover,
+input[type=range]::-moz-range-thumb:hover {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+input[type="date" i]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    background-image: url('../images/calendarIcon.svg');
+    background-size: 20px;
+    background-position: center;
+    margin-right: 10px;
+    transition: 0.2s;
+}
+
+input[type="date" i]::-webkit-calendar-picker-indicator:hover {
+    transform: scale(1.3);
+}
+
+input[type="date" i]::-webkit-datetime-edit {
+    padding-left: 30px;
+}
+
 html,
 body {
     padding: 0;
@@ -14,5 +60,6 @@ a {
 }
 
 * {
+    /* color: #9f9f9f; */
     box-sizing: border-box;
 }

@@ -1,47 +1,50 @@
 import cn from 'classnames'
 import { useState } from 'react'
 import { Completed } from './Completed'
-import { Filter } from './Filter'
+import { FilterDanger } from './FilterDanger'
 import { InWork } from './InWork'
 
 export const Danger = () => {
-    const [activeBtn, setActiveBtn] = useState('inWork')
+    const [activeBtn, setActiveBtn] = useState(false)
 
-    const blockClasses = 'flex flex-col bg-white rounded-xl p-3 shadow-md gap-2'
+    const blockClasses =
+        'flex flex-col bg-light rounded-xl p-3 shadow-dark gap-2'
     const btnTitleClasses =
-        'border-b text-center h-7 hover:border-b-2 hover:font-medium cursor-pointer'
+        'border-b text-center h-7 hover:border-b-2 hover:font-medium cursor-pointer text-lg'
     const activeBtnClasses = 'border-b-2 font-medium'
-    const hrClasses = 'border-none bg-text h-[1.5px] w-full'
+    const hrClasses = 'border-none bg-text-light h-[1.5px] w-full mb-3'
 
     return (
-        <div className='grid grid-cols-[2fr_1fr] gap-3 text-text-light'>
+        <div className='grid grid-cols-[2.4fr_1fr] gap-3 text-text-light'>
             <div className={blockClasses}>
                 <div className='grid grid-cols-2'>
                     <button
                         className={cn(btnTitleClasses, {
-                            [activeBtnClasses]: activeBtn === 'inWork',
+                            [activeBtnClasses]: !activeBtn,
                         })}
-                        onClick={() => setActiveBtn('inWork')}
+                        onClick={() => setActiveBtn(false)}
                     >
                         В работе
                     </button>
                     <button
                         className={cn(btnTitleClasses, {
-                            [activeBtnClasses]: activeBtn === 'completed',
+                            [activeBtnClasses]: activeBtn,
                         })}
-                        onClick={() => setActiveBtn('completed')}
+                        onClick={() => setActiveBtn(true)}
                     >
                         Завершенные
                     </button>
                 </div>
-                {activeBtn === 'inWork' ? <InWork /> : <Completed />}
+                {!activeBtn ? (
+                    <InWork />
+                ) : (
+                    <Completed />
+                )}
             </div>
             <div className={blockClasses}>
-                <p className='flex font-medium h-10 items-center'>Фильтр</p>
+                <p className='flex font-medium h-10 items-center text-lg'>Фильтр</p>
                 <hr className={hrClasses} />
-                <div>
-                    <Filter />
-                </div>
+                <FilterDanger isClosed={activeBtn}/>
             </div>
         </div>
     )
