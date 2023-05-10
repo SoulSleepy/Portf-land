@@ -5,7 +5,7 @@ import { INetworkForm } from 'types/types'
 import {
     useLazySetDHCPSettingsQuery,
     useLazySetLanSettingsQuery,
-} from '@/state/rtk/settings.rtk'
+} from 'state/rtk/settings.rtk'
 
 interface IProps {
     params: INetworkForm

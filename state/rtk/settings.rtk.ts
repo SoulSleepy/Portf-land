@@ -164,9 +164,9 @@ export const settingsApi = createApi({
             }),
             invalidatesTags: [{ type: 'Firewall', id: 'LIST' }],
         }),
-        getDellFirewall: builder.mutation<
+        SetDellFirewall: builder.query<
             IDellFirewallResponse,
-            INewFirewallForm
+            {[x: string]: string}
         >({
             query: (params) => ({
                 url: `setting-delSettingsFirewall`,
@@ -177,7 +177,6 @@ export const settingsApi = createApi({
                     token: 'DEBUG',
                 },
             }),
-            invalidatesTags: [{ type: 'Firewall', id: 'LIST' }],
         }),
     }),
 })
@@ -192,5 +191,5 @@ export const {
     useLazySetWanSettingsQuery,
     useLazySetDHCPSettingsQuery,
     useLazySetLanSettingsQuery,
-    useGetDellFirewallMutation,
+    useLazySetDellFirewallQuery,
 } = settingsApi
