@@ -4,25 +4,20 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import {
     useGetDHCPQuery,
     useGetNetworkInfoQuery,
-    useLazySetDHCPSettingsQuery,
-    useLazySetLanSettingsQuery,
 } from 'state/rtk/settings.rtk'
 import Image from 'next/image'
 import upIpIcon from '../../../images/upIpIcon.svg'
 import downIpIcon from '../../../images/downIpIcon.svg'
 import { INetworkForm } from 'types/types'
 import { openSetLanSettingsModal } from 'state/slices/modals.slice'
-import { useAppDispatch } from '@/state/store'
-import { SetLanSettingsModal } from '@/components/Modals/SetLanSettingsModal'
+import { useAppDispatch } from 'state/store'
+import { SetLanSettingsModal } from 'components/Modals/SetLanSettingsModal'
 
 export const Lan = () => {
     const { data: dataLan, isLoading: isLoadLan } = useGetNetworkInfoQuery()
     const { data: dataDHCP, isLoading: isLoadDHCP } = useGetDHCPQuery()
 
     const dispatch = useAppDispatch()
-
-    const [setDHCPSettings] = useLazySetDHCPSettingsQuery()
-    const [setLanSettings] = useLazySetLanSettingsQuery()
 
     const { register, handleSubmit, watch, setValue } = useForm<INetworkForm>({
         mode: 'onBlur',

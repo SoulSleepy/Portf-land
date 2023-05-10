@@ -1,4 +1,4 @@
-import { IFirewallItem } from "types/types"
+import { IFirewallItem, INewFirewallForm } from "types/types"
 import { FC } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import cn from 'classnames'
@@ -6,26 +6,27 @@ import Image from "next/image"
 import editIcon from '../../../../images/editIcon.svg'
 import deleteIcon from '../../../../images/deleteIcon.svg'
 import addIcon from '../../../../images/addIcon.svg'
-import { useGetDellFirewallMutation } from "state/rtk/settings.rtk"
+import { useLazySetDellFirewallQuery } from "state/rtk/settings.rtk"
 
 
 export const FirewallList:FC<IFirewallItem> = (props) => {
-    const [dellFirewallItem] = useGetDellFirewallMutation()
+    const [dellFirewallItem] = useLazySetDellFirewallQuery()
 
     const {anonymous,dest,dest_ip,dest_port,device,src,index,name,real_name,src_dport,target,type} = props
 
     const { register, reset, handleSubmit, formState, watch, setValue } =
-        useForm<any>({
+        useForm<INewFirewallForm>({
             mode: 'onBlur',
         })
 
-        const onSubmit: SubmitHandler<any> = (data) => {
+        const onSubmit: SubmitHandler<INewFirewallForm> = (data) => {
             console.log(data)
         }
 
         const deleteItem = (name: string) => {
             const params = {[name]: name}
-            console.log(params);
+            dellFirewallItem(params)
+            // setTimeout(getFirewallList, )
         }
 
         const inputClasses =
