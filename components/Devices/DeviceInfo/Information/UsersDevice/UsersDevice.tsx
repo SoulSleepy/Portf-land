@@ -16,9 +16,9 @@ export const UsersDevice = ({ users }: IProps) => {
             <p className={titleClasses}>Пользователи</p>
             <hr className={hrClasses} />
             <div className='grid grid-cols-2 gap-2 font-medium'>
-                {users.map((item) => {
+                {users.map((item, index) => {
                     return (
-                        <div className='flex flex-row items-center gap-2 bg-light-lighter h-8 w-full pl-1'>
+                        <div key={index} className='flex flex-row items-center gap-2 bg-light-lighter h-8 w-full pl-1'>
                             <UserIcon />
                             <p className=''>
                                 {item.login}

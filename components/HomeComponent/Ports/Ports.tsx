@@ -28,7 +28,7 @@ export const Ports = ({ ports, isLoading }: IProps) => {
                 ) : (
                     ports.map((item) => {
                         return (
-                            <div className={portClasses}>
+                            <div key={item.port} className={portClasses}>
                                 <Image
                                     src={
                                         item.link
