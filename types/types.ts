@@ -100,9 +100,7 @@ export interface IToggleWiFiResponse {
     explain: string
 }
 
-export interface IToggleWifiItems {
-    
-}
+export interface IToggleWifiItems {}
 
 export interface IToggleWiFiItem {
     name: string
@@ -217,6 +215,112 @@ export interface IUpdateUserForm {
     password: string
 }
 
+// danger/event => DangerItem interfaces //
+export interface IGetDangerItemResponse {
+    status: boolean
+    data: IGetDangerInfo
+    msg: string
+    error: null
+    explain: string
+}
+
+export interface IGetDangerInfo {
+    id: number
+    type: number
+    crt: string
+    createTst: number
+    entityType: number
+    startTst: number
+    body: IGetDangerBody
+    deviceInfo: IGetDangerDevice
+    status: number
+    titleVars: IGetDangerTitleVars
+}
+
+export interface IGetDangerBody {
+    title: string
+    cves: IGetDangerCvec[]
+    port: string
+}
+
+export interface IGetDangerCvec {
+    securityMetrics: IGetDangerSecurityMetrics
+    descs: IGetDangerDesc[]
+    name: string
+    typesOfVuln: IGetDangerTypesOfVuln[]
+    urls: string[]
+    title: IGetDangerTitle2
+}
+
+export interface IGetDangerSecurityMetrics {
+    version: string
+    str: string
+    num: string
+}
+
+export interface IGetDangerDesc {
+    lang: string
+    source_name: string
+    desc: string
+}
+
+export interface IGetDangerTypesOfVuln {
+    name: string
+    title: IGetDangerTitle
+}
+
+export interface IGetDangerTitle {
+    ru: string
+    en: string
+}
+
+export interface IGetDangerTitle2 {
+    ru: string
+    en: string
+}
+
+export interface IGetDangerDevice {
+    entityId: number
+    entityType: number
+    name: string
+    type: number
+}
+
+export interface IGetDangerTitleVars {
+    softName: string
+}
+
+// danger/event => EventItem interfaces //
+export interface IGetEventItemResponse {
+    status: boolean
+    data: IEventInfo
+    msg: string
+    error: null
+    explain: string
+}
+
+export interface IEventInfo {
+    id: number
+    class: number
+    type: number
+    priority: number
+    entityType: number
+    createTst: number
+    body: IEventInfoBody
+    deviceInfo: IEventInfoDeviceInfo
+    status: number
+}
+
+export interface IEventInfoBody {
+    sender: string
+}
+
+export interface IEventInfoDeviceInfo {
+    entityId: number
+    entityType: number
+    name: string
+    type: number
+}
 // danger/event => DangerList interfaces //
 export interface IDangerListResponse {
     status: boolean

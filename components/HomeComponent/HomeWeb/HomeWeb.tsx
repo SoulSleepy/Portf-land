@@ -58,7 +58,7 @@ export const HomeWeb = () => {
                                         height={45}
                                     />
                                     <div className='w-[140px]'>
-                                        <p className='font-medium text-xl'>
+                                        <p className='font-medium text-xl whitespace-nowrap'>
                                             {item.name}
                                         </p>
                                         <p className='text-sm'>

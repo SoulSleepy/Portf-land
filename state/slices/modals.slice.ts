@@ -11,6 +11,8 @@ export interface IState {
     isOpenSetLanSettings: boolean
     isOpenSetProviderSettings: boolean
     isOpenAddWhiteIp: boolean
+    isOpenGetTaskItem: boolean
+    isOpenGetEventItem: boolean
 }
 
 const initialState: IState = {
@@ -24,6 +26,8 @@ const initialState: IState = {
     isOpenSetLanSettings: false,
     isOpenSetProviderSettings: false,
     isOpenAddWhiteIp: false,
+    isOpenGetTaskItem: false,
+    isOpenGetEventItem: false,
 }
 
 export const modals = createSlice({
@@ -90,6 +94,18 @@ export const modals = createSlice({
         closeAddWhiteIpModal: (state) => {
             state.isOpenAddWhiteIp = false
         },
+        openGetTaskItemModal: (state) => {
+            state.isOpenGetTaskItem = true
+        },
+        closeGetTaskItemModal: (state) => {
+            state.isOpenGetTaskItem = false
+        },
+        openGetEventItemModal: (state) => {
+            state.isOpenGetEventItem = true
+        },
+        closeGetEventItemModal: (state) => {
+            state.isOpenGetEventItem = false
+        },
     },
 })
 
@@ -114,6 +130,10 @@ export const {
     closeSetProviderSettingsModal,
     openAddWhiteIpModal,
     closeAddWhiteIpModal,
+    openGetTaskItemModal,
+    closeGetTaskItemModal,
+    openGetEventItemModal,
+    closeGetEventItemModal
 } = modals.actions
 
 export default modals.reducer

@@ -2,62 +2,27 @@ import {
     ClockIcon,
     DangerLevelIconIcon,
     DevicesIcon,
-} from '@/components/Icons/Icons'
-import Image from 'next/image'
-import dangerLevelIcon from '../../../../images/dangerLevelIcon.svg'
-import { useLazyGetDeviceTasksQuery } from '@/state/rtk/devices.rtk'
-import { useEffect } from 'react'
-import { toDate } from '@/helpers/softFunctions'
-
-interface IdangerItem {
-    id: number
-    nameDanger: string
-    levelDanger: number
-    device: string
-    date: string
-    number: number
-}
-
-const dangerItem: IdangerItem[] = [
-    {
-        id: 1,
-        nameDanger: 'Найдено уязвимое ПО OpenSSH 7.9 pl',
-        levelDanger: 9.3,
-        device: 'GAK-BOX',
-        date: '08:27 31.05.2022',
-        number: 177,
-    },
-    {
-        id: 2,
-        nameDanger: 'Найдено уязвимое ПО Nginx 1.14.2',
-        levelDanger: 7.8,
-        device: 'GAK-BOX',
-        date: '08:28 31.05.2022',
-        number: 178,
-    },
-    {
-        id: 3,
-        nameDanger: 'Найдено уязвимое ПО OpenSSH 8.4 pl',
-        levelDanger: 9.3,
-        device: 'GAK-BOX',
-        date: '08:27 31.05.2022',
-        number: 179,
-    },
-    {
-        id: 4,
-        nameDanger: 'Найдено уязвимое Http_server 2.4.46',
-        levelDanger: 6.8,
-        device: 'GAK-BOX',
-        date: '11:23 31.05.2022',
-        number: 180,
-    },
-]
+} from 'components/Icons/Icons'
+import { useLazyGetDeviceTasksQuery } from 'state/rtk/devices.rtk'
+import { useEffect, useState } from 'react'
+import { toDate } from 'helpers/softFunctions'
+import { useAppDispatch } from 'state/store'
+import { GetDangerItemModal } from 'components/Modals/GetDangerItemModal'
+import { openGetTaskItemModal } from 'state/slices/modals.slice'
 
 interface IProps {
     deviceId: number
 }
 
 export const Dangers = ({ deviceId }: IProps) => {
+    const dispatch = useAppDispatch()
+    const [taskId, setTaskId] = useState(0)
+
+    const openModal = (value: number) => {
+        setTaskId(value)
+        dispatch(openGetTaskItemModal())
+    }
+
     const [getDeviceTasks, { data, isLoading }] = useLazyGetDeviceTasksQuery()
 
     useEffect(() => {
@@ -77,6 +42,7 @@ export const Dangers = ({ deviceId }: IProps) => {
                         data.map((item) => {
                             return (
                                 <div
+                                    onClick={() => openModal(item.id)}
                                     key={item.id}
                                     className='flex flex-row gap-4 pl-3 hover:bg-light-lighter cursor-pointer'
                                 >
@@ -90,7 +56,8 @@ export const Dangers = ({ deviceId }: IProps) => {
                                     </div>
                                     <div className='flex flex-col gap-2'>
                                         <p className='font-medium text-lg'>
-                                            Найдено уязвимое ПО {item.titleVars.softName}
+                                            Найдено уязвимое ПО{' '}
+                                            {item.titleVars.softName}
                                         </p>
                                         <div className='flex flex-col gap-1'>
                                             <div className='flex flex-row gap-2'>
@@ -118,6 +85,7 @@ export const Dangers = ({ deviceId }: IProps) => {
                     </p>
                 )}
             </div>
+            <GetDangerItemModal id={taskId} />
         </div>
     )
 }

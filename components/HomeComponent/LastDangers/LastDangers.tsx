@@ -1,6 +1,10 @@
-import { ITaskItem } from 'types/types'
+import { IGetDangerInfo, ITaskItem } from 'types/types'
 import { DangerIcon } from 'components/Icons/Icons'
 import { toDate } from 'helpers/softFunctions'
+import { GetDangerItemModal } from 'components/Modals/GetDangerItemModal'
+import { useAppDispatch } from 'state/store'
+import { openGetTaskItemModal } from 'state/slices/modals.slice'
+import { useState } from 'react'
 
 interface IProps {
     dangerList: ITaskItem[]
@@ -8,6 +12,14 @@ interface IProps {
 }
 
 export const LastDangers = ({ dangerList, isLoading }: IProps) => {
+    const dispatch = useAppDispatch()
+    const [taskId, setTaskId] = useState(0)
+
+    const openModal = (value: number) => {
+        setTaskId(value)
+        dispatch(openGetTaskItemModal())
+    }
+
     const blockClasses =
         'flex flex-col bg-light rounded-xl p-3 shadow-dark gap-2'
     const titleClasses = 'flex font-medium h-10 items-center text-lg'
@@ -25,7 +37,11 @@ export const LastDangers = ({ dangerList, isLoading }: IProps) => {
                 ) : (
                     dangerList.map((item) => {
                         return (
-                            <div className={eventDangerClasses} key={item.id}>
+                            <div
+                                className={eventDangerClasses}
+                                key={item.id}
+                                onClick={() => openModal(item.id)}
+                            >
                                 <DangerIcon />
                                 <div className='flex flex-col gap-1'>
                                     <p className='leading-5'>
@@ -40,6 +56,7 @@ export const LastDangers = ({ dangerList, isLoading }: IProps) => {
                     })
                 )}
             </div>
+            <GetDangerItemModal id={taskId}/>
         </div>
     )
 }

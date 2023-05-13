@@ -2,10 +2,21 @@ import { ClockIcon, DangerLevelIconIcon, DevicesIcon } from 'components/Icons/Ic
 import { toDate } from 'helpers/softFunctions'
 import { useGetDangerListQuery } from 'state/rtk/dangerAndEvent.rtk'
 import { useFilter } from 'helpers/hooks/useFilter'
+import { GetDangerItemModal } from 'components/Modals/GetDangerItemModal'
+import { useAppDispatch } from 'state/store'
+import { useState } from 'react'
+import { openGetTaskItemModal } from 'state/slices/modals.slice'
 
 
 export const InWork = () => {
-    
+    const dispatch = useAppDispatch()
+    const [taskId, setTaskId] = useState(0)
+
+    const openModal = (value: number) => {
+        setTaskId(value)
+        dispatch(openGetTaskItemModal())
+    }
+
     const { filter } = useFilter()
     const { data, isLoading } = useGetDangerListQuery(filter)
     
@@ -18,6 +29,7 @@ export const InWork = () => {
                     data?.map((item) => {
                         return (
                             <div
+                                onClick={() => openModal(item.id)}
                                 key={item.id}
                                 className='flex flex-row gap-4 hover:bg-light-lighter cursor-pointer'
                             >
@@ -54,6 +66,7 @@ export const InWork = () => {
                     Уязвимости отсутствуют
                 </p>
             )}
+            <GetDangerItemModal id={taskId}/>
         </div>
     )
 }

@@ -1,6 +1,10 @@
 import { IIncidentsItem } from 'types/types'
 import { EventIcon } from 'components/Icons/Icons'
-import { toDate } from '@/helpers/softFunctions'
+import { toDate } from 'helpers/softFunctions'
+import { useAppDispatch } from 'state/store'
+import { useState } from 'react'
+import { openGetEventItemModal } from 'state/slices/modals.slice'
+import { GetEventItemModal } from 'components/Modals/GetEventItemModal'
 
 interface IProps {
     eventList: IIncidentsItem[]
@@ -8,6 +12,14 @@ interface IProps {
 }
 
 export const LastEvents = ({ eventList, isLoading }: IProps) => {
+    const dispatch = useAppDispatch()
+    const [taskId, setTaskId] = useState(0)
+
+    const openModal = (value: number) => {
+        setTaskId(value)
+        dispatch(openGetEventItemModal())
+    }
+
     const blockClasses =
         'flex flex-col bg-light rounded-xl p-3 shadow-dark gap-2'
     const titleClasses = 'flex font-medium h-10 items-center text-lg'
@@ -25,21 +37,30 @@ export const LastEvents = ({ eventList, isLoading }: IProps) => {
                 ) : (
                     eventList.map((item) => {
                         return (
-                            <div className={eventDangerClasses} key={item.id}>
-                                <div className='scale-110'><EventIcon /></div>
+                            <div
+                                className={eventDangerClasses}
+                                key={item.id}
+                                onClick={() => openModal(item.id)}
+                            >
+                                <div className='scale-110'>
+                                    <EventIcon />
+                                </div>
                                 <div className='flex flex-col gap-1'>
                                     <p className='leading-5'>
                                         {item.type === 5
                                             ? 'Рассылка пакетов отключения пользователей от Wifi-сети'
                                             : 'неизвестно'}
                                     </p>
-                                    <p className='text-sm'>{toDate(item.createTst)}</p>
+                                    <p className='text-sm'>
+                                        {toDate(item.createTst)}
+                                    </p>
                                 </div>
                             </div>
                         )
                     })
                 )}
             </div>
+            <GetEventItemModal id={taskId}/>
         </div>
     )
 }

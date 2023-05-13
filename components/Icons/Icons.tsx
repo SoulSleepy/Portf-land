@@ -325,12 +325,12 @@ export const LightModeIcon = () => {
     )
 }
 
-export const ClockIcon = () => {
+export const ClockIcon = ({ fill = 'black' }) => {
     return (
         <IconWrapper width={24} height={24} fill='none'>
             <path
                 d='M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z'
-                stroke='black'
+                stroke={fill}
                 strokeWidth='2'
                 strokeMiterlimit='10'
                 strokeLinecap='round'
@@ -338,7 +338,7 @@ export const ClockIcon = () => {
             />
             <path
                 d='M12 7V12H17'
-                stroke='black'
+                stroke={fill}
                 strokeWidth='2'
                 strokeLinecap='round'
                 strokeLinejoin='round'
@@ -570,6 +570,183 @@ export const DeleteIcon = ({ fill = '#6C7281' }) => {
             />
             <path
                 d='M9 14.9999L14.9999 9'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+        </IconWrapper>
+    )
+}
+
+export const ShowIpsIcon = ({ fill = '#6C7281' }) => {
+    return (
+        <IconWrapper width={24} height={24} fill='none'>
+            <path
+                d='M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+            <path
+                d='M9 13L12 10L15 13'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+        </IconWrapper>
+    )
+}
+
+export const HideIpsIcon = ({ fill = '#6C7281' }) => {
+    return (
+        <IconWrapper width={24} height={24} fill='none'>
+            <path
+                d='M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+            <path
+                d='M15 11L12 14L9 11'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+        </IconWrapper>
+    )
+}
+
+export const PlusIcon = ({ fill = '#6C7281' }) => {
+    return (
+        <IconWrapper width={24} height={24} fill='none'>
+            <path
+                d='M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z'
+                stroke={fill}
+                strokeWidth='2'
+                strokeMiterlimit='10'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+            <path
+                d='M8 12H16'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+            <path
+                d='M12 16L12 8'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+        </IconWrapper>
+    )
+}
+
+export const PlusRombIcon = ({ fill = '#6C7281' }) => {
+    return (
+        <IconWrapper width={24} height={24} fill='none'>
+            <path
+                d='M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z'
+                stroke={fill}
+                strokeWidth='2'
+                strokeMiterlimit='10'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+            <path
+                d='M9 9L14.9999 14.9999'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+            <path
+                d='M9 14.9999L14.9999 9'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+        </IconWrapper>
+    )
+}
+
+export const EditIcon = ({ fill = '#6C7281' }) => {
+    return (
+        <IconWrapper width={24} height={24} fill='none'>
+            <path
+                d='M4 19.9998H8L19.2929 8.70696C19.6834 8.31643 19.6834 7.68327 19.2929 7.29274L16.7071 4.70696C16.3166 4.31643 15.6834 4.31643 15.2929 4.70696L4 15.9998V19.9998Z'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+            <path
+                d='M12 8L16 12'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+        </IconWrapper>
+    )
+}
+
+export const TaskItemIcon = ({ fill = '#6C7281' }) => {
+    return (
+        <IconWrapper width={24} height={24} fill='none'>
+            <path
+                d='M4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12Z'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+            <path
+                d='M9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12Z'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+        </IconWrapper>
+    )
+}
+
+export const TaskDescriptionIcon = ({ fill = '#6C7281' }) => {
+    return (
+        <IconWrapper width={24} height={24} fill='none'>
+            <path
+                d='M21 12C21 16.9706 16.9706 21 12 21C10.2289 21 8.57736 20.4884 7.18497 19.605L3 21L4.39499 16.815C3.51156 15.4226 3 13.7711 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+            <path
+                d='M16 12H16.002V12.002H16V12Z'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+            <path
+                d='M12 12H12.002V12.002H12V12Z'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+            <path
+                d='M8 12H8.002V12.002H8V12Z'
                 stroke={fill}
                 strokeWidth='2'
                 strokeLinecap='round'

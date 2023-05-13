@@ -1,8 +1,7 @@
 import { INewFirewallForm } from 'types/types'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import Image from 'next/image'
-import addIcon from '../../../../images/addIcon.svg'
 import { useGetNewFirewallMutation } from 'state/rtk/settings.rtk'
+import { PlusIcon } from 'components/Icons/Icons'
 
 export const NewFirewall = () => {
     const [ setNewFirewall ] = useGetNewFirewallMutation()
@@ -49,8 +48,8 @@ export const NewFirewall = () => {
                 placeholder='Расширенный IP'
                 {...register('src_ip')}
             />
-            <button className='hover:scale-110' type='submit'>
-                <Image src={addIcon} width={30} height={30} alt='add' />
+            <button className='scale-[1.2] hover:scale-[1.3]' type='submit'>
+                <PlusIcon />
             </button>
         </form>
     )

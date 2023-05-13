@@ -1,10 +1,6 @@
-import { IFirewallItem, INewFirewallForm, SrcNeighIp } from 'types/types'
+import { IFirewallItem, INewFirewallForm } from 'types/types'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import cn from 'classnames'
-import Image from 'next/image'
-import editIcon from '../../../../images/editIcon.svg'
-import deleteIcon from '../../../../images/deleteIcon.svg'
-import addIcon from '../../../../images/addIcon.svg'
 import {
     useSetDellFirewallMutation,
     useSetEditSettingsFirewallMutation,
@@ -14,6 +10,14 @@ import { openAddWhiteIpModal } from 'state/slices/modals.slice'
 import { AddWhiteIpModal } from 'components/Modals/AddWhiteIpModal'
 import { useEffect, useState } from 'react'
 import { IpsItems } from './IpsItems'
+import {
+    EditIcon,
+    HideIpsIcon,
+    PlusIcon,
+    PlusRombIcon,
+    ShowIpsIcon,
+} from 'components/Icons/Icons'
+import { getNoun } from 'helpers/softFunctions'
 
 export const FirewallList = ({
     src_neigh,
@@ -24,7 +28,6 @@ export const FirewallList = ({
     real_name,
     src_dport,
 }: IFirewallItem) => {
-
     const [ipValues, setIpValues] = useState('Нет адресов')
     const [openIps, setOpenIps] = useState(false)
 
@@ -35,7 +38,8 @@ export const FirewallList = ({
 
     useEffect(() => {
         if (src_neigh) {
-            setIpValues(Object.values(src_neigh).length + ' адресов')
+            const length = Object.values(src_neigh).length
+            setIpValues(length + getNoun(length, ' адрес', ' адреса', ' адресов'))
         }
     }, [src_neigh])
 
@@ -87,7 +91,14 @@ export const FirewallList = ({
                 className={cn(inputClasses, 'w-[80px]')}
                 defaultValue={dest_port}
             />
-            <div className='flex flex-row gap-2 items-center relative' >
+            <div className='flex flex-row gap-2 items-center relative'>
+                <button
+                    type='button'
+                    className='scale-[1.2] hover:scale-[1.3]'
+                    onClick={() => setOpenIps(!openIps)}
+                >
+                    {!openIps ? <ShowIpsIcon /> : <HideIpsIcon />}
+                </button>
                 <input
                     type='text'
                     value={ipValues}
@@ -95,30 +106,27 @@ export const FirewallList = ({
                     onClick={() => setOpenIps(!openIps)}
                     readOnly
                 />
-                {openIps && src_neigh && <IpsItems src_neigh={src_neigh}/>}
+                {openIps && src_neigh && (
+                    <IpsItems src_neigh={src_neigh} setOpen={setOpenIps} />
+                )}
                 <button
-                    className='hover:scale-110'
+                    className='scale-[1.2] hover:scale-[1.3]'
                     type='button'
                     onClick={() => dispatch(openAddWhiteIpModal())}
                 >
-                    <Image src={addIcon} width={30} height={30} alt='add' />
+                    <PlusIcon />
                 </button>
             </div>
             <div className='flex flex-col items-end'>
                 <button
-                    className='hover:scale-125'
+                    className='hover:scale-110'
                     type='button'
                     onClick={() => deleteItem(real_name)}
                 >
-                    <Image
-                        src={deleteIcon}
-                        width={20}
-                        height={20}
-                        alt='delete'
-                    />
+                    <PlusRombIcon />
                 </button>
-                <button className='hover:scale-125' type='submit'>
-                    <Image src={editIcon} width={20} height={20} alt='edit' />
+                <button className='hover:scale-110' type='submit'>
+                    <EditIcon />
                 </button>
             </div>
             <AddWhiteIpModal body={{ dest_ip, dest_port, name, src_dport }} />

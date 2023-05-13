@@ -2,15 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 50px rgb(59 129 246 / var(--tw-bg-opacity)) inset;
-  -webkit-text-fill-color: #fff;
-} */
-
-
 input[type=range]::-webkit-slider-thumb,
 input[type=range]::-moz-range-thumb {
     position: relative;
@@ -60,6 +51,6 @@ a {
 }
 
 * {
-    /* color: #9f9f9f; */
+    /* color: #b96039; */
     box-sizing: border-box;
 }

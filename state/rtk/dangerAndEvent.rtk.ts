@@ -1,4 +1,11 @@
-import {IFilterDevicesResponse, IFilter, IDangerListResponse, IEventListResponse } from 'types/types'
+import {
+    IFilterDevicesResponse,
+    IFilter,
+    IDangerListResponse,
+    IEventListResponse,
+    IGetDangerItemResponse,
+    IGetEventItemResponse,
+} from 'types/types'
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { fetchBase } from './config'
 
@@ -50,7 +57,37 @@ export const dangerAndEventApi = createApi({
             }),
             transformResponse: ({ data }: IEventListResponse) => data,
         }),
+        getTaskItem: builder.query<IGetDangerItemResponse['data'], number>({
+            query: (id) => ({
+                url: `task-get`,
+                method: 'POST',
+                body: {
+                    args: { id },
+                    path: 'task/get',
+                    token: 'DEBUG',
+                },
+            }),
+            transformResponse: ({ data }: IGetDangerItemResponse) => data,
+        }),
+        getEventItem: builder.query<IGetEventItemResponse['data'], number>({
+            query: (id) => ({
+                url: `incident-get`,
+                method: 'POST',
+                body: {
+                    args: { id },
+                    path: 'incident/get',
+                    token: 'DEBUG',
+                },
+            }),
+            transformResponse: ({ data }: IGetEventItemResponse) => data,
+        }),
     }),
 })
 
-export const { useGetDevicesQuery, useGetDangerListQuery, useGetEventListQuery } = dangerAndEventApi
+export const {
+    useGetDevicesQuery,
+    useGetDangerListQuery,
+    useGetEventListQuery,
+    useLazyGetTaskItemQuery,
+    useLazyGetEventItemQuery,
+} = dangerAndEventApi

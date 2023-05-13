@@ -1,6 +1,7 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/dist/query'
 
 export const BASE_URL = 'http://192.168.1.253:8080/'
+// export const BASE_URL = 'https://gaklink/api/index.php/'
 
 const headers = new Headers()
 headers.set('Content-Type', 'application/json')
