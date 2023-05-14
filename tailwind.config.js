@@ -28,6 +28,7 @@ module.exports = {
             text: {
                 DEFAULT: '#1F2937',
                 light: '#6C7281',
+                lightD: '#bebebe',
             },
             light: {
                 DEFAULT: '#FAFBFC',

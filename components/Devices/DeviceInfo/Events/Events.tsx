@@ -5,6 +5,7 @@ import { toDate } from 'helpers/softFunctions'
 import { openGetEventItemModal } from 'state/slices/modals.slice'
 import { useAppDispatch } from 'state/store'
 import { GetEventItemModal } from 'components/Modals/GetEventItemModal'
+import { eventTypeObj } from '@/helpers/consts'
 
 interface IProps {
     deviceId: number
@@ -50,9 +51,7 @@ export const Events = ({ deviceId }: IProps) => {
                                     </div>
                                     <div className='flex flex-col gap-2'>
                                         <p className='font-medium text-lg'>
-                                            {item.type === 5
-                                                ? 'Рассылка пакетов отключения пользователей от Wifi-сети'
-                                                : 'неизвестно'}
+                                            {eventTypeObj[item.type as number]?.title}
                                         </p>
                                         <div className='flex flex-col gap-1'>
                                             <div className='flex flex-row gap-2'>

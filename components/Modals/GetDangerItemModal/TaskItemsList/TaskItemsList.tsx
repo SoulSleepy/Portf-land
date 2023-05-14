@@ -15,8 +15,7 @@ interface IProps {
 
 export const TaskItemsList = ({cves}: IProps) => {
     const [show, setShow] = useState('')
-
-
+    
     return (
         <div className='rounded-md bg-light-lighter'>
             {cves?.map((item) => {

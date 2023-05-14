@@ -10,6 +10,7 @@ import {
 } from 'components/Icons/Icons'
 import { toDate } from 'helpers/softFunctions'
 import { EventItemInfo } from './EventItemInfo'
+import { eventTypeObj } from 'helpers/consts'
 
 interface IProps {
     id: number
@@ -50,7 +51,7 @@ export const GetEventItemModal = ({ id }: IProps) => {
                                 <EventIcon />
                             </div>
                             <p className={titleClasses}>
-                                {data?.entityType === 1 ? 'Рассылка пакетов отключения пользователей от Wifi-сети' : 'неизвестно'}
+                                {eventTypeObj[data?.type as number]?.title}
                             </p>
                             <p className='ml-auto'>#{data?.id}</p>
                         </div>
@@ -67,7 +68,7 @@ export const GetEventItemModal = ({ id }: IProps) => {
                                 <p>{toDate(data?.createTst as number)}</p>
                             </div>
                         </div>
-                        <EventItemInfo />
+                        <EventItemInfo type={data?.type as number}/>
                     </div>
                 )}
             </div>

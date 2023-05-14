@@ -5,6 +5,8 @@ import { useAppDispatch } from 'state/store'
 import { useState } from 'react'
 import { openGetEventItemModal } from 'state/slices/modals.slice'
 import { GetEventItemModal } from 'components/Modals/GetEventItemModal'
+import { eventTypeObj } from 'helpers/consts'
+import { useTheme } from 'helpers/hooks/useTheme'
 
 interface IProps {
     eventList: IIncidentsItem[]
@@ -12,6 +14,7 @@ interface IProps {
 }
 
 export const LastEvents = ({ eventList, isLoading }: IProps) => {
+    const { theme } = useTheme()
     const dispatch = useAppDispatch()
     const [taskId, setTaskId] = useState(0)
 
@@ -21,17 +24,17 @@ export const LastEvents = ({ eventList, isLoading }: IProps) => {
     }
 
     const blockClasses =
-        'flex flex-col bg-light rounded-xl p-3 shadow-dark gap-2'
+        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2 h-[337px]'
     const titleClasses = 'flex font-medium h-10 items-center text-lg'
-    const hrClasses = 'border-none bg-text-light h-[1.5px] w-full'
+    const hrClasses = 'border-none bg-text-light dark:bg-text-lightD h-[1.5px] w-full'
     const eventDangerClasses =
-        'flex flex-row items-center gap-2 p-1 bg-light-lighter cursor-pointer'
+        'flex flex-row items-center gap-2 p-1 bg-light-lighter dark:bg-light-lighterD cursor-pointer'
 
     return (
         <div className={blockClasses}>
             <p className={titleClasses}>Последние события</p>
             <hr className={hrClasses} />
-            <div className='flex flex-col h-[280px] overflow-auto gap-2'>
+            <div className='flex flex-col h-[250px] overflow-auto gap-2'>
                 {isLoading ? (
                     <p className='Loading'></p>
                 ) : (
@@ -43,13 +46,11 @@ export const LastEvents = ({ eventList, isLoading }: IProps) => {
                                 onClick={() => openModal(item.id)}
                             >
                                 <div className='scale-110'>
-                                    <EventIcon />
+                                    <EventIcon fill={theme === 'dark' ? 'white': '#6C7281'}/>
                                 </div>
                                 <div className='flex flex-col gap-1'>
                                     <p className='leading-5'>
-                                        {item.type === 5
-                                            ? 'Рассылка пакетов отключения пользователей от Wifi-сети'
-                                            : 'неизвестно'}
+                                        {eventTypeObj[item.type as number]?.title}
                                     </p>
                                     <p className='text-sm'>
                                         {toDate(item.createTst)}

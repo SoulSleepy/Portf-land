@@ -6,8 +6,10 @@ import {
 import { useEffect, useState } from 'react'
 import { UpdateIcon } from 'components/Icons/Icons'
 import cn from 'classnames'
+import { useTheme } from 'helpers/hooks/useTheme'
 
 export const Speed = () => {
+    const { theme } = useTheme()
     const [test, setTest] = useState(false)
 
     const [getSpeedResult, { data, isLoading }] = useLazyGetSpeedNetQuery()
@@ -23,16 +25,15 @@ export const Speed = () => {
             setTest(true)
             setTimeout(setTest, 45000, false)
         }
-        // homeApi.useGetGrahpicQuery()
     }
 
     const blockClasses =
-        'flex flex-col bg-light rounded-xl p-3 shadow-dark gap-2'
+        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2'
     const titleClasses = 'flex font-medium h-10 items-center text-lg'
-    const hrClasses = 'border-none bg-text-light h-[1.5px] w-full'
-    const dotClasses = 'w-1 h-1 bg-text-light rounded-[2px]'
+    const hrClasses = 'border-none bg-text-light dark:bg-text-lightD h-[1.5px] w-full'
+    const dotClasses = 'w-1 h-1 bg-text-light rounded-[2px] dark:bg-text-lightD'
     const updateBtnClasses =
-        'flex items-center justify-center bg-light-lighter rounded-[20px] h-[40px] w-[40px] hover:border ml-auto'
+        'dark:bg-light-lighterD flex items-center justify-center bg-light-lighter rounded-[20px] h-[40px] w-[40px] hover:border ml-auto'
 
     return (
         <div className={blockClasses}>
@@ -78,7 +79,7 @@ export const Speed = () => {
                     )}
                     onClick={() => testSpeed()}
                 >
-                    <UpdateIcon />
+                    <UpdateIcon fill={theme === 'dark' ? 'white' : '#6C7281'}/>
                 </button>
             </div>
         </div>

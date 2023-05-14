@@ -1,6 +1,4 @@
 import { ClockIcon, DevicesIcon, EventIcon } from 'components/Icons/Icons'
-import Image from 'next/image'
-import eventIcon from '../../images/eventIcon.svg'
 import { FilterEvent } from './FilterEvent'
 import { useFilter } from 'helpers/hooks/useFilter'
 import { useGetEventListQuery } from 'state/rtk/dangerAndEvent.rtk'
@@ -9,6 +7,7 @@ import { openGetEventItemModal } from 'state/slices/modals.slice'
 import { useState } from 'react'
 import { useAppDispatch } from 'state/store'
 import { GetEventItemModal } from '../Modals/GetEventItemModal'
+import { eventTypeObj } from 'helpers/consts'
 
 export const Event = () => {
     const dispatch = useAppDispatch()
@@ -46,9 +45,7 @@ export const Event = () => {
                                         </div>
                                         <div className='flex flex-col gap-2'>
                                             <p className='font-medium text-lg'>
-                                                {item.type === 5
-                                                    ? 'Рассылка пакетов отключения пользователей от Wifi-сети'
-                                                    : 'неизвестно'}
+                                                {eventTypeObj[item.type as number]?.title}
                                             </p>
                                             <div className='flex flex-col gap-1'>
                                                 <div className='flex flex-row gap-2'>

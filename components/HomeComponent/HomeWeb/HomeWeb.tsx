@@ -9,6 +9,7 @@ import {
 import { ISetToggleWifiRequest } from 'types/types'
 import { useState } from 'react'
 import cn from 'classnames'
+import { WifiOffIcon, WifiOnIcon } from '@/components/Icons/Icons'
 
 export const HomeWeb = () => {
     const [timeoutOn, setOnTimeout] = useState(false)
@@ -17,11 +18,11 @@ export const HomeWeb = () => {
     const [setWifi] = useLazySetToggleWiFiQuery()
 
     const blockClasses =
-        'flex flex-col bg-light rounded-xl p-3 shadow-dark gap-2'
+        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2'
     const titleClasses = 'flex font-medium h-10 items-center text-lg'
-    const hrClasses = 'border-none bg-text-light h-[1.5px] w-full'
+    const hrClasses = 'border-none bg-text-light dark:bg-text-lightD h-[1.5px] w-full'
     const btnClasses =
-        cn('flex flex-col items-center justify-center h-8 w-[120px] cursor-pointer outline outline-0 hover:outline-1 hover:font-medium bg-light-lighter rounded-sm ml-auto', {'opacity-30 hover:outline-none hover:font-normal': timeoutOn})
+        cn('dark:bg-light-lighterD flex flex-col items-center justify-center h-8 w-[120px] cursor-pointer outline outline-0 hover:outline-1 hover:font-medium bg-light-lighter rounded-sm ml-auto', {'opacity-30 hover:outline-none hover:font-normal': timeoutOn})
 
     const toggleWifi = ({ started, range }: ISetToggleWifiRequest) => {
         if (timeoutOn === false) {
@@ -46,17 +47,10 @@ export const HomeWeb = () => {
                                 key={item.name}
                                 className='flex flex-row h-[52px] gap-[10px] items-center'
                             >
-                                <div className='flex flex-row gap-5'>
-                                    <Image
-                                        src={
-                                            item.enabled === true
-                                                ? wifiIcon
-                                                : noWifiIcon
-                                        }
-                                        alt='wifiOnOff'
-                                        width={45}
-                                        height={45}
-                                    />
+                                <div className='flex flex-row gap-5 items-center'>
+                                    <div className='scale-75'>
+                                        {item.enabled === true ? <WifiOnIcon /> : <WifiOffIcon />}
+                                    </div>
                                     <div className='w-[140px]'>
                                         <p className='font-medium text-xl whitespace-nowrap'>
                                             {item.name}

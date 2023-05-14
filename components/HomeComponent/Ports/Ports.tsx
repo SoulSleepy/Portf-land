@@ -1,9 +1,6 @@
-import Image from 'next/image'
-import lanPortOnIcon from '../../../images/lanPortOnIcon.svg'
-import lanPortOffIcon from '../../../images/lanPortOffIcon.svg'
-import netIcon from '../../../images/netIcon.svg'
-import { IPortLocalNetwork } from '@/types/types'
-import cn from 'classnames'
+import { IPortLocalNetwork } from 'types/types'
+import { LanPortIcon, NetIcon } from 'components/Icons/Icons'
+import { useTheme } from 'helpers/hooks/useTheme'
 
 interface IProps {
     ports: IPortLocalNetwork[]
@@ -11,12 +8,15 @@ interface IProps {
 }
 
 export const Ports = ({ ports, isLoading }: IProps) => {
+    const { theme } = useTheme()
+
     const blockClasses =
-        'flex flex-col bg-light rounded-xl p-3 shadow-dark gap-2'
+        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2'
     const titleClasses = 'flex font-medium h-10 items-center text-lg'
-    const hrClasses = 'border-none bg-text-light h-[1.5px] w-full'
+    const hrClasses =
+        'border-none bg-text-light dark:bg-text-lightD h-[1.5px] w-full'
     const portClasses =
-        'flex flex-col items-center justify-center h-[78px] bg-light-lighter rounded-sm'
+        'relative flex flex-col items-center justify-center h-[78px] bg-light-lighter dark:bg-light-lighterD rounded-sm'
 
     return (
         <div className={blockClasses}>
@@ -29,32 +29,25 @@ export const Ports = ({ ports, isLoading }: IProps) => {
                     ports.map((item) => {
                         return (
                             <div key={item.port} className={portClasses}>
-                                <Image
-                                    src={
-                                        item.link
-                                            ? lanPortOnIcon
-                                            : lanPortOffIcon
-                                    }
-                                    alt='lanPort'
-                                    width={35}
-                                    height={35}
-                                />
-                                {item.type === 'wan' ? (
-                                    <Image
-                                        className='mt-[-10px]'
-                                        src={netIcon}
-                                        alt='netIcon'
-                                        width={20}
-                                        height={20}
+                                <div className='scale-[0.08] h-[35px] mt-[-15px]'>
+                                    <LanPortIcon
+                                        fill={item.link ? 'green' : 'red'}
                                     />
-                                ) : null}
-                                <p
-                                    className={cn('uppercase', {
-                                        'mt-[10px]': item.type === 'ethernet',
-                                    })}
-                                >
+                                </div>
+                                <p className=' uppercase mt-[25px]'>
                                     {item.type === 'ethernet' ? 'lan' : 'wan'}
                                 </p>
+                                {item.type === 'wan' && (
+                                    <div className='absolute bottom-6 mt-[-10px] scale-90'>
+                                        <NetIcon
+                                            fill={
+                                                theme === 'dark'
+                                                    ? 'white'
+                                                    : 'black'
+                                            }
+                                        />
+                                    </div>
+                                )}
                             </div>
                         )
                     })

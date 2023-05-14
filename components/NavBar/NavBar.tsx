@@ -1,7 +1,7 @@
 import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState} from 'react'
+import { useState } from 'react'
 import {
     ZaglushLogoIcon,
     HomeIcon,
@@ -14,6 +14,7 @@ import {
     SettingsIcon,
     SystemIcon,
     LogoutIcon,
+    LogoIcon,
 } from '../Icons/Icons'
 import { useLazyLogoutUserQuery } from 'state/rtk/auth.rtk'
 import { useTheme } from 'helpers/hooks/useTheme'
@@ -21,7 +22,7 @@ import { useTheme } from 'helpers/hooks/useTheme'
 interface IMenuItem {
     id: number
     name: string
-    icon: ({fill} : {fill?: string | undefined}) => JSX.Element
+    icon: ({ fill }: { fill?: string | undefined }) => JSX.Element
     link: string
 }
 
@@ -38,9 +39,8 @@ const menuItems: IMenuItem[] = [
 ]
 
 export const NavBar = () => {
-
-    const {theme} = useTheme()
-    const {route} = useRouter()
+    const { theme } = useTheme()
+    const { route } = useRouter()
     const [toggleCollapse, setToggleCollapse] = useState(false)
     const [isCollapse, setIsCollapse] = useState(false)
     const [postLogoutUser] = useLazyLogoutUserQuery()
@@ -84,26 +84,25 @@ export const NavBar = () => {
             <div className='flex flex-col'>
                 <div className='flex items-center jastify-between relative'>
                     <div className='flex items-center pl-1 gap-4'>
-                        <ZaglushLogoIcon fill={theme === 'dark' ? 'red' : 'black'}/>
-                        <span
+                        <div
                             className={cn(
-                                'mt-2 text-lg font-medium text-text',
+                                'absolute -top-20 right-5 flex flex-col items-center justify-center',
                                 { hidden: toggleCollapse }
                             )}
                         >
-                            {/* Logo */}
-                        </span>
+                            <LogoIcon />
+                        </div>
                     </div>
                     {isCollapse && (
                         <button
                             className={collapseIconClasses}
                             onClick={toggleNavBar}
                         >
-                            <ShowIcon />
+                            <ShowIcon fill={theme === 'dark' ? 'white' : 'black'}/>
                         </button>
                     )}
                 </div>
-                <div className='flex flex-col items-start mt-[40px]'>
+                <div className='flex flex-col items-start mt-[100px]'>
                     {menuItems.map((item) => {
                         return (
                             <div
@@ -115,11 +114,16 @@ export const NavBar = () => {
                                     className='flex py-[10px] px-4 gap-2 items-center w-full h-full'
                                 >
                                     <div>
-                                        <item.icon fill='black'/>
+                                        <item.icon
+                                            fill={
+                                                theme === 'dark'
+                                                    ? 'white'
+                                                    : 'black'
+                                            }
+                                        />
                                     </div>
                                     {!toggleCollapse && (
-                                        <span
-                                            className='text-md font-medium text-text-light'>
+                                        <span className='text-md font-medium text-text-light dark:text-text-lightD'>
                                             {item.name}
                                         </span>
                                     )}
@@ -135,10 +139,10 @@ export const NavBar = () => {
                 className='flex items-center cursor-pointer hover:bg-light-lighter dark:hover:bg-light-lighterD rounded w-full overflow-hidden whitespace-nowrap gap-2 px-4 py-[10px]'
             >
                 <div>
-                    <LogoutIcon />
+                    <LogoutIcon fill={theme === 'dark' ? 'white' : 'black'} />
                 </div>
                 {!toggleCollapse && (
-                    <span className='text-md font-medium text-text-light'>
+                    <span className='text-md font-medium text-text-light dark:text-text-lightD'>
                         Выход
                     </span>
                 )}

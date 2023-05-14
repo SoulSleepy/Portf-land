@@ -12,9 +12,9 @@ export const Internet = () => {
         .filter((_, idx) => idx % 5 === 0)
 
     const blockClasses =
-        'flex flex-col bg-light dark:bg-darkD rounded-xl p-3 shadow-dark gap-2'
+        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2'
     const titleClasses = 'flex font-medium h-10 items-center text-lg'
-    const hrClasses = 'border-none bg-text-light h-[1.5px] w-full'
+    const hrClasses = 'border-none dark:bg-text-lightD bg-text-light h-[1.5px] w-full'
 
     return (
         <div className={blockClasses}>
