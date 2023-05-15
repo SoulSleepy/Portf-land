@@ -24,8 +24,8 @@ export const LastEvents = ({ eventList, isLoading }: IProps) => {
     }
 
     const blockClasses =
-        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2 h-[337px]'
-    const titleClasses = 'flex font-medium h-10 items-center text-lg'
+        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2 h-[322px]'
+    const titleClasses = 'flex font-medium h-8 items-center text-lg'
     const hrClasses = 'border-none bg-text-light dark:bg-text-lightD h-[1.5px] w-full'
     const eventDangerClasses =
         'flex flex-row items-center gap-2 p-1 bg-light-lighter dark:bg-light-lighterD cursor-pointer'

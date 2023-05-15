@@ -55,7 +55,7 @@ export const Lan = () => {
 
     const blockClasses =
         'flex flex-col bg-light rounded-xl p-3 shadow-dark gap-2'
-    const titleClasses = 'flex font-medium h-10 items-center'
+    const titleClasses = 'flex font-medium h-8 items-center text-lg'
     const hrClasses = 'border-none bg-text-light h-[1.5px] w-full'
     const inputClasses =
         'outline-none rounded-md h-[30px] pl-1 w-full cursor-pointer outline-1 hover:outline-2 focus:outline-2 outline-text-light'

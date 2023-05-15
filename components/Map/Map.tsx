@@ -1,6 +1,10 @@
 import Image from 'next/image'
 import routerPng from '../../images/router.png'
 import { DevicesIcon } from '../Icons/Icons'
+import { useGetMapListQuery } from '@/state/rtk/map'
+import { Ethernet } from './Ethernet'
+import { WifiMap } from './WifiMap'
+import { IMapItem } from '@/types/types'
 
 interface IExternalPort {
     id: number
@@ -68,10 +72,7 @@ const wifiDevices: IDevices[] = [
 ]
 
 export const Map = () => {
-    const blockDevicesClasses = 'grid grid-cols-3 gap-2 '
-    const borderBlockClasses = 'border-white border border-solid rounded-md'
-    const devicePortClasses =
-        'flex flex-col gap-1 w-20 h-16 mt-2 overflow-hidden hover:overflow-auto text-sm text-text-light'
+    const {data, isLoading, isError} = useGetMapListQuery()
 
     return (
         <div className='flex flex-col gap-4'>
@@ -84,7 +85,7 @@ export const Map = () => {
                     <p>VPN</p>
                     <p>external</p>
                     <div className='grid grid-cols-3 gap-1 w-44'>
-                        {externalPort.map((item) => {
+                        {/* {isLoading ? <p>loading</p> : data?.map((item) => {
                             return (
                                 <p
                                     key={item.id}
@@ -93,64 +94,14 @@ export const Map = () => {
                                     {item.number}
                                 </p>
                             )
-                        })}
+                        })} тут надо добавить блок портов под external но их нет пока что*/} 
                     </div>
                 </div>
             </div>
-            <div className='grid grid-cols-2 gap-4'>
-                <div className={borderBlockClasses}>
-                    <p className='font-medium pt-1 pl-3'>Ethernet</p>
-                    <div className={blockDevicesClasses}>
-                        {netDevices.map((item) => {
-                            return (
-                                <div
-                                    key={item.id}
-                                    className='flex flex-row items-center gap-2 p-2 hover:bg-mapItemBG cursor-pointer'
-                                >
-                                    <DevicesIcon />
-                                    <div>
-                                        <p className='font-medium'>
-                                            {item.name}
-                                        </p>
-                                        <p className='text-sm'>{item.ip}</p>
-                                        <div className={devicePortClasses}>
-                                            {item.ports.map((port) => {
-                                                return <p key={port}>{port}</p>
-                                            })}
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        })}
-                    </div>
-                </div>
-                <div className={borderBlockClasses}>
-                    <p className='font-medium pt-1 pl-3'>Wi-Fi</p>
-                    <div className={blockDevicesClasses}>
-                        {wifiDevices.map((item) => {
-                            return (
-                                <div
-                                    key={item.id}
-                                    className='flex flex-row items-center gap-2 p-2 hover:bg-mapItemBG cursor-pointer'
-                                >
-                                    <DevicesIcon />
-                                    <div>
-                                        <p className='font-medium'>
-                                            {item.name}
-                                        </p>
-                                        <p className='text-sm'>{item.ip}</p>
-                                        <div className={devicePortClasses}>
-                                            {item.ports.map((port) => {
-                                                return <p key={port}>{port}</p>
-                                            })}
-                                        </div>
-                                    </div>
-                                </div>
-                            )
-                        })}
-                    </div>
-                </div>
-            </div>
+            {isLoading ? <p>loading</p> : <div className='grid grid-cols-2 gap-4 min-h-[435px]'>
+                <Ethernet data={data as IMapItem[]}/>
+                <WifiMap data={data as IMapItem[]}/>
+            </div>}
         </div>
     )
 }

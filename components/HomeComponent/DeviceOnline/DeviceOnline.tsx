@@ -7,8 +7,8 @@ interface IProps {
 
 export const DeviceOnline = ({ deviceOnline, isLoading }: IProps) => {
     const blockClasses =
-        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2'
-    const titleClasses = 'flex font-medium h-10 items-center text-lg'
+        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl pt-3 px-3 p-2  shadow-dark gap-2'
+    const titleClasses = 'flex font-medium h-8 items-center text-lg'
     const hrClasses = 'border-none bg-text-light dark:bg-text-lightD h-[1.5px] w-full'
     const devicesOnlineClasses =
         'relative flex items-center justify-center h-14 w-14 rounded-[28px] bg-light-lighter dark:bg-light-lighterD border-2'
@@ -19,7 +19,7 @@ export const DeviceOnline = ({ deviceOnline, isLoading }: IProps) => {
         <div className={blockClasses}>
             <p className={titleClasses}>Устройства в сети</p>
             <hr className={hrClasses} />
-            <div className='flex flex-row h-[80px] items-center justify-center gap-14'>
+            <div className='flex flex-row h-[80px] items-center justify-center mt-[6px] gap-16'>
                 <div className='flex flex-col items-center'>
                     <div className={devicesOnlineClasses}>
                         {!isLoading && deviceOnline.cable.new > 0 && (

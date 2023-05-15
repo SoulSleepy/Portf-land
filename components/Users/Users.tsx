@@ -28,7 +28,7 @@ export const Users = () => {
 
     const blockClasses =
         'flex flex-col bg-light rounded-xl p-3 shadow-dark gap-2'
-    const titleClasses = 'flex font-medium h-10 items-center'
+    const titleClasses = 'flex font-medium h-10 items-center text-lg'
     const hrClasses = 'border-none bg-text-light h-[1.5px] w-full'
     const btnInfoClasses =
         'flex flex-col items-center justify-center cursor-pointer h-8 w-36 outline outline-0 hover:outline-1 hover:font-medium bg-light-lighter rounded-sm'

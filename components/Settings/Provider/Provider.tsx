@@ -4,9 +4,9 @@ import { useEffect } from 'react'
 import { useGetNetworkInfoQuery } from 'state/rtk/settings.rtk'
 import { Pppoe } from './Pppoe'
 import { Static } from './Static'
-import { useAppDispatch } from '@/state/store'
-import { openSetProviderSettingsModal } from '@/state/slices/modals.slice'
-import { SetProviderSettingsModal } from '@/components/Modals/setProviderSettingsModal'
+import { useAppDispatch } from 'state/store'
+import { openSetProviderSettingsModal } from 'state/slices/modals.slice'
+import { SetProviderSettingsModal } from 'components/Modals/setProviderSettingsModal'
 
 export interface IWanSettingsForm {
     namePppoe?: string
@@ -58,7 +58,7 @@ export const Provider = () => {
 
     const blockClasses =
         'flex flex-col bg-light rounded-xl p-3 shadow-dark gap-2'
-    const titleClasses = 'flex font-medium h-10 items-center'
+    const titleClasses = 'flex font-medium h-8 items-center text-lg'
     const hrClasses = 'border-none bg-text-light h-[1.5px] w-full'
     const btn =
         'bg-light-lighter rounded-sm h-[34px] w-full cursor-pointer hover:border'

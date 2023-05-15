@@ -29,7 +29,7 @@ export const Speed = () => {
 
     const blockClasses =
         'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2'
-    const titleClasses = 'flex font-medium h-10 items-center text-lg'
+    const titleClasses = 'flex font-medium h-8 items-center text-lg'
     const hrClasses = 'border-none bg-text-light dark:bg-text-lightD h-[1.5px] w-full'
     const dotClasses = 'w-1 h-1 bg-text-light rounded-[2px] dark:bg-text-lightD'
     const updateBtnClasses =

@@ -13,6 +13,7 @@ import modalsSlice from './slices/modals.slice'
 import filterSlice from './slices/filter.slice'
 import userSlice from './slices/auth.slice'
 import mainSlice from './slices/main.slice'
+import { mapApi } from './rtk/map'
 
 const store = configureStore({
     reducer: {
@@ -23,6 +24,7 @@ const store = configureStore({
         [homeApi.reducerPath]: homeApi.reducer,
         [dangerAndEventApi.reducerPath]: dangerAndEventApi.reducer,
         [devicesApi.reducerPath]: devicesApi.reducer,
+        [mapApi.reducerPath]: mapApi.reducer,
         auth: userSlice,
         filter: filterSlice,
         modals: modalsSlice,
@@ -37,6 +39,7 @@ const store = configureStore({
             homeApi.middleware,
             dangerAndEventApi.middleware,
             devicesApi.middleware,
+            mapApi.middleware
         ]),
 })
 

@@ -32,7 +32,7 @@ module.exports = {
             },
             light: {
                 DEFAULT: '#FAFBFC',
-                lighter: '#F3F4F6',
+                lighter: '#f0f1f2',
                 lighterD: '#18162bdc'
             },
         },

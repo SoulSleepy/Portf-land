@@ -592,6 +592,30 @@ export interface IDeviceProgramItem {
     instTst: string
 }
 
+// map => MapList interfaces //
+export interface IGetMapListResponse {
+    status: boolean
+    data: IMapItem[]
+    msg: string
+    error: null
+    explain: string
+}
+
+export interface IMapItem {
+    id: number
+    name: string
+    ip: string
+    type: number
+    mac: string
+    online: number | boolean
+    agent: boolean
+    antivirus: boolean
+    isRouter: boolean
+    wired: boolean
+    wifiWired: boolean
+    ports: object | []
+  }
+
 // settings => WiFi interfaces //
 export interface IWiFiResponse {
     status: boolean

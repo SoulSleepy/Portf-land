@@ -7,7 +7,7 @@ export const Firewall = () => {
     const { data, isLoading } = useGetSettingsFirewallQuery()
 
     const blockClasses = 'flex flex-col bg-light rounded-xl p-3 shadow-dark gap-2'
-    const titleClasses = 'flex font-medium h-10 items-center'
+    const titleClasses = 'flex font-medium h-10 items-center text-lg'
     const hrClasses = 'border-none bg-text-light h-[1.5px] w-full'
 
     if (isLoading) return <div> Loading </div>
