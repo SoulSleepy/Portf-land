@@ -18,7 +18,7 @@ export const ThemeButton = () => {
                     input:-webkit-autofill:focus,
                     input:-webkit-autofill:active {
                         -webkit-box-shadow: 0 0 0 50px
-                            ${theme === 'light' ? 'white' : 'red'} inset;
+                            ${theme === 'light' ? 'white' : '#1c1a33'} inset;
                         -webkit-text-fill-color: ${theme === 'light'
                             ? '#6c7281'
                             : '#6c7281'};

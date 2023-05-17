@@ -347,12 +347,12 @@ export const ClockIcon = ({ fill = 'black' }) => {
     )
 }
 
-export const ShowSelectIcon = () => {
+export const ShowSelectIcon = ({ fill = 'black' }) => {
     return (
         <IconWrapper width={24} height={24} fill='none'>
             <path
                 d='M15 11L12 14L9 11'
-                stroke='black'
+                stroke={fill}
                 strokeWidth='2'
                 strokeLinecap='round'
                 strokeLinejoin='round'
@@ -515,13 +515,13 @@ export const UpdateIcon = ({ fill = '#6C7281' }) => {
     )
 }
 
-export const DangerLevelIconIcon = ({ fill = 'black' }) => {
+export const DangerLevelIcon = ({ fill = 'black' }) => {
     return (
         <IconWrapper width={24} height={24} fill='none'>
             <path
                 d='M19 3H5C4.44772 3 4 3.44771 4 4V10.1649C4 17.5464 10.2742 20.3516 11.7098 20.8968C11.9 20.9691 12.1 20.9691 12.2902 20.8968C13.7258 20.3516 20 17.5464 20 10.1649V4C20 3.44772 19.5523 3 19 3Z'
                 stroke={fill}
-                strokeWidth='2'
+                strokeWidth='1'
                 strokeLinecap='round'
                 strokeLinejoin='round'
             />
@@ -1217,6 +1217,69 @@ export const WifiOnIcon = () => {
                 fill='#00DA3D'
                 stroke='#00DA3D'
             ></path>
+        </IconWrapper>
+    )
+}
+
+export const DownIpIcon = ({ fill = '#6C7281' }) => {
+    return (
+        <IconWrapper width={24} height={24} fill='none'>
+            <path
+                d='M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+            <path
+                d='M13 15L10 12L13 9'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+        </IconWrapper>
+    )
+}
+
+export const UpIpIcon = ({ fill = '#6C7281' }) => {
+    return (
+        <IconWrapper width={24} height={24} fill='none'>
+            <path
+                d='M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+            <path
+                d='M11 9L14 12L11 15'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+        </IconWrapper>
+    )
+}
+
+export const ResetIcon = ({ fill = '#6C7281' }) => {
+    return (
+        <IconWrapper width={24} height={24} fill='none'>
+            <path
+                d='M14 8H19V3'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
+            <path
+                d='M18.7094 16.3571C17.7775 17.792 16.4102 18.8904 14.8082 19.4909C13.2062 20.0915 11.4538 20.1627 9.80833 19.6939C8.16287 19.2252 6.71103 18.2413 5.66595 16.8867C4.62086 15.5321 4.03759 13.8781 4.00176 12.1675C3.96593 10.457 4.47943 8.78004 5.46687 7.38284C6.45431 5.98564 7.86368 4.94181 9.48806 4.4046C11.1124 3.86738 12.8663 3.86509 14.492 4.39805C16.1178 4.93101 17.5299 5.97114 18.521 7.36575'
+                stroke={fill}
+                strokeWidth='2'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+            />
         </IconWrapper>
     )
 }

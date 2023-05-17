@@ -34,7 +34,7 @@ export const WifiMap = ({ data }: IProps) => {
                                             Object.keys(item.ports).map(
                                                 (port) => {
                                                     return (
-                                                        <p key={port}>{port}</p>
+                                                        <p className='px-1 py-[2px] w-20 hover:bg-light-lighterD dark:hover:bg-text' key={port}>{port}</p>
                                                     )
                                                 }
                                             )

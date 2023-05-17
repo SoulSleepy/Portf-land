@@ -1,6 +1,7 @@
 import { useSetDellFirewallMutation } from 'state/rtk/settings.rtk'
 import { DeleteIcon } from 'components/Icons/Icons'
 import { SrcNeighIp } from 'types/types'
+import { useTheme } from 'helpers/hooks/useTheme'
 
 interface IProps {
     src_neigh: SrcNeighIp[]
@@ -8,6 +9,7 @@ interface IProps {
 }
 
 export const IpsItems = ({ src_neigh, setOpen }: IProps) => {
+    const { theme } = useTheme()
     const [setDelIpFirewall] = useSetDellFirewallMutation()
 
     const delIp = (name: string) => {
@@ -17,13 +19,13 @@ export const IpsItems = ({ src_neigh, setOpen }: IProps) => {
     }
 
     return (
-        <div className='p-1 absolute -bottom-[2px] left-8 flex flex-col gap-1 z-20 h-[100px] w-[200px] outline outline-1 hover:outline-2 bg-light rounded-md'>
+        <div className='p-1 absolute -bottom-[2px] left-8 flex flex-col gap-1 z-20 h-[100px] w-[200px] outline outline-1 hover:outline-2 bg-light dark:bg-darkDD rounded-md'>
             <div className='overflow-auto pr-2 z-30'>
                 {Object.entries(src_neigh).map((item) => {
                     return (
                         <div
                             key={item[0]}
-                            className='flex flex-row justify-between items-center h-8 w-full gap-2 hover:bg-light-lighter'
+                            className='flex flex-row justify-between items-center h-8 w-full gap-2 hover:bg-light-lighter dark:hover:bg-light-lighterD'
                         >
                             <p className='pl-1 text-lg'>
                                 {typeof item[1] === 'string' ? item[1] : '*'}
@@ -32,7 +34,7 @@ export const IpsItems = ({ src_neigh, setOpen }: IProps) => {
                                 className='hover:scale-110'
                                 onClick={() => delIp(item[0])}
                             >
-                                <DeleteIcon />
+                                <DeleteIcon fill={theme === 'dark' ? '#bebebe' : '#6C7281'}/>
                             </button>
                         </div>
                     )

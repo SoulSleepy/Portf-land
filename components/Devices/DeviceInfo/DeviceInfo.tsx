@@ -1,12 +1,12 @@
-import Image from 'next/image'
 import cn from 'classnames'
 import { useState } from 'react'
-import devicesIcon from '../../../images/devicesIcon.svg'
 import { Dangers } from './Dangers'
 import { Information } from './Information'
 import { Programs } from './Programs'
 import { Events } from './Events'
 import { IDeviceItem } from 'types/types'
+import { DevicesIcon } from 'components/Icons/Icons'
+import { useTheme } from 'helpers/hooks/useTheme'
 
 interface IDeviceInfoItem {
     information: JSX.Element
@@ -16,6 +16,7 @@ interface IDeviceInfoItem {
 }
 
 export const DeviceInfo = ({ device }: { device: IDeviceItem }) => {
+    const { theme } = useTheme()
     const [activeBtn, setActiveBtn] =
         useState<keyof IDeviceInfoItem>('information')
 
@@ -27,21 +28,18 @@ export const DeviceInfo = ({ device }: { device: IDeviceItem }) => {
     }
 
     const blockClasses =
-        'flex flex-col bg-light rounded-xl p-3 shadow-dark gap-2'
+        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2'
     const btnTitleClasses =
         'border-b text-center h-7 hover:border-b-2 hover:font-medium cursor-pointer text-lg'
-    const activeBtnClasses = 'border-b-2 font-medium'
+    const activeBtnClasses = 'border-b-2 font-medium dark:text-light'
 
     return (
         <div className='flex flex-col gap-3'>
             <div className={blockClasses}>
                 <div className='flex flex-row gap-3'>
-                    <Image
-                        src={devicesIcon}
-                        width={30}
-                        height={30}
-                        alt='devices'
-                    />
+                    <div className='flex items-center pl-1 scale-125'>
+                        <DevicesIcon fill={theme === 'dark' ? '#bebebe' : '#6C7281'} />
+                    </div>
                     <div className='flex flex-col leading-3'>
                         <p className='font-medium text-xl'>{device.name}</p>
                         <p className='text-base'>{device.ip}</p>

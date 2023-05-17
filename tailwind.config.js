@@ -13,10 +13,10 @@ module.exports = {
         ...defaultTheme,
         colors: {
             ...defaultTheme.colors,
-            primaryD: '#1f1f39',
             primary: '#3B81F6',
             white: '#ffffff',
             darkD: '#1c1a33dc',
+            darkDD: '#1c1a33f5',
             modalBg: 'rgba(0, 0, 0, 0.55)',
             mapItemBG: 'rgba(0, 0, 0, 0.25)',
             transparent: 'transparent',

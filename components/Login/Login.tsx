@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import bgImage from '../../images/bg.png'
 import { IAuthForm } from 'types/types'
-import { HideInputIcon, ShowInputIcon } from '../Icons/Icons'
+import { HideInputIcon, LogoIcon, ShowInputIcon } from '../Icons/Icons'
 
 export const Login = () => {
     const [show, setShow] = useState(false)
@@ -43,7 +43,8 @@ export const Login = () => {
                     src={bgImage}
                     alt='background'
                 />
-                <div className='flex flex-col items-center gap-16'>
+                <div className='flex flex-col items-center gap-16 mt-[-50px]'>
+                    <div className='flex z-10 h-[110px] ml-[-55px]'><LogoIcon /></div>
                     <p className='z-10 font-medium text-2xl tracking-wider'>
                         Авторизация
                     </p>

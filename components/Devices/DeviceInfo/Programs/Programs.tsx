@@ -1,130 +1,14 @@
-import Image from 'next/image'
-import devicesIcon from '../../../../images/devicesIcon.svg'
-import { useLazyGetDeviceProgramsQuery } from '@/state/rtk/devices.rtk'
+import { useLazyGetDeviceProgramsQuery } from 'state/rtk/devices.rtk'
 import { useEffect } from 'react'
-import { DevicesIcon } from '@/components/Icons/Icons'
-import { toDate } from '@/helpers/softFunctions'
-
-const programs = [
-    {
-        id: 1,
-        name: 'Пакет драйверов Windows-SEGGER (J-LinkCDC)',
-        version: '2.30.0.2',
-        location: 'C:UsersOdinAppDataLocalTemp ',
-        publisher: 'SEGGER',
-        date: '09.06.2022, 10:50:51',
-    },
-    {
-        id: 2,
-        name: 'Пакет драйверов Windows-SEGGER (J-LinkCDC)',
-        version: '2.30.0.2',
-        location: 'C:UsersOdinAppDataLocalTemp ',
-        publisher: 'segger',
-        date: '09.06.2022, 10:50:51',
-    },
-    {
-        id: 3,
-        name: 'AMD Software',
-        version: '21.3.1',
-        location: 'C:UsersOdinAppDataLocalTemp ',
-        publisher: 'Advanced Micro Devices, Inc.',
-        date: '09.06.2022, 10:50:51',
-    },
-    {
-        id: 4,
-        name: 'Пакет драйверов Windows-SEGGER (J-LinkCDC)',
-        version: '2.30.0.2',
-        location: 'C:UsersOdinAppDataLocalTemp ',
-        publisher: 'SEGGER',
-        date: '09.06.2022, 10:50:51',
-    },
-    {
-        id: 5,
-        name: 'Git version 2.30.0.2',
-        version: '2.30.0.2',
-        location: 'C:Program FilesGit ',
-        publisher: 'The Git Development',
-        date: '09.06.2022, 10:50:51',
-    },
-    {
-        id: 6,
-        name: 'Пакет драйверов Windows-SEGGER (J-LinkCDC)',
-        version: '2.30.0.2',
-        location: 'C:UsersOdinAppDataLocalTemp ',
-        publisher: 'Holtek Semiconductor',
-        date: '09.06.2022, 10:50:51',
-    },
-    {
-        id: 7,
-        name: 'Пакет драйверов Windows-SEGGER (J-LinkCDC)',
-        version: '2.30.0.2',
-        location: 'C:UsersOdinAppDataLocalTemp ',
-        publisher: 'SEGGER',
-        date: '09.06.2022, 10:50:51',
-    },
-    {
-        id: 8,
-        name: 'Microsoft Azure Compute Emulator - v2.9.7',
-        version: '2.9.8999.43',
-        location: 'C:UsersOdinAppDataLocalTemp ',
-        publisher: 'Microsoft Corporation',
-        date: '09.06.2022, 10:50:51',
-    },
-    {
-        id: 9,
-        name: 'Mozilla Firefox (x64 ru)',
-        version: '101.0.1',
-        location: 'C:Program FilesMozilla Firefox ',
-        publisher: 'Mozilla',
-        date: '09.06.2022, 10:50:51',
-    },
-    {
-        id: 10,
-        name: 'Git version 2.30.0.2',
-        version: '2.30.0.2',
-        location: 'C:Program FilesGit ',
-        publisher: 'The Git Development',
-        date: '09.06.2022, 10:50:51',
-    },
-    {
-        id: 11,
-        name: 'Пакет драйверов Windows-SEGGER (J-LinkCDC)',
-        version: '2.30.0.2',
-        location: 'C:UsersOdinAppDataLocalTemp ',
-        publisher: 'Holtek Semiconductor',
-        date: '09.06.2022, 10:50:51',
-    },
-    {
-        id: 12,
-        name: 'Пакет драйверов Windows-SEGGER (J-LinkCDC)',
-        version: '2.30.0.2',
-        location: 'C:UsersOdinAppDataLocalTemp ',
-        publisher: 'SEGGER',
-        date: '09.06.2022, 10:50:51',
-    },
-    {
-        id: 13,
-        name: 'Microsoft Azure Compute Emulator - v2.9.7',
-        version: '2.9.8999.43',
-        location: 'C:UsersOdinAppDataLocalTemp ',
-        publisher: 'Microsoft Corporation',
-        date: '09.06.2022, 10:50:51',
-    },
-    {
-        id: 14,
-        name: 'Mozilla Firefox (x64 ru)',
-        version: '101.0.1',
-        location: 'C:Program FilesMozilla Firefox ',
-        publisher: 'Mozilla',
-        date: '09.06.2022, 10:50:51',
-    },
-]
+import { DevicesIcon } from 'components/Icons/Icons'
+import { useTheme } from 'helpers/hooks/useTheme'
 
 interface IProps {
     deviceId: number
 }
 
 export const Programs = ({ deviceId }: IProps) => {
+    const { theme } = useTheme()
     const [getPrograms, { data, isLoading }] = useLazyGetDeviceProgramsQuery()
 
     useEffect(() => {
@@ -138,8 +22,8 @@ export const Programs = ({ deviceId }: IProps) => {
         ' flex items-center border-r-[1px] border-b-[1px] p-1 h-8 truncate ...'
 
     return (
-        <div className='flex flex-col bg-light border shadow-dark overflow-auto h-[390px] relative'>
-            <div className='grid grid-cols-5 items-center text-sm font-medium text-text-light border-t-[1px] border-l-[1px] sticky top-0 bg-light-lighter'>
+        <div className='flex flex-col bg-light dark:bg-darkD border shadow-dark overflow-auto h-[530px] relative'>
+            <div className='grid grid-cols-5 items-center text-sm font-medium text-text-light dark:text-text-lightD border-t-[1px] border-l-[1px] sticky top-0 bg-light-lighter dark:bg-darkDD'>
                 <p className={tableTitleClasses}>Программа</p>
                 <p className={tableTitleClasses}>Версия</p>
                 <p className={tableTitleClasses}>Расположение</p>
@@ -152,11 +36,11 @@ export const Programs = ({ deviceId }: IProps) => {
                         return (
                             <div
                                 key={item.name}
-                                className='grid grid-cols-5 items-center text-sm text-text-light border-l-[1px]'
+                                className='grid grid-cols-5 items-center text-sm text-text-light dark:text-text-lightD border-l-[1px]'
                             >
-                                <div className='flex flex-row border-r-[1px] border-b-[1px] pl-1 pt-[3px] h-8 truncate ...'>
+                                <div className='flex flex-row gap-1 border-r-[1px] border-b-[1px] pl-1 pt-[3px] h-8 truncate ...'>
                                     <div>
-                                        <DevicesIcon />
+                                        <DevicesIcon fill={theme === 'dark' ? '#bebebe' : '#6C7281'}/>
                                     </div>
                                     <p>{item.name}</p>
                                 </div>

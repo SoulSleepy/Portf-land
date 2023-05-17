@@ -10,7 +10,6 @@ import { IDevicesLocalNetwork, IIncidentsItem, IPortLocalNetwork, ITaskItem } fr
 
 export const HomeComponent = () => {
     const { data, isLoading } = useGetHomeInfoQuery()
-    console.log(data);
 
     return (
         <div className='flex flex-col gap-4 text-text-light'>

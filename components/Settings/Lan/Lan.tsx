@@ -1,19 +1,17 @@
 import { useEffect } from 'react'
 import cn from 'classnames'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import {
-    useGetDHCPQuery,
-    useGetNetworkInfoQuery,
-} from 'state/rtk/settings.rtk'
-import Image from 'next/image'
-import upIpIcon from '../../../images/upIpIcon.svg'
-import downIpIcon from '../../../images/downIpIcon.svg'
+import { useGetDHCPQuery, useGetNetworkInfoQuery } from 'state/rtk/settings.rtk'
 import { INetworkForm } from 'types/types'
 import { openSetLanSettingsModal } from 'state/slices/modals.slice'
 import { useAppDispatch } from 'state/store'
 import { SetLanSettingsModal } from 'components/Modals/SetLanSettingsModal'
+import { DownIpIcon, UpIpIcon } from 'components/Icons/Icons'
+import { useTheme } from 'helpers/hooks/useTheme'
+import { Loader } from 'components/Loader'
 
 export const Lan = () => {
+    const { theme } = useTheme()
     const { data: dataLan, isLoading: isLoadLan } = useGetNetworkInfoQuery()
     const { data: dataDHCP, isLoading: isLoadDHCP } = useGetDHCPQuery()
 
@@ -54,122 +52,166 @@ export const Lan = () => {
     }
 
     const blockClasses =
-        'flex flex-col bg-light rounded-xl p-3 shadow-dark gap-2'
+        'flex flex-col bg-light dark:bg-darkD rounded-xl p-3 shadow-dark gap-2'
     const titleClasses = 'flex font-medium h-8 items-center text-lg'
-    const hrClasses = 'border-none bg-text-light h-[1.5px] w-full'
+    const hrClasses =
+        'border-none bg-text-light dark:bg-text-lightD h-[1.5px] w-full'
     const inputClasses =
-        'outline-none rounded-md h-[30px] pl-1 w-full cursor-pointer outline-1 hover:outline-2 focus:outline-2 outline-text-light'
+        'outline-none dark:bg-darkD rounded-md h-[30px] pl-1 w-full cursor-pointer outline-1 hover:outline-2 focus:outline-2 dark:outline-text-lightD outline-text-light'
     const labelClasses =
-        'bg-light text-sm absolute -top-[13px] left-1 leading-[17px]'
+        'bg-light dark:bg-darkD text-sm absolute -top-[13px] left-1 leading-[17px]'
     const btn =
-        'bg-light-lighter rounded-sm h-[34px] w-full cursor-pointer hover:border'
+        'bg-light-lighter dark:bg-light-lighterD rounded-sm h-[34px] w-full cursor-pointer hover:border'
     const btnIp = 'flex items-center justify-center text-2xl hover:scale-110'
 
-    if (isLoadLan && isLoadDHCP) return <div> Loading </div>
     return (
         <div className={blockClasses}>
             <p className={titleClasses}>Локальная Сеть</p>
             <hr className={hrClasses} />
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className='flex flex-col gap-6 mt-4'>
-                    <div className='relative'>
-                        <label className={labelClasses}>Gateway</label>
-                        <input
-                            className={inputClasses}
-                            placeholder='192.168.1.1 (wan)'
-                            type='text'
-                            {...register('gateway')}
-                        />
-                    </div>
-                    <div className='relative'>
-                        <label className={labelClasses}>IP</label>
-                        <input
-                            className={inputClasses}
-                            type='text'
-                            {...register('ipLan')}
-                        />
-                    </div>
-                    <div className='relative'>
-                        <label className={labelClasses}>Маска сети</label>
-                        <input
-                            className={inputClasses}
-                            type='text'
-                            {...register('mask')}
-                        />
-                    </div>
-                    <p className='-mb-3'>DHCP</p>
-                    <div className='relative'>
-                        <label className={labelClasses}>C</label>
-                        <p className='absolute top-[3px] left-1 text-[#9f9f9f]'>
-                            {dataDHCP?.ip}
-                        </p>
-                        <input
-                            className={cn(
-                                inputClasses,
-                                'pl-[85px] font-medium'
-                            )}
-                            type='text'
-                            {...register('minDHCP')}
-                        />
-                        <div className='absolute top-[3px] left-[125px] flex flex-row'>
-                            <button
-                                type='button'
-                                className={btnIp}
-                                onClick={() => downIpValue(minDHCP, 'minDHCP')}
-                            >
-                                <Image src={downIpIcon} alt='downIp' />
-                            </button>
-                            <button
-                                type='button'
-                                className={btnIp}
-                                onClick={() => upIpValue(minDHCP, 'minDHCP')}
-                            >
-                                <Image src={upIpIcon} alt='upIp' />
-                            </button>
+            <Loader isLoading={isLoadLan && isLoadDHCP}>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className='flex flex-col gap-6 mt-4'>
+                        <div className='relative'>
+                            <label className={labelClasses}>Gateway</label>
+                            <input
+                                className={inputClasses}
+                                placeholder='192.168.1.1 (wan)'
+                                type='text'
+                                {...register('gateway')}
+                            />
                         </div>
-                    </div>
-                    <div className='relative'>
-                        <label className={labelClasses}>По</label>
-                        <p className='absolute top-[3px] left-1 text-[#9f9f9f]'>
-                            {dataDHCP?.ip}
-                        </p>
-                        <input
-                            className={cn(
-                                inputClasses,
-                                'pl-[85px] font-medium'
-                            )}
-                            type='text'
-                            {...register('maxDHCP')}
-                        />
-                        <div className='absolute top-[3px] left-[125px] flex flex-row'>
-                            <button
-                                type='button'
-                                className={btnIp}
-                                onClick={() => downIpValue(maxDHCP, 'maxDHCP')}
-                            >
-                                <Image src={downIpIcon} alt='downIp' />
-                            </button>
-                            <button
-                                type='button'
-                                className={btnIp}
-                                onClick={() => upIpValue(maxDHCP, 'maxDHCP')}
-                            >
-                                <Image src={upIpIcon} alt='upIp' />
-                            </button>
+                        <div className='relative'>
+                            <label className={labelClasses}>IP</label>
+                            <input
+                                className={inputClasses}
+                                type='text'
+                                {...register('ipLan')}
+                            />
                         </div>
+                        <div className='relative'>
+                            <label className={labelClasses}>Маска сети</label>
+                            <input
+                                className={inputClasses}
+                                type='text'
+                                {...register('mask')}
+                            />
+                        </div>
+                        <p className='-mb-3'>DHCP</p>
+                        <div className='relative'>
+                            <label className={labelClasses}>C</label>
+                            <p className='absolute top-[3px] left-1 text-[#9f9f9f] dark:text-text-light'>
+                                {dataDHCP?.ip}
+                            </p>
+                            <input
+                                className={cn(
+                                    inputClasses,
+                                    'pl-[85px] font-medium'
+                                )}
+                                type='text'
+                                {...register('minDHCP')}
+                            />
+                            <div className='absolute top-[3px] left-[125px] flex flex-row'>
+                                <button
+                                    type='button'
+                                    className={btnIp}
+                                    onClick={() =>
+                                        downIpValue(minDHCP, 'minDHCP')
+                                    }
+                                >
+                                    <div>
+                                        <DownIpIcon
+                                            fill={
+                                                theme === 'dark'
+                                                    ? '#bebebe'
+                                                    : '#6C7281'
+                                            }
+                                        />
+                                    </div>
+                                </button>
+                                <button
+                                    type='button'
+                                    className={btnIp}
+                                    onClick={() =>
+                                        upIpValue(minDHCP, 'minDHCP')
+                                    }
+                                >
+                                    <div>
+                                        <UpIpIcon
+                                            fill={
+                                                theme === 'dark'
+                                                    ? '#bebebe'
+                                                    : '#6C7281'
+                                            }
+                                        />
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                        <div className='relative'>
+                            <label className={labelClasses}>По</label>
+                            <p className='absolute top-[3px] left-1 text-[#9f9f9f] dark:text-text-light'>
+                                {dataDHCP?.ip}
+                            </p>
+                            <input
+                                className={cn(
+                                    inputClasses,
+                                    'pl-[85px] font-medium'
+                                )}
+                                type='text'
+                                {...register('maxDHCP')}
+                            />
+                            <div className='absolute top-[3px] left-[125px] flex flex-row'>
+                                <button
+                                    type='button'
+                                    className={btnIp}
+                                    onClick={() =>
+                                        downIpValue(maxDHCP, 'maxDHCP')
+                                    }
+                                >
+                                    <div>
+                                        <DownIpIcon
+                                            fill={
+                                                theme === 'dark'
+                                                    ? '#bebebe'
+                                                    : '#6C7281'
+                                            }
+                                        />
+                                    </div>
+                                </button>
+                                <button
+                                    type='button'
+                                    className={btnIp}
+                                    onClick={() =>
+                                        upIpValue(maxDHCP, 'maxDHCP')
+                                    }
+                                >
+                                    <div>
+                                        <UpIpIcon
+                                            fill={
+                                                theme === 'dark'
+                                                    ? '#bebebe'
+                                                    : '#6C7281'
+                                            }
+                                        />
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                        <p className='-mb-3'>DNS</p>
+                        <input
+                            className={inputClasses}
+                            type='text'
+                            {...register('dns')}
+                        />
+                        <button className={btn} type='submit'>
+                            Применить
+                        </button>
                     </div>
-                    <p className='-mb-3'>DNS</p>
-                    <input
-                        className={inputClasses}
-                        type='text'
-                        {...register('dns')}
-                    />
-                    <button className={btn} type='submit'>
-                        Применить
-                    </button>
-                </div>
-            </form>
-            <SetLanSettingsModal params={{minDHCP, maxDHCP, gateway, ipLan, mask, dns}} />
+                </form>
+            </Loader>
+            <SetLanSettingsModal
+                params={{ minDHCP, maxDHCP, gateway, ipLan, mask, dns }}
+            />
         </div>
     )
 }

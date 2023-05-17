@@ -18,6 +18,7 @@ import {
     ShowIpsIcon,
 } from 'components/Icons/Icons'
 import { getNoun } from 'helpers/softFunctions'
+import { useTheme } from 'helpers/hooks/useTheme'
 
 export const FirewallList = ({
     src_neigh,
@@ -28,6 +29,7 @@ export const FirewallList = ({
     real_name,
     src_dport,
 }: IFirewallItem) => {
+    const { theme } = useTheme()
     const [ipValues, setIpValues] = useState('Нет адресов')
     const [openIps, setOpenIps] = useState(false)
 
@@ -39,7 +41,9 @@ export const FirewallList = ({
     useEffect(() => {
         if (src_neigh) {
             const length = Object.values(src_neigh).length
-            setIpValues(length + getNoun(length, ' адрес', ' адреса', ' адресов'))
+            setIpValues(
+                length + getNoun(length, ' адрес', ' адреса', ' адресов')
+            )
         }
     }, [src_neigh])
 
@@ -65,12 +69,12 @@ export const FirewallList = ({
     }
 
     const inputClasses =
-        'outline-none rounded-md h-[30px] pl-1 ml-1 cursor-pointer outline-1 hover:outline-2 outline-text-light'
+        'outline-none rounded-md h-[30px] pl-1 ml-1 cursor-pointer outline-1 hover:outline-2 dark:bg-darkD dark:outline-text-lightD outline-text-light'
 
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className='grid grid-cols-[1fr_1.8fr_1fr_1.2fr_2fr_0.2fr] p-1 gap-3 bg-light-lighter items-center'
+            className='grid grid-cols-[1fr_1.8fr_1fr_1.2fr_2fr_0.2fr] p-1 gap-3 bg-light-lighter dark:bg-light-lighterD items-center'
         >
             <input
                 type='text'
@@ -97,7 +101,15 @@ export const FirewallList = ({
                     className='scale-[1.2] hover:scale-[1.3]'
                     onClick={() => setOpenIps(!openIps)}
                 >
-                    {!openIps ? <ShowIpsIcon /> : <HideIpsIcon />}
+                    {!openIps ? (
+                        <ShowIpsIcon
+                            fill={theme === 'dark' ? '#bebebe' : '#6C7281'}
+                        />
+                    ) : (
+                        <HideIpsIcon
+                            fill={theme === 'dark' ? '#bebebe' : '#6C7281'}
+                        />
+                    )}
                 </button>
                 <input
                     type='text'
@@ -114,7 +126,7 @@ export const FirewallList = ({
                     type='button'
                     onClick={() => dispatch(openAddWhiteIpModal())}
                 >
-                    <PlusIcon />
+                    <PlusIcon fill={theme === 'dark' ? '#bebebe' : '#6C7281'}/>
                 </button>
             </div>
             <div className='flex flex-col items-end'>
@@ -123,10 +135,10 @@ export const FirewallList = ({
                     type='button'
                     onClick={() => deleteItem(real_name)}
                 >
-                    <PlusRombIcon />
+                    <PlusRombIcon fill={theme === 'dark' ? '#bebebe' : '#6C7281'}/>
                 </button>
                 <button className='hover:scale-110' type='submit'>
-                    <EditIcon />
+                    <EditIcon fill={theme === 'dark' ? '#bebebe' : '#6C7281'}/>
                 </button>
             </div>
             <AddWhiteIpModal body={{ dest_ip, dest_port, name, src_dport }} />

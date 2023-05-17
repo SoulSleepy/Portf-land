@@ -36,7 +36,7 @@ export const Ethernet = ({data}: IProps) => {
                                                 Object.keys(item.ports).map(
                                                     (port) => {
                                                         return (
-                                                            <p className='px-1 py-[2px] w-20 hover:bg-light-lighterD' key={port}>
+                                                            <p className='px-1 py-[2px] w-20 hover:bg-light-lighterD dark:hover:bg-text' key={port}>
                                                                 {port}
                                                             </p>
                                                         )

@@ -7,6 +7,7 @@ import { Static } from './Static'
 import { useAppDispatch } from 'state/store'
 import { openSetProviderSettingsModal } from 'state/slices/modals.slice'
 import { SetProviderSettingsModal } from 'components/Modals/setProviderSettingsModal'
+import { Loader } from '@/components/Loader'
 
 export interface IWanSettingsForm {
     namePppoe?: string
@@ -44,49 +45,72 @@ export const Provider = () => {
         setValue('state', value)
     }
 
-    const [state, namePppoe, passwordPppoe, gatewayStatic, ipStatic, maskStatic, dnsStatic] = watch(['state', 'namePppoe', 'passwordPppoe', 'gatewayStatic', 'ipStatic', 'maskStatic', 'dnsStatic'])
+    const [
+        state,
+        namePppoe,
+        passwordPppoe,
+        gatewayStatic,
+        ipStatic,
+        maskStatic,
+        dnsStatic,
+    ] = watch([
+        'state',
+        'namePppoe',
+        'passwordPppoe',
+        'gatewayStatic',
+        'ipStatic',
+        'maskStatic',
+        'dnsStatic',
+    ])
     const renameValue = (name: string) => {
         return providerOptions.find((item) => item.value === name)
             ?.name as string
     }
 
     const onSubmit: SubmitHandler<IWanSettingsForm> = (data) => {
-        console.log(data);
-        
         dispatch(openSetProviderSettingsModal())
     }
 
     const blockClasses =
-        'flex flex-col bg-light rounded-xl p-3 shadow-dark gap-2'
+        'flex flex-col bg-light dark:bg-darkD rounded-xl p-3 shadow-dark gap-2'
     const titleClasses = 'flex font-medium h-8 items-center text-lg'
-    const hrClasses = 'border-none bg-text-light h-[1.5px] w-full'
+    const hrClasses =
+        'border-none bg-text-light dark:bg-text-lightD h-[1.5px] w-full'
     const btn =
-        'bg-light-lighter rounded-sm h-[34px] w-full cursor-pointer hover:border'
-
-    if (isLoading) return <div> Loading </div>
+        'bg-light-lighter dark:bg-light-lighterD rounded-sm h-[34px] w-full cursor-pointer hover:border'
 
     return (
         <div className={blockClasses}>
             <p className={titleClasses}>Провайдер</p>
             <hr className={hrClasses} />
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className='flex flex-col gap-6 mt-4'>
-                    <CustomSelect
-                        selectName='Протоколы'
-                        defaultValue={renameValue(state)}
-                        selectOptions={providerOptions}
-                        changeValue={changeValue}
-                    />
-                    {state === 'pppoe' && <Pppoe register={register} />}
-                    {state === 'static' && (
-                        <Static register={register} />
-                    )}
-                    <button className={btn} type='submit'>
-                        Применить
-                    </button>
-                </div>
-            </form>
-            <SetProviderSettingsModal settings={{state, namePppoe, passwordPppoe, gatewayStatic, ipStatic, maskStatic, dnsStatic}}/>
+            <Loader isLoading={isLoading}>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className='flex flex-col gap-6 mt-4'>
+                        <CustomSelect
+                            selectName='Протоколы'
+                            defaultValue={renameValue(state)}
+                            selectOptions={providerOptions}
+                            changeValue={changeValue}
+                        />
+                        {state === 'pppoe' && <Pppoe register={register} />}
+                        {state === 'static' && <Static register={register} />}
+                        <button className={btn} type='submit'>
+                            Применить
+                        </button>
+                    </div>
+                </form>
+            </Loader>
+            <SetProviderSettingsModal
+                settings={{
+                    state,
+                    namePppoe,
+                    passwordPppoe,
+                    gatewayStatic,
+                    ipStatic,
+                    maskStatic,
+                    dnsStatic,
+                }}
+            />
         </div>
     )
 }

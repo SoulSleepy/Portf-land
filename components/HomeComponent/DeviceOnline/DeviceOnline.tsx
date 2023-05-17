@@ -1,3 +1,4 @@
+import { Loader } from 'components/Loader'
 import { IDevicesLocalNetwork } from 'types/types'
 
 interface IProps {
@@ -20,15 +21,15 @@ export const DeviceOnline = ({ deviceOnline, isLoading }: IProps) => {
             <p className={titleClasses}>Устройства в сети</p>
             <hr className={hrClasses} />
             <div className='flex flex-row h-[80px] items-center justify-center mt-[6px] gap-16'>
-                <div className='flex flex-col items-center'>
+                <Loader size={75} isLoading={isLoading}><div className='flex flex-col items-center'>
                     <div className={devicesOnlineClasses}>
-                        {!isLoading && deviceOnline.cable.new > 0 && (
+                        {deviceOnline?.cable.new > 0 && (
                             <p className={newDevice}>
                                 {deviceOnline.cable.new}
                             </p>
                         )}
                         <p className='text-xl font-medium'>
-                            {!isLoading && deviceOnline.cable.count}
+                            {deviceOnline?.cable.count}
                         </p>
                     </div>
                     <p>Кабель</p>
@@ -43,7 +44,8 @@ export const DeviceOnline = ({ deviceOnline, isLoading }: IProps) => {
                         </p>
                     </div>
                     <p>Wi-Fi</p>
-                </div>
+                </div></Loader>
+                
             </div>
         </div>
     )

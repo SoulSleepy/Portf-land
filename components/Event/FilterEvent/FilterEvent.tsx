@@ -38,11 +38,11 @@ export const FilterEvent = () => {
     })
 
     const btnFilter =
-        'flex flex-col items-center justify-center cursor-pointer h-8 w-full outline outline-0 hover:outline-1 hover:font-medium bg-light-lighter rounded-sm'
+        'flex flex-col items-center justify-center cursor-pointer h-8 w-full outline outline-0 hover:outline-1 hover:font-medium bg-light-lighter dark:bg-light-lighterD rounded-sm'
     const inputDate =
-        'outline-none rounded-md h-[30px] w-full cursor-pointer outline-1 hover:outline-2 focus:outline-2 outline-text-light'
+        'dark:bg-darkD dark:outline-text-lightD outline-none rounded-md h-[30px] w-full cursor-pointer outline-1 hover:outline-2 focus:outline-2 outline-text-light'
     const labelDate =
-        'bg-light font-medium absolute -top-[13px] left-1 leading-[17px]'
+        'bg-light dark:bg-darkD font-medium absolute -top-[13px] left-1 leading-[17px]'
 
     const onChangeValue = (value: string) => {
         setValue('device', value)

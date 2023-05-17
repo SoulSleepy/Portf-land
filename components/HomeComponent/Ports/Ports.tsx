@@ -1,6 +1,7 @@
 import { IPortLocalNetwork } from 'types/types'
 import { LanPortIcon, NetIcon } from 'components/Icons/Icons'
 import { useTheme } from 'helpers/hooks/useTheme'
+import { Loader } from '@/components/Loader'
 
 interface IProps {
     ports: IPortLocalNetwork[]
@@ -22,11 +23,9 @@ export const Ports = ({ ports, isLoading }: IProps) => {
         <div className={blockClasses}>
             <p className={titleClasses}>Сетевые порты</p>
             <hr className={hrClasses} />
-            <div className='grid grid-cols-4 gap-2'>
-                {isLoading ? (
-                    <div className='h-[78px]'>loading</div>
-                ) : (
-                    ports.map((item) => {
+            <div className='grid grid-cols-4 gap-2 h-[78px]'>
+                <Loader size={75} isLoading={isLoading}>
+                    {ports?.map((item) => {
                         return (
                             <div key={item.port} className={portClasses}>
                                 <div className='scale-[0.08] h-[35px] mt-[-15px]'>
@@ -50,8 +49,8 @@ export const Ports = ({ ports, isLoading }: IProps) => {
                                 )}
                             </div>
                         )
-                    })
-                )}
+                    })}
+                </Loader>
             </div>
         </div>
     )

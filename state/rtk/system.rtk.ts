@@ -86,13 +86,12 @@ export const systemApi = createApi({
             }),
         }),
         getChangeUpdate: builder.query<IChangeUpdateResponse, IParamsChangeUpdate>({
-            query: ({times, updating}) => ({
+            query: (params) => ({
                 url: `update-changeUpdateSettings`,
                 method: 'POST',
                 body: {
                     args: {
-                        times,
-                        updating,
+                        ...params
                     },
                     path: 'update/changeUpdateSettings',
                     token: 'DEBUG',

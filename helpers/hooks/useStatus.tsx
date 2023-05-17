@@ -14,6 +14,7 @@ export const useStatus = () => {
                 dispath(setActiveUser(data !== 'wizard'))
                 if (data === 'cubic-is-not-auth') {
                     dispath(setAuthUser(false))
+                    localStorage.removeItem('isAuth')
                 }
             })
     }

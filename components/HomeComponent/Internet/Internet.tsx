@@ -1,8 +1,10 @@
+import { Loader } from 'components/Loader'
 import { XAxis, YAxis, ResponsiveContainer, LineChart, Line } from 'recharts'
 import { useGetGrahpicQuery } from 'state/rtk/home.rtk'
 
 export const Internet = () => {
-    const { data, isLoading } = useGetGrahpicQuery()
+    const { data, isLoading, isError } = useGetGrahpicQuery()
+
     const renderData = data
         ?.map((item, index) => ({
             date: `${index}`,
@@ -14,29 +16,28 @@ export const Internet = () => {
     const blockClasses =
         'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2'
     const titleClasses = 'flex font-medium h-8 items-center text-lg'
-    const hrClasses = 'border-none dark:bg-text-lightD bg-text-light h-[1.5px] w-full'
+    const hrClasses =
+        'border-none dark:bg-text-lightD bg-text-light h-[1.5px] w-full'
 
     return (
         <div className={blockClasses}>
             <p className={titleClasses}>Интернет</p>
             <hr className={hrClasses} />
-            {isLoading ? (
-                <p>loading</p>
-            ) : (
-                <div className='flex flex-col gap-1'>
-                    <div className='flex flex-row justify-between'>
-                        <p>Трафик Mbit/s</p>
-                        <div className='flex flex-row gap-4'>
-                            <div className='flex flex-row gap-1 items-center'>
-                                <div className='h-[2px] w-7 bg-graph'></div>
-                                <p className='text-graph'>Прием</p>
-                            </div>
-                            <div className='flex flex-row gap-1 items-center'>
-                                <div className='h-[2px] w-7 bg-graph-upload'></div>
-                                <p className='text-graph-upload'>Передача</p>
-                            </div>
+            <div className='flex flex-col gap-1 h-[260px]'>
+                <div className='flex flex-row justify-between'>
+                    <p>Трафик Mbit/s</p>
+                    <div className='flex flex-row gap-4'>
+                        <div className='flex flex-row gap-1 items-center'>
+                            <div className='h-[2px] w-7 bg-graph'></div>
+                            <p className='text-graph'>Прием</p>
+                        </div>
+                        <div className='flex flex-row gap-1 items-center'>
+                            <div className='h-[2px] w-7 bg-graph-upload'></div>
+                            <p className='text-graph-upload'>Передача</p>
                         </div>
                     </div>
+                </div>
+                <Loader isLoading={isLoading}>
                     <ResponsiveContainer
                         className='h-[232px]'
                         minWidth='100%'
@@ -60,8 +61,8 @@ export const Internet = () => {
                             />
                         </LineChart>
                     </ResponsiveContainer>
-                </div>
-            )}
+                </Loader>
+            </div>
         </div>
     )
 }

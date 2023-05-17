@@ -8,9 +8,9 @@ interface IProps {
 export const Static = ({register}: IProps) => {
 
     const inputClasses =
-        'outline-none rounded-md h-[30px] pl-1 w-full cursor-pointer outline-1 hover:outline-2 focus:outline-2 outline-text-light'
+        'outline-none rounded-md h-[30px] pl-1 w-full cursor-pointer outline-1 hover:outline-2 focus:outline-2 dark:bg-darkD dark:outline-text-lightD outline-text-light'
     const labelClasses =
-        'bg-light text-sm absolute -top-[13px] left-1 leading-[17px]'
+        'bg-light dark:bg-darkD text-sm absolute -top-[13px] left-1 leading-[17px]'
 
     return (
         <div className='flex flex-col gap-6'>
