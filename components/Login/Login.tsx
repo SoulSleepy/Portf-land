@@ -16,7 +16,6 @@ export const Login = () => {
     const [postAuthUser, { isError }] = useLazyAuthUserQuery()
     const onSubmit: SubmitHandler<IAuthForm> = (data) => {
         postAuthUser(data)
-        console.log(data)
     }
 
     const inputClasses =

@@ -9,8 +9,8 @@ import {
 import { ISetToggleWifiRequest } from 'types/types'
 import { useState } from 'react'
 import cn from 'classnames'
-import { WifiOffIcon, WifiOnIcon } from '@/components/Icons/Icons'
-import { Loader } from '@/components/Loader'
+import { WifiOffIcon, WifiOnIcon } from 'components/Icons/Icons'
+import { Loader } from 'components/Loader'
 
 export const HomeWeb = () => {
     const [timeoutOn, setOnTimeout] = useState(false)

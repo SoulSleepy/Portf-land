@@ -1,6 +1,6 @@
 import { IAuthForm, IAuthResponse } from 'types/types'
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { setAuthUser } from 'state/slices/auth.slice'
+import { setActiveUser, setAuthUser } from 'state/slices/auth.slice'
 import { fetchBaseAuth } from './config'
 
 export const authApi = createApi({
@@ -53,6 +53,7 @@ export const authApi = createApi({
             onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
                 const { data } = await queryFulfilled
                 if (data.status) {
+                    dispatch(setActiveUser(true))
                     dispatch(setAuthUser(true))
                     localStorage.setItem('isAuth', 'true')
                 }

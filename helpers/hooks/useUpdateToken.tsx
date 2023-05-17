@@ -22,8 +22,8 @@ export const useUpdateToken = () => {
     }
 
     useEffect(() => {
-        if (authUser === true && idInterval) {
-            clearInterval(idInterval)
+        if (authUser === true) {
+            clearInterval(idInterval as NodeJS.Timer)
             idInterval = setInterval(timeoutFetch, 15000)
         }
         if (authUser === false && idInterval) {

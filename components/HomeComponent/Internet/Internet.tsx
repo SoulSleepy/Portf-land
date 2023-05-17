@@ -1,17 +1,30 @@
 import { Loader } from 'components/Loader'
+import { useEffect, useState } from 'react'
 import { XAxis, YAxis, ResponsiveContainer, LineChart, Line } from 'recharts'
 import { useGetGrahpicQuery } from 'state/rtk/home.rtk'
 
+interface IGrafhData {
+    date: string
+    out: number
+    in: number
+}
+
 export const Internet = () => {
     const { data, isLoading, isError } = useGetGrahpicQuery()
+    const [renderData, setRenderData] = useState([] as IGrafhData[])
 
-    const renderData = data
-        ?.map((item, index) => ({
-            date: `${index}`,
-            out: item.out / 1024,
-            in: item.in / 1024,
-        }))
-        .filter((_, idx) => idx % 5 === 0)
+    useEffect(() => {
+        if(data) {
+            const newData: IGrafhData[] = data
+            ?.map((item, index) => ({
+                date: `${index}`,
+                out: item.out / 1024,
+                in: item.in / 1024,
+            }))
+            .filter((_, idx) => idx % 5 === 0)
+            setRenderData(newData)
+        }
+    }, [data])
 
     const blockClasses =
         'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2'
