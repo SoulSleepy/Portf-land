@@ -5,6 +5,7 @@ import Image from 'next/image'
 import bgImage from '../../images/bg.png'
 import { IAuthForm } from 'types/types'
 import { HideInputIcon, LogoIcon, ShowInputIcon } from '../Icons/Icons'
+import { Loader } from '../Loader'
 
 export const Login = () => {
     const [show, setShow] = useState(false)
@@ -13,7 +14,7 @@ export const Login = () => {
         mode: 'onBlur',
     })
 
-    const [postAuthUser, { isError }] = useLazyAuthUserQuery()
+    const [postAuthUser, { isError, isLoading }] = useLazyAuthUserQuery()
     const onSubmit: SubmitHandler<IAuthForm> = (data) => {
         postAuthUser(data)
     }
@@ -42,51 +43,59 @@ export const Login = () => {
                     src={bgImage}
                     alt='background'
                 />
-                <div className='flex flex-col items-center gap-16 mt-[-50px]'>
-                    <div className='flex z-10 h-[110px] ml-[-55px]'><LogoIcon /></div>
+                <div className='flex flex-col items-center gap-16 mt-[-50px] h-[438px]'>
+                    <div className='flex z-10 h-[110px] ml-[-55px]'>
+                        <LogoIcon />
+                    </div>
                     <p className='z-10 font-medium text-2xl tracking-wider'>
                         Авторизация
                     </p>
-                    <form
-                        className='flex flex-col gap-6'
-                        onSubmit={handleSubmit(onSubmit)}
-                        autoComplete='off'
-                    >
-                        <div className='relative z-10'>
-                            <input
-                                className={inputClasses}
-                                {...register('login')}
-                            />
-                            <label className={labelClasses}>Логин</label>
-                        </div>
-                        <div className='relative'>
-                            <input
-                                className={inputClasses}
-                                type={show ? 'text' : 'password'}
-                                {...register('password')}
-                            />
-                            <label className={labelClasses}>Пароль</label>
-                            <div
-                                className='absolute cursor-pointer right-1 top-2'
-                                onClick={() => setShow(!show)}
-                            >
-                                {show ? <ShowInputIcon /> : <HideInputIcon />}
+                    <Loader isLoading={isLoading}>
+                        <form
+                            className='flex flex-col gap-6'
+                            onSubmit={handleSubmit(onSubmit)}
+                            autoComplete='off'
+                        >
+                            <div className='relative z-10'>
+                                <input
+                                    className={inputClasses}
+                                    {...register('login')}
+                                />
+                                <label className={labelClasses}>Логин</label>
                             </div>
-                        </div>
-                        <div className='relative'>
-                            <button
-                                className='flex mt-2 items-center justify-center h-8 w-[250px] uppercase font-medium  outline outline-0 bg-light-lighter bg-opacity-10 hover:bg-opacity-20 hover:outline-1 rounded-sm'
-                                type='submit'
-                            >
-                                Войти
-                            </button>
-                            {isError && (
-                                <div className='text-lightRed absolute flex items-center justify-center h-10 w-[250px]'>
-                                    Не верный логин или пароль
+                            <div className='relative'>
+                                <input
+                                    className={inputClasses}
+                                    type={show ? 'text' : 'password'}
+                                    {...register('password')}
+                                />
+                                <label className={labelClasses}>Пароль</label>
+                                <div
+                                    className='absolute cursor-pointer right-1 top-2'
+                                    onClick={() => setShow(!show)}
+                                >
+                                    {show ? (
+                                        <ShowInputIcon />
+                                    ) : (
+                                        <HideInputIcon />
+                                    )}
                                 </div>
-                            )}
-                        </div>
-                    </form>
+                            </div>
+                            <div className='relative'>
+                                <button
+                                    className='flex mt-2 items-center justify-center h-8 w-[250px] uppercase font-medium  outline outline-0 bg-light-lighter bg-opacity-10 hover:bg-opacity-20 hover:outline-1 rounded-sm'
+                                    type='submit'
+                                >
+                                    Войти
+                                </button>
+                                {isError && (
+                                    <div className='text-lightRed absolute flex items-center justify-center h-10 w-[250px]'>
+                                        Не верный логин или пароль
+                                    </div>
+                                )}
+                            </div>
+                        </form>
+                    </Loader>
                 </div>
             </div>
         </>
