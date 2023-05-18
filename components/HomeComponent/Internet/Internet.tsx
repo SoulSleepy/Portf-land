@@ -14,7 +14,7 @@ export const Internet = () => {
     const [renderData, setRenderData] = useState([] as IGrafhData[])
 
     useEffect(() => {
-        if(data) {
+        if(data && !isError) {
             const newData: IGrafhData[] = data
             ?.map((item, index) => ({
                 date: `${index}`,
