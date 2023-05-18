@@ -14,7 +14,7 @@ export const Login = () => {
         mode: 'onBlur',
     })
 
-    const [postAuthUser, { isError, isLoading }] = useLazyAuthUserQuery()
+    const [postAuthUser, { data, isLoading }] = useLazyAuthUserQuery()
     const onSubmit: SubmitHandler<IAuthForm> = (data) => {
         postAuthUser(data)
     }
@@ -43,7 +43,7 @@ export const Login = () => {
                     src={bgImage}
                     alt='background'
                 />
-                <div className='flex flex-col items-center gap-16 mt-[-50px] h-[438px]'>
+                <div className='flex flex-col items-center gap-[70px] mt-[-50px] h-[438px]'>
                     <div className='flex z-10 h-[110px] ml-[-55px]'>
                         <LogoIcon />
                     </div>
@@ -88,7 +88,7 @@ export const Login = () => {
                                 >
                                     Войти
                                 </button>
-                                {isError && (
+                                {data?.msg === 'log-pass-error' && (
                                     <div className='text-lightRed absolute flex items-center justify-center h-10 w-[250px]'>
                                         Не верный логин или пароль
                                     </div>

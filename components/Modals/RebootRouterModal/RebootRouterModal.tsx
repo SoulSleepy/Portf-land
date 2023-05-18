@@ -18,12 +18,12 @@ export const RebootRouterModal = () => {
         onClose()
     }
 
-    const btnClasses = 'flex items-center justify-center h-8 w-[100px] hover:font-medium outline outline-0 bg-light-lighter hover:outline-1 rounded-sm'
+    const btnClasses = 'flex items-center justify-center h-8 w-[100px] hover:font-medium outline outline-0 bg-light-lighter dark:bg-light-lighterD hover:outline-1 rounded-sm'
 
     return (
         <Modal isOpen={isOpenRebootRouter} onClose={onClose}>
             <div
-                className='flex flex-col p-5 items-center gap-5 bg-light rounded-md text-text-light'
+                className='flex flex-col p-5 items-center gap-5 bg-light rounded-md text-text-light dark:text-text-lightD dark:bg-darkD'
                 onClick={(event) => event.stopPropagation()}
             >
                 <p className='font-medium text-xl tracking-wider'>Вы уверены?</p>

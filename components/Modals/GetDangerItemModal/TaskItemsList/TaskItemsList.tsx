@@ -8,16 +8,18 @@ import {
 
 import { useState } from "react"
 import { TaskItemInfo } from "./TaskItemInfo"
+import { useTheme } from "helpers/hooks/useTheme"
 
 interface IProps {
     cves: IGetDangerCvec[]
 }
 
 export const TaskItemsList = ({cves}: IProps) => {
+    const { theme } = useTheme()
     const [show, setShow] = useState('')
     
     return (
-        <div className='rounded-md bg-light-lighter'>
+        <div className='rounded-md bg-light-lighter dark:bg-light-lighterD'>
             {cves?.map((item) => {
                 return (
                     <div
@@ -43,7 +45,7 @@ export const TaskItemsList = ({cves}: IProps) => {
                             />
                             <div className='flex flex-row justify-between w-full'>
                                 <p>{item.title.ru}</p>
-                                <p className=''>{item.name}</p>
+                                <p>{item.name}</p>
                             </div>
                             <button
                                 type='button'
@@ -55,9 +57,9 @@ export const TaskItemsList = ({cves}: IProps) => {
                                 }
                             >
                                 {show !== item.name ? (
-                                    <HideIpsIcon />
+                                    <HideIpsIcon fill={theme === 'dark' ? '#bebebe' : '#6C7281'}/>
                                 ) : (
-                                    <ShowIpsIcon />
+                                    <ShowIpsIcon fill={theme === 'dark' ? '#bebebe' : '#6C7281'}/>
                                 )}
                             </button>
                         </div>

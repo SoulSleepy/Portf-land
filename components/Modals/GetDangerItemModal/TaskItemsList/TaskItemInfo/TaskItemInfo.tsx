@@ -4,12 +4,14 @@ import { TaskDescriptionIcon } from 'components/Icons/Icons'
 import Link from 'next/link'
 import { useState } from 'react'
 import { toCVSS3 } from 'helpers/softFunctions'
+import { useTheme } from 'helpers/hooks/useTheme'
 
 interface IProps {
     item: IGetDangerCvec
 }
 
 export const TaskItemInfo = ({ item }: IProps) => {
+    const { theme } = useTheme()
     const [activeDes, setActiveDes] = useState(0)
     const [openDescription, setOpenDescription] = useState(false)
 
@@ -37,9 +39,9 @@ export const TaskItemInfo = ({ item }: IProps) => {
                         className='cursor-pointer relative'
                         onClick={() => setOpenDescription(!openDescription)}
                     >
-                        <TaskDescriptionIcon />
+                        <TaskDescriptionIcon fill={theme === 'dark' ? '#bebebe' : '#6C7281'}/>
                         {openDescription && (
-                            <div className='absolute -top-[80px] left-7 p-1 bg-text-light  text-light flex flex-col w-[430px] rounded-md'>
+                            <div className='absolute -top-[80px] left-7 p-1 bg-text-light dark:bg-text-lightD text-light dark:text-darkD flex flex-col w-[430px] rounded-md'>
                                 {toCVSS3(item.securityMetrics.str).map(
                                     (elem) => {
                                         return <p className='text-sm'>{elem}</p>
@@ -66,7 +68,7 @@ export const TaskItemInfo = ({ item }: IProps) => {
                     })}
                 </div>
             </div>
-            <div className='grid grid-cols-[1fr_3fr] border-2 rounded-sm h-[195px] bg-light'>
+            <div className='grid grid-cols-[1fr_3fr] border-2 rounded-sm h-[195px] bg-light dark:bg-darkD'>
                 <div className='flex flex-col gap-2 overflow-auto border-r-2 p-2'>
                     {item.descs.map((item, index) => {
                         return (
@@ -74,9 +76,9 @@ export const TaskItemInfo = ({ item }: IProps) => {
                                 key={index}
                                 onClick={() => setActiveDes(index)}
                                 className={cn(
-                                    'uppercase cursor-pointer hover:bg-light-lighter',
+                                    'uppercase cursor-pointer hover:bg-light-lighter dark:hover:bg-light-lighterD',
                                     {
-                                        'font-medium border-r-2 border-primary bg-light-lighter':
+                                        'font-medium border-r-2 border-primary bg-light-lighter dark:bg-light-lighterD':
                                             activeDes === index,
                                     }
                                 )}

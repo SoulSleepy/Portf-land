@@ -22,7 +22,7 @@ export const ChangeAuth = () => {
         <div className={blockClasses}>
             <p className={titleClasses}>Смена авторизационных данных</p>
             <hr className={hrClasses} />
-            <div className='flex flex-col gap-5 mt-2'>
+            <div className='flex flex-col gap-5 mt-2 h-[88px]'>
                 <div className='relative w-[250px]'>
                     <label className={labelClasses}>Логин</label>
                     <input className={inputClasses} type='text' />
