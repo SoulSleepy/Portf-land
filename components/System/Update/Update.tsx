@@ -7,20 +7,11 @@ import {
 } from 'state/rtk/system.rtk'
 import { useEffect, useState } from 'react'
 import { Loader } from 'components/Loader'
-
-const updateOptions = [
-    { name: 'Ручное', value: 'man' },
-    { name: 'Автоматическое', value: 'auto' },
-]
-
-const timeOptions = [
-    { name: '6:00 - 7:00', value: '6,7' },
-    { name: '12:00 - 13:00', value: '12,13' },
-    { name: '18:00 - 19:00', value: '18,19' },
-    { name: '00:00 - 01:00', value: '0,1' },
-]
+import { useTranslation } from 'next-i18next'
+import { timeOptions } from 'helpers/consts'
 
 export const Update = () => {
+    const { t } = useTranslation('system')
     const [updateValue, setUpadateValue] = useState('man')
     const [timeValue, setTimeValue] = useState('6,7')
     const [loadUpdate, setLoadUpdate] = useState('')
@@ -33,22 +24,25 @@ export const Update = () => {
     useEffect(() => {
         if (dataInfo) {
             setUpadateValue(dataInfo['update-settings'].updating)
-            dataInfo['update-settings'].times && setTimeValue(dataInfo['update-settings'].times?.join() as string)
+            dataInfo['update-settings'].times &&
+                setTimeValue(
+                    dataInfo['update-settings'].times?.join() as string
+                )
         }
     }, [dataInfo])
 
     useEffect(() => {
         if (dataVersion) {
             if (dataVersion?.version !== dataInfo?.version) {
-                setLoadUpdate(`Доступно обновление - ${dataVersion?.version}`)
-            } else setLoadUpdate('Обновлений нет')
+                setLoadUpdate(`${t('update available')} - ${dataVersion?.version}`)
+            } else setLoadUpdate(`${t('no updates')}`)
         }
     }, [dataVersion])
 
     const version = () => {
-        if (loadUpdate !== 'Идет проверка') {
+        if (loadUpdate !== 'load') {
             getVersion()
-            setLoadUpdate('Идет проверка')
+            setLoadUpdate('load')
         }
     }
 
@@ -71,6 +65,11 @@ export const Update = () => {
         } else getChangeUpdate(paramsMan)
     }
 
+    const updateOptions = [
+        { name: `${t('manual')}`, value: 'man' },
+        { name: `${t('automatic')}`, value: 'auto' },
+    ]
+
     const blockClasses =
         'flex flex-col bg-light dark:bg-darkD rounded-xl p-3 shadow-dark gap-2'
     const titleClasses = 'flex font-medium h-10 items-center text-lg'
@@ -82,7 +81,7 @@ export const Update = () => {
     return (
         <div className={blockClasses}>
             <div className={titleClasses}>
-                Версия системы -
+                {t('system version')} -
                 <Loader size={75} isLoading={isLoadInfo}>
                     <p className='ml-1'>{dataInfo?.version}</p>
                 </Loader>
@@ -90,7 +89,7 @@ export const Update = () => {
             <div className='flex flex-col h-[75px] gap-[7px]'>
                 <div className='flex flex-row gap-3 items-center h-[45px]'>
                     <CustomSelect
-                        selectName='Обновление'
+                        selectName={t('update')}
                         selectOptions={updateOptions}
                         defaultValue={renameUpdateValue(updateValue)}
                         changeValue={setUpadateValue}
@@ -99,15 +98,15 @@ export const Update = () => {
                         <button
                             className={cn(settingsBtnClasses, 'h-9 w-[190px]', {
                                 'cursor-default opacity-50 outline-none hover:font-normal':
-                                    loadUpdate === 'Идет проверка',
+                                    loadUpdate === 'load',
                             })}
                             onClick={version}
                         >
-                            Проверить обновления
+                            {t('check for updates')}
                         </button>
                     ) : (
                         <CustomSelect
-                            selectName='Время обновления'
+                            selectName={t('update time')}
                             selectOptions={timeOptions}
                             defaultValue={renameTimeValue(timeValue)}
                             changeValue={setTimeValue}
@@ -116,7 +115,19 @@ export const Update = () => {
                 </div>
                 {updateValue === 'man' ? (
                     <div className='flex flex-row items-center justify-between gap-2'>
-                        <div className='flex items-center h-10'><Loader size={75} isLoading={loadUpdate === 'Идет проверка'}><p className='font-medium'>{loadUpdate}</p></Loader></div>
+                        <div
+                            className={cn(
+                                'flex flex-col h-full justify-center',
+                                { 'mt-[-20px]': loadUpdate === 'load' }
+                            )}
+                        >
+                            <Loader
+                                size={75}
+                                isLoading={loadUpdate === 'load'}
+                            >
+                                <p className='font-medium'>{loadUpdate}</p>
+                            </Loader>
+                        </div>
                         {loadUpdate.length <= 14 ? null : (
                             <button className={cn(settingsBtnClasses, 'h-9')}>
                                 Обновить

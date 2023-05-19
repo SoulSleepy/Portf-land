@@ -2,8 +2,10 @@ import { useGetSettingsFirewallQuery } from 'state/rtk/settings.rtk'
 import { NewFirewall } from './NewFirewall'
 import { FirewallList } from './FirewallList/FirewallList'
 import { Loader } from 'components/Loader'
+import { useTranslation } from 'next-i18next'
 
 export const Firewall = () => {
+    const { t } = useTranslation('settings')
     const { data, isLoading } = useGetSettingsFirewallQuery()
 
     const blockClasses =
@@ -15,17 +17,17 @@ export const Firewall = () => {
     return (
         <div className={blockClasses}>
             <div className='grid grid-cols-[1fr_1.8fr_1fr_1.2fr_2fr_0.2fr] gap-3'>
-                <p className={titleClasses}>Правило</p>
-                <p className={titleClasses}>Устройство</p>
-                <p className={titleClasses}>Внешний порт</p>
-                <p className={titleClasses}>Исходный порт</p>
-                <p className={titleClasses}>Белый список IP-адресов</p>
+                <p className={titleClasses}>{t('rule')}</p>
+                <p className={titleClasses}>{t('device')}</p>
+                <p className={titleClasses}>{t('external port')}</p>
+                <p className={titleClasses}>{t('source port')}</p>
+                <p className={titleClasses}>{t('white list IP addresses')}</p>
             </div>
             <hr className={hrClasses} />
             <div className='flex flex-col gap-1'>
                 <Loader isLoading={isLoading}>
                     {!data ? (
-                        <p>Правила отсутствуют</p>
+                        <p>{t('there are no rules')}</p>
                     ) : (
                         data?.map(([key, item]) => {
                             return <FirewallList key={key} {...item} />

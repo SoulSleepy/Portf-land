@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { IAgentInfoUsbDevice } from 'types/types'
 
 interface IProps {
@@ -5,6 +6,7 @@ interface IProps {
 }
 
 export const USBDevices = ({ usbDevices }: IProps) => {
+    const { t } = useTranslation('devices')
     const blockClasses =
         'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2'
     const titleClasses = 'flex font-medium h-10 items-center text-lg'
@@ -12,7 +14,7 @@ export const USBDevices = ({ usbDevices }: IProps) => {
 
     return (
         <div className={blockClasses}>
-            <p className={titleClasses}>Устройства USB</p>
+            <p className={titleClasses}>{t('USB devices')}</p>
             <hr className={hrClasses} />
             <div className='grid grid-cols-2 gap-2'>
                 {usbDevices.map((item) => {

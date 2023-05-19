@@ -7,7 +7,8 @@ import { openGetEventItemModal } from 'state/slices/modals.slice'
 import { GetEventItemModal } from 'components/Modals/GetEventItemModal'
 import { eventTypeObj } from 'helpers/consts'
 import { useTheme } from 'helpers/hooks/useTheme'
-import { Loader } from '@/components/Loader'
+import { Loader } from 'components/Loader'
+import { useTranslation } from 'next-i18next'
 
 interface IProps {
     eventList: IIncidentsItem[]
@@ -15,6 +16,7 @@ interface IProps {
 }
 
 export const LastEvents = ({ eventList, isLoading }: IProps) => {
+    const { t } = useTranslation('home')
     const { theme } = useTheme()
     const dispatch = useAppDispatch()
     const [taskId, setTaskId] = useState(0)
@@ -34,40 +36,47 @@ export const LastEvents = ({ eventList, isLoading }: IProps) => {
 
     return (
         <div className={blockClasses}>
-            <p className={titleClasses}>Последние события</p>
+            <p className={titleClasses}>{t('recent events')}</p>
             <hr className={hrClasses} />
             <div className='flex flex-col h-[250px] overflow-auto gap-2'>
                 <Loader size={75} isLoading={isLoading}>
-                    {eventList?.map((item) => {
-                        return (
-                            <div
-                                className={eventDangerClasses}
-                                key={item.id}
-                                onClick={() => openModal(item.id)}
-                            >
-                                <div className='scale-110'>
-                                    <EventIcon
-                                        fill={
-                                            theme === 'dark'
-                                                ? 'white'
-                                                : '#6C7281'
-                                        }
-                                    />
+                    {eventList?.length ? (
+                        eventList?.map((item) => {
+                            return (
+                                <div
+                                    className={eventDangerClasses}
+                                    key={item.id}
+                                    onClick={() => openModal(item.id)}
+                                >
+                                    <div className='scale-110'>
+                                        <EventIcon
+                                            fill={
+                                                theme === 'dark'
+                                                    ? 'white'
+                                                    : '#6C7281'
+                                            }
+                                        />
+                                    </div>
+                                    <div className='flex flex-col gap-1'>
+                                        <p className='leading-5'>
+                                            {
+                                                eventTypeObj[
+                                                    item.type as number
+                                                ]?.title
+                                            }
+                                        </p>
+                                        <p className='text-sm'>
+                                            {toDate(item.createTst)}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className='flex flex-col gap-1'>
-                                    <p className='leading-5'>
-                                        {
-                                            eventTypeObj[item.type as number]
-                                                ?.title
-                                        }
-                                    </p>
-                                    <p className='text-sm'>
-                                        {toDate(item.createTst)}
-                                    </p>
-                                </div>
-                            </div>
-                        )
-                    })}
+                            )
+                        })
+                    ) : (
+                        <p className='text-lg flex items-center justify-center h-full'>
+                            {t('no events')}
+                        </p>
+                    )}
                 </Loader>
             </div>
             <GetEventItemModal id={taskId} />

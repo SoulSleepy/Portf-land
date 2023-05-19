@@ -1,0 +1,14 @@
+{
+    "in progress": "В работе",
+    "completed": "Завершенные",
+    "filter": "Фильтр",
+    "devices": "Устройства",
+    "all": "все",
+    "severity": "Критичность",
+    "from": "От",
+    "to": "До",
+    "apply": "Применить",
+    "reset": "Сбросить",
+    "no vulnerabilities found": "Уязвимости отсутствуют",
+    "vulnerable software found": "Найдено уязвимое ПО"
+}

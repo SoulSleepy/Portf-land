@@ -19,6 +19,8 @@ import {
 } from 'components/Icons/Icons'
 import { getNoun } from 'helpers/softFunctions'
 import { useTheme } from 'helpers/hooks/useTheme'
+import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
 
 export const FirewallList = ({
     src_neigh,
@@ -29,6 +31,8 @@ export const FirewallList = ({
     real_name,
     src_dport,
 }: IFirewallItem) => {
+    const { locale } = useRouter()
+    const { t } = useTranslation('settings')
     const { theme } = useTheme()
     const [ipValues, setIpValues] = useState('Нет адресов')
     const [openIps, setOpenIps] = useState(false)
@@ -41,11 +45,12 @@ export const FirewallList = ({
     useEffect(() => {
         if (src_neigh) {
             const length = Object.values(src_neigh).length
-            setIpValues(
-                length + getNoun(length, ' адрес', ' адреса', ' адресов')
+            const adress = t(
+                getNoun(length, 'address1', 'address2', 'address5')
             )
+            setIpValues(`${length} ${adress}`)
         }
-    }, [src_neigh])
+    }, [src_neigh, locale])
 
     const { register, reset, handleSubmit, formState, watch, setValue } =
         useForm<INewFirewallForm>({
@@ -126,7 +131,7 @@ export const FirewallList = ({
                     type='button'
                     onClick={() => dispatch(openAddWhiteIpModal())}
                 >
-                    <PlusIcon fill={theme === 'dark' ? '#bebebe' : '#6C7281'}/>
+                    <PlusIcon fill={theme === 'dark' ? '#bebebe' : '#6C7281'} />
                 </button>
             </div>
             <div className='flex flex-col items-end'>
@@ -135,10 +140,12 @@ export const FirewallList = ({
                     type='button'
                     onClick={() => deleteItem(real_name)}
                 >
-                    <PlusRombIcon fill={theme === 'dark' ? '#bebebe' : '#6C7281'}/>
+                    <PlusRombIcon
+                        fill={theme === 'dark' ? '#bebebe' : '#6C7281'}
+                    />
                 </button>
                 <button className='hover:scale-110' type='submit'>
-                    <EditIcon fill={theme === 'dark' ? '#bebebe' : '#6C7281'}/>
+                    <EditIcon fill={theme === 'dark' ? '#bebebe' : '#6C7281'} />
                 </button>
             </div>
             <AddWhiteIpModal body={{ dest_ip, dest_port, name, src_dport }} />

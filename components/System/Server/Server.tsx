@@ -1,8 +1,10 @@
 import { useGetServerInfoQuery } from 'state/rtk/system.rtk'
 import cn from 'classnames'
 import { Loader } from 'components/Loader'
+import { useTranslation } from 'next-i18next'
 
 export const Server = () => {
+    const { t } = useTranslation('system')
     const { data, isLoading } = useGetServerInfoQuery()
 
     const blockClasses =
@@ -15,7 +17,7 @@ export const Server = () => {
 
     return (
         <div className={blockClasses}>
-            <p className={titleClasses}>Подключение к серверу ИБ</p>
+            <p className={titleClasses}>{t('connection to server')}</p>
             <hr className={hrClasses} />
             <Loader isLoading={isLoading}>
                 {false ? (
@@ -31,17 +33,12 @@ export const Server = () => {
                     </div>
                 ) : (
                     <p>
-                        Данный функционал позволяет отделу информционной
-                        безопастности быть в курсе текущего состояния
-                        инфраструктуры локальной сети и своевременно давать
-                        рекомендации пользователю. Для подключения требуется
-                        ввести хост и ключ, выданные компанией или
-                        администратором.
+                        {t('text1')}
                     </p>
                 )}
             </Loader>
             <button className={cn(btnClasses, 'h-8 w-[120px] mt-2')}>
-                Подключиться
+                {t('connect')}
             </button>
         </div>
     )

@@ -7,6 +7,7 @@ import { Events } from './Events'
 import { IDeviceItem } from 'types/types'
 import { DevicesIcon } from 'components/Icons/Icons'
 import { useTheme } from 'helpers/hooks/useTheme'
+import { useTranslation } from 'next-i18next'
 
 interface IDeviceInfoItem {
     information: JSX.Element
@@ -16,6 +17,7 @@ interface IDeviceInfoItem {
 }
 
 export const DeviceInfo = ({ device }: { device: IDeviceItem }) => {
+    const { t } = useTranslation('devices')
     const { theme } = useTheme()
     const [activeBtn, setActiveBtn] =
         useState<keyof IDeviceInfoItem>('information')
@@ -48,11 +50,11 @@ export const DeviceInfo = ({ device }: { device: IDeviceItem }) => {
                     {device.agent &&
                         (device.online === true ? (
                             <p className='ml-auto text-primary'>
-                                Агент запущен
+                                {t('agent running')}
                             </p>
                         ) : (
                             <p className='ml-auto text-primary'>
-                                Агент установлен
+                                {t('agent installed')}
                             </p>
                         ))}
                 </div>
@@ -67,7 +69,7 @@ export const DeviceInfo = ({ device }: { device: IDeviceItem }) => {
                         })}
                         onClick={() => setActiveBtn('information')}
                     >
-                        Информация
+                        {t('information')}
                     </button>
                     {device.agent && (
                         <button
@@ -76,7 +78,7 @@ export const DeviceInfo = ({ device }: { device: IDeviceItem }) => {
                             })}
                             onClick={() => setActiveBtn('programs')}
                         >
-                            Программы
+                            {t('programs')}
                         </button>
                     )}
                     <button
@@ -85,7 +87,7 @@ export const DeviceInfo = ({ device }: { device: IDeviceItem }) => {
                         })}
                         onClick={() => setActiveBtn('dangers')}
                     >
-                        Уязвимости
+                        {t('tasks')}
                     </button>
                     <button
                         className={cn(btnTitleClasses, {
@@ -93,7 +95,7 @@ export const DeviceInfo = ({ device }: { device: IDeviceItem }) => {
                         })}
                         onClick={() => setActiveBtn('events')}
                     >
-                        События
+                        {t('events')}
                     </button>
                 </div>
             </div>

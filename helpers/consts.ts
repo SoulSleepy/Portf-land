@@ -72,6 +72,24 @@ export const widthChannel24 = [
     { name: '40 Mhz', value: '40' },
 ]
 
+export const dangerLevel = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+export const providerOptions = [
+    { name: 'DHCP client', value: 'dhcp' },
+    { name: 'Unmanaged', value: 'um' },
+    { name: 'PPPoE', value: 'pppoe' },
+    { name: 'Static address', value: 'static' },
+]
+
+
+
+export const timeOptions = [
+    { name: '6:00 - 7:00', value: '6,7' },
+    { name: '12:00 - 13:00', value: '12,13' },
+    { name: '18:00 - 19:00', value: '18,19' },
+    { name: '00:00 - 01:00', value: '0,1' },
+]
+
 export const translateObj: any = {
     AV: {
         title: 'Вектор атаки (AV):',

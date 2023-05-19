@@ -1,0 +1,10 @@
+{
+    "filter": "Filter",
+    "devices": "Devices",
+    "all": "all",
+    "from": "From",
+    "to": "To",
+    "apply": "Apply",
+    "reset": "Reset",
+    "no events found": "No events found"
+}

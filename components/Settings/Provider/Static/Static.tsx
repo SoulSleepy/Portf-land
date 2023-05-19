@@ -1,11 +1,13 @@
 import { UseFormRegister } from "react-hook-form"
 import { IWanSettingsForm } from "../Provider"
+import { useTranslation } from "next-i18next"
 
 interface IProps {
     register: UseFormRegister<IWanSettingsForm>
 }
 
 export const Static = ({register}: IProps) => {
+    const { t } = useTranslation('settings')
 
     const inputClasses =
         'outline-none rounded-md h-[30px] pl-1 w-full cursor-pointer outline-1 hover:outline-2 focus:outline-2 dark:bg-darkD dark:outline-text-lightD outline-text-light'
@@ -31,7 +33,7 @@ export const Static = ({register}: IProps) => {
                 />
             </div>
             <div className='relative'>
-                <label className={labelClasses}>Маска</label>
+                <label className={labelClasses}>{t('mask')}</label>
                 <input
                     className={inputClasses}
                     type='text'

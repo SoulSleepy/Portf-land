@@ -1,7 +1,6 @@
 .wrap {
     display: flex;
     flex-direction: column;
-    height: 100%;
     align-items: center;
     justify-content: center;
 }
@@ -21,8 +20,8 @@
     background: #ffffff;
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
-.bgBlack div{
-    background: #6C7281;
+.bgBlack div {
+    background: #6c7281;
 }
 .ellipsis div:nth-child(1) {
     left: 8px;

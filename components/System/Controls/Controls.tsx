@@ -7,8 +7,10 @@ import {
 import { RebootRouterModal } from 'components/Modals/RebootRouterModal'
 import { ResetIcon, UpdateIcon } from 'components/Icons/Icons'
 import { useTheme } from 'helpers/hooks/useTheme'
+import { useTranslation } from 'next-i18next'
 
 export const Controls = () => {
+    const { t } = useTranslation('system')
     const { theme } = useTheme()
     const dispatch = useAppDispatch()
 
@@ -29,7 +31,7 @@ export const Controls = () => {
                     className='uppercase tracking-wide'
                     onClick={() => dispatch(openRebootRouterModal())}
                 >
-                    Перезагрузить
+                    {t('restart')}
                 </button>
             </div>
             <div
@@ -41,7 +43,7 @@ export const Controls = () => {
                         fill={theme === 'dark' ? '#bebebe' : '#6C7281'}
                     />
                 </div>
-                <button className='uppercase tracking-wide'>Сбросить</button>
+                <button className='uppercase tracking-wide'>{t('reset')}</button>
             </div>
             <ResetRouterModal />
             <RebootRouterModal />

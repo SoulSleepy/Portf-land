@@ -2,6 +2,7 @@ import { IPortLocalNetwork } from 'types/types'
 import { LanPortIcon, NetIcon } from 'components/Icons/Icons'
 import { useTheme } from 'helpers/hooks/useTheme'
 import { Loader } from '@/components/Loader'
+import { useTranslation } from 'next-i18next'
 
 interface IProps {
     ports: IPortLocalNetwork[]
@@ -10,6 +11,7 @@ interface IProps {
 
 export const Ports = ({ ports, isLoading }: IProps) => {
     const { theme } = useTheme()
+    const { t } = useTranslation('home')
 
     const blockClasses =
         'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2'
@@ -21,7 +23,7 @@ export const Ports = ({ ports, isLoading }: IProps) => {
 
     return (
         <div className={blockClasses}>
-            <p className={titleClasses}>Сетевые порты</p>
+            <p className={titleClasses}>{t('network ports')}</p>
             <hr className={hrClasses} />
             <div className='grid grid-cols-4 gap-2 h-[78px]'>
                 <Loader size={75} isLoading={isLoading}>

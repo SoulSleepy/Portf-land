@@ -1,11 +1,13 @@
 import { UseFormRegister } from "react-hook-form"
 import { IWanSettingsForm } from "../Provider"
+import { useTranslation } from "next-i18next"
 
 interface IProps {
     register: UseFormRegister<IWanSettingsForm>
 }
 
 export const Pppoe = ({register}: IProps) => {
+    const { t } = useTranslation('settings')
 
     const inputClasses =
         'outline-none rounded-md h-[30px] pl-1 w-full cursor-pointer outline-1 hover:outline-2 focus:outline-2 dark:bg-darkD dark:outline-text-lightD outline-text-light'
@@ -15,7 +17,7 @@ export const Pppoe = ({register}: IProps) => {
     return (
         <div className='flex flex-col gap-6'>
             <div className='relative'>
-                <label className={labelClasses}>Имя</label>
+                <label className={labelClasses}>{t('name')}</label>
                 <input
                     className={inputClasses}
                     type='text'
@@ -23,7 +25,7 @@ export const Pppoe = ({register}: IProps) => {
                 />
             </div>
             <div className='relative'>
-                <label className={labelClasses}>Пароль</label>
+                <label className={labelClasses}>{t('password')}</label>
                 <input
                     className={inputClasses}
                     type='text'

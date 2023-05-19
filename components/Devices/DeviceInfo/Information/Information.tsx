@@ -6,7 +6,7 @@ import { Basic } from './Basic'
 import { Ports } from './Ports'
 import { Equipment } from './Equipment'
 import { USBDevices } from './USBDevices'
-import { Loader } from '@/components/Loader'
+import { Loader } from 'components/Loader'
 
 interface IProps {
     deviceId: number

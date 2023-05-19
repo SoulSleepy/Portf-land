@@ -10,8 +10,10 @@ import { channels24, widthChannel24 } from 'helpers/consts'
 import { HideInputIcon, ShowInputIcon } from 'components/Icons/Icons'
 import { useTheme } from 'helpers/hooks/useTheme'
 import { Loader } from 'components/Loader'
+import { useTranslation } from 'next-i18next'
 
 export const WiFi24 = () => {
+    const { t } = useTranslation('settings')
     const { theme } = useTheme()
     const dispatch = useAppDispatch()
     const [show, setShow] = useState(false)
@@ -78,7 +80,7 @@ export const WiFi24 = () => {
                     <div className='flex flex-col gap-6 mt-4'>
                         <div className='relative'>
                             <label className={labelClasses}>
-                                Название сети
+                                {t('network name')}
                             </label>
                             <input
                                 className={inputClasses}
@@ -87,7 +89,7 @@ export const WiFi24 = () => {
                             />
                         </div>
                         <div className='relative'>
-                            <label className={labelClasses}>Пароль</label>
+                            <label className={labelClasses}>{t('password')}</label>
                             <input
                                 className={inputClasses}
                                 type={show ? 'text' : 'password'}
@@ -118,18 +120,18 @@ export const WiFi24 = () => {
                         </div>
                         <CustomSelect
                             defaultValue={channel}
-                            selectName={'Канал'}
+                            selectName={t('channel')}
                             selectOptions={channels24}
                             changeValue={changeValueChannel}
                         />
                         <CustomSelect
                             defaultValue={renameValue(width)}
-                            selectName={'Ширина'}
+                            selectName={t('width')}
                             selectOptions={widthChannel24}
                             changeValue={changeValueWidth}
                         />
                         <button className={btn} type='submit'>
-                            Применить
+                            {t('apply')}
                         </button>
                     </div>
                 </form>

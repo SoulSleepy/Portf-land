@@ -1,0 +1,23 @@
+{
+    "internet": "Интернет",
+    "traffic": "Трафик",
+    "reception": "Прием",
+    "transmission": "Передача",
+    "home network": "Домашняя сеть",
+    "GHz": "Ггц",
+    "channel": "канал",
+    "off": "Выключить",
+    "on": "Включить",
+    "internet connection speed": "Скорость интернет соединения",
+    "PING": "PING",
+    "receive": "прием",
+    "transmit": "передача",
+    "network ports": "Сетевые Порты",
+    "devices on network": "Устройства в сети",
+    "cable": "Кабель",
+    "recent events": "Последние события",
+    "no events": "События отсутствуют",
+    "recent vulnerabilities": "Последние уязвимости",
+    "no vulnerabilities": "Уязвимости отсутствуют",
+    "vulnerable software found": "Найдено уязвимое ПО"
+}

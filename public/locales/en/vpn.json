@@ -1,0 +1,11 @@
+{
+    "server": "server",
+    "description": "Description",
+    "generate keys": "Generate keys",
+    "client": "client",
+    "paths for configuring certificates": "Paths for configuring certificates",
+    "load configuration to server": "Load configuration to server",
+    "load root certificate": "Load root certificate",
+    "load client certificate": "Load client certificate",
+    "load client key": "Load client key"
+}

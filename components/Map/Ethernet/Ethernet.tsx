@@ -1,12 +1,14 @@
 import { useTheme } from "helpers/hooks/useTheme"
 import { DevicesIcon } from "components/Icons/Icons"
 import { IMapItem } from "types/types"
+import { useTranslation } from "next-i18next"
 
 interface IProps {
     data: IMapItem[]
 }
 
 export const Ethernet = ({data}: IProps) => {
+    const { t } = useTranslation('map')
     const { theme } = useTheme()
 
     const blockDevicesClasses = 'grid grid-cols-3 gap-2 '
@@ -43,7 +45,7 @@ export const Ethernet = ({data}: IProps) => {
                                                     }
                                                 )
                                             ) : (
-                                                <p>нет</p>
+                                                <p>{t('no')}</p>
                                             )}
                                         </div>
                                     </div>

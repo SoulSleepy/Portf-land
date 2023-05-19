@@ -6,8 +6,8 @@ import { useGetDevicesQuery } from 'state/rtk/dangerAndEvent.rtk'
 import { useFilter } from 'helpers/hooks/useFilter'
 import { IFilter, IFilterDevicesItem } from 'types/types'
 import { toUnix } from 'helpers/softFunctions'
-
-const dangerLevel = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+import { useTranslation } from 'next-i18next'
+import { dangerLevel } from 'helpers/consts'
 
 interface IDangerFilterForm {
     device: string
@@ -22,6 +22,7 @@ interface IProps {
 }
 
 export const FilterDanger = ({ isClosed }: IProps) => {
+    const { t } = useTranslation('tasks')
     const [selectOptions, setSelectOptions] = useState(['всe'])
     const [minValue, setMinValue] = useState(0)
     const [maxValue, setMaxValue] = useState(10)
@@ -48,13 +49,13 @@ export const FilterDanger = ({ isClosed }: IProps) => {
         useForm<IDangerFilterForm>({
             mode: 'onBlur',
             defaultValues: {
-                device: 'все',
+                device: 'all',
                 min: 0,
                 max: 10,
             },
         })
 
-    const defaultValueDevice = watch('device')
+    const defaultValueDevice = t(watch('device'))
     const onChangeValue = (value: string) => {
         setValue('device', value)
     }
@@ -134,13 +135,13 @@ export const FilterDanger = ({ isClosed }: IProps) => {
             {!isLoading && (
                 <CustomSelect
                     changeValue={onChangeValue}
-                    defaultValue={defaultValueDevice}
-                    selectName='Устройства'
+                    defaultValue={t(defaultValueDevice)}
+                    selectName={t('devices')}
                     selectOptions={selectOptions}
                 />
             )}
             <div className='flex flex-col gap-2'>
-                <p className=''>Критичность</p>
+                <p>{t('severity')}</p>
                 <div className='flex flex-col'>
                     <div className='relative h-1 rounded-md bg-text-light'>
                         <div
@@ -189,7 +190,7 @@ export const FilterDanger = ({ isClosed }: IProps) => {
             </div>
             <div className='flex flex-col gap-6 mt-4'>
                 <div className='relative'>
-                    <label className={labelDate}>От</label>
+                    <label className={labelDate}>{t('from')}</label>
                     <input
                         className={inputDate}
                         type='date'
@@ -197,7 +198,7 @@ export const FilterDanger = ({ isClosed }: IProps) => {
                     />
                 </div>
                 <div className='relative'>
-                    <label className={labelDate}>До</label>
+                    <label className={labelDate}>{t('to')}</label>
                     <input
                         className={inputDate}
                         type='date'
@@ -207,14 +208,14 @@ export const FilterDanger = ({ isClosed }: IProps) => {
             </div>
             <div className='flex flex-row gap-2 justify-around'>
                 <button className={btnFilter} type='submit'>
-                    Применить
+                    {t('apply')}
                 </button>
                 <button
                     className={btnFilter}
                     type='button'
                     onClick={() => toDefaultValue()}
                 >
-                    Сбросить
+                    {t('reset')}
                 </button>
             </div>
         </form>

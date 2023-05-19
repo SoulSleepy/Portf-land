@@ -8,8 +8,10 @@ import { useState } from 'react'
 import { openGetTaskItemModal } from 'state/slices/modals.slice'
 import { useTheme } from 'helpers/hooks/useTheme'
 import { Loader } from 'components/Loader'
+import { useTranslation } from 'next-i18next'
 
 export const InWork = () => {
+    const { t } = useTranslation('tasks')
     const { theme } = useTheme()
     const dispatch = useAppDispatch()
     const [taskId, setTaskId] = useState(0)
@@ -82,7 +84,7 @@ export const InWork = () => {
                     })
                 ) : (
                     <p className='flex flex-col items-center justify-center text-2xl h-full'>
-                        Уязвимости отсутствуют
+                        {t('no vulnerabilities found')}
                     </p>
                 )}
             </Loader>

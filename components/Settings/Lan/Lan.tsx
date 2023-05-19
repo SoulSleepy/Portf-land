@@ -9,8 +9,10 @@ import { SetLanSettingsModal } from 'components/Modals/SetLanSettingsModal'
 import { DownIpIcon, UpIpIcon } from 'components/Icons/Icons'
 import { useTheme } from 'helpers/hooks/useTheme'
 import { Loader } from 'components/Loader'
+import { useTranslation } from 'next-i18next'
 
 export const Lan = () => {
+    const { t } = useTranslation('settings')
     const { theme } = useTheme()
     const { data: dataLan, isLoading: isLoadLan } = useGetNetworkInfoQuery()
     const { data: dataDHCP, isLoading: isLoadDHCP } = useGetDHCPQuery()
@@ -66,7 +68,7 @@ export const Lan = () => {
 
     return (
         <div className={blockClasses}>
-            <p className={titleClasses}>Локальная Сеть</p>
+            <p className={titleClasses}>{t('local network')}</p>
             <hr className={hrClasses} />
             <Loader isLoading={isLoadLan && isLoadDHCP}>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -89,7 +91,7 @@ export const Lan = () => {
                             />
                         </div>
                         <div className='relative'>
-                            <label className={labelClasses}>Маска сети</label>
+                            <label className={labelClasses}>{t('network mask')}</label>
                             <input
                                 className={inputClasses}
                                 type='text'
@@ -98,7 +100,7 @@ export const Lan = () => {
                         </div>
                         <p className='-mb-3'>DHCP</p>
                         <div className='relative'>
-                            <label className={labelClasses}>C</label>
+                            <label className={labelClasses}>{t('from')}</label>
                             <p className='absolute top-[3px] left-1 text-[#9f9f9f] dark:text-text-light'>
                                 {dataDHCP?.ip}
                             </p>
@@ -148,7 +150,7 @@ export const Lan = () => {
                             </div>
                         </div>
                         <div className='relative'>
-                            <label className={labelClasses}>По</label>
+                            <label className={labelClasses}>{t('to')}</label>
                             <p className='absolute top-[3px] left-1 text-[#9f9f9f] dark:text-text-light'>
                                 {dataDHCP?.ip}
                             </p>
@@ -204,7 +206,7 @@ export const Lan = () => {
                             {...register('dns')}
                         />
                         <button className={btn} type='submit'>
-                            Применить
+                            {t('apply')}
                         </button>
                     </div>
                 </form>

@@ -15,8 +15,10 @@ import { useAppDispatch } from 'state/store'
 import { UserIcon } from '../Icons/Icons'
 import { useTheme } from 'helpers/hooks/useTheme'
 import { Loader } from '../Loader'
+import { useTranslation } from 'next-i18next'
 
 export const Users = () => {
+    const { t } = useTranslation('users')
     const { theme } = useTheme()
     const dispatch = useAppDispatch()
     const { data, isLoading } = useGetUsersQuery()
@@ -83,18 +85,18 @@ export const Users = () => {
                     className={cn(btnInfoClasses, 'rounded-md w-full')}
                     onClick={() => dispatch(openCreateUserModal())}
                 >
-                    Создать
+                    {t('create')}
                 </button>
             </div>
             <div className='flex flex-col gap-3 h-[670px] overflow-auto'>
                 <div className={blockClasses}>
-                    <p className={titleClasses}>Информация о пользователе</p>
+                    <p className={titleClasses}>{t('user information')}</p>
                     <hr className={hrClasses} />
                     <div className='flex flex-row justify-between p-2'>
                         <div className='flex flex-col'>
                             <p>id</p>
-                            <p>Логин</p>
-                            <p>Роль</p>
+                            <p>{t('login')}</p>
+                            <p>{t('role')}</p>
                         </div>
                         <div className='flex flex-col items-end'>
                             <p>{activeItem.id}</p>
@@ -107,13 +109,13 @@ export const Users = () => {
                             className={btnInfoClasses}
                             onClick={() => dispatch(openUpdateUserModal())}
                         >
-                            Редактировать
+                            {t('edit')}
                         </button>
                         <button
                             className={btnInfoClasses}
                             onClick={() => dispatch(openDeleteUserModal())}
                         >
-                            Удалить
+                            {t('delete')}
                         </button>
                     </div>
                 </div>

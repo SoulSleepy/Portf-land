@@ -7,7 +7,9 @@ import { Static } from './Static'
 import { useAppDispatch } from 'state/store'
 import { openSetProviderSettingsModal } from 'state/slices/modals.slice'
 import { SetProviderSettingsModal } from 'components/Modals/setProviderSettingsModal'
-import { Loader } from '@/components/Loader'
+import { Loader } from 'components/Loader'
+import { useTranslation } from 'next-i18next'
+import { providerOptions } from 'helpers/consts'
 
 export interface IWanSettingsForm {
     namePppoe?: string
@@ -19,14 +21,8 @@ export interface IWanSettingsForm {
     state: string
 }
 
-const providerOptions = [
-    { name: 'DHCP client', value: 'dhcp' },
-    { name: 'Unmanaged', value: 'um' },
-    { name: 'PPPoE', value: 'pppoe' },
-    { name: 'Static address', value: 'static' },
-]
-
 export const Provider = () => {
+    const { t } = useTranslation('settings')
     const { data, isLoading } = useGetNetworkInfoQuery()
     const dispatch = useAppDispatch()
 
@@ -81,13 +77,13 @@ export const Provider = () => {
 
     return (
         <div className={blockClasses}>
-            <p className={titleClasses}>Провайдер</p>
+            <p className={titleClasses}>{t('provider')}</p>
             <hr className={hrClasses} />
             <Loader isLoading={isLoading}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='flex flex-col gap-6 mt-4'>
                         <CustomSelect
-                            selectName='Протоколы'
+                            selectName={t('protocols')}
                             defaultValue={renameValue(state)}
                             selectOptions={providerOptions}
                             changeValue={changeValue}
@@ -95,7 +91,7 @@ export const Provider = () => {
                         {state === 'pppoe' && <Pppoe register={register} />}
                         {state === 'static' && <Static register={register} />}
                         <button className={btn} type='submit'>
-                            Применить
+                            {t('apply')}
                         </button>
                     </div>
                 </form>

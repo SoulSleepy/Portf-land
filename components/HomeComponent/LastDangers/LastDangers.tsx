@@ -6,7 +6,8 @@ import { useAppDispatch } from 'state/store'
 import { openGetTaskItemModal } from 'state/slices/modals.slice'
 import { useState } from 'react'
 import { useTheme } from 'helpers/hooks/useTheme'
-import { Loader } from '@/components/Loader'
+import { Loader } from 'components/Loader'
+import { useTranslation } from 'next-i18next'
 
 interface IProps {
     dangerList: ITaskItem[]
@@ -14,6 +15,7 @@ interface IProps {
 }
 
 export const LastDangers = ({ dangerList, isLoading }: IProps) => {
+    const { t } = useTranslation('home')
     const { theme } = useTheme()
     const dispatch = useAppDispatch()
     const [taskId, setTaskId] = useState(0)
@@ -33,33 +35,41 @@ export const LastDangers = ({ dangerList, isLoading }: IProps) => {
 
     return (
         <div className={blockClasses}>
-            <p className={titleClasses}>Последние уязвимости</p>
+            <p className={titleClasses}>{t('recent vulnerabilities')}</p>
             <hr className={hrClasses} />
             <div className='flex flex-col h-[250px] overflow-auto gap-2'>
                 <Loader size={75} isLoading={isLoading}>
-                    {dangerList?.map((item) => {
-                        return (
-                            <div
-                                className={eventDangerClasses}
-                                key={item.id}
-                                onClick={() => openModal(item.id)}
-                            >
-                                <DangerIcon
-                                    fill={
-                                        theme === 'dark' ? 'white' : '#6C7281'
-                                    }
-                                />
-                                <div className='flex flex-col gap-1'>
-                                    <p className='leading-5'>
-                                        Найдено уязвимое ПО
-                                    </p>
-                                    <p className='text-sm'>
-                                        {toDate(item.createTst)}
-                                    </p>
+                    {dangerList?.length ? (
+                        dangerList?.map((item) => {
+                            return (
+                                <div
+                                    className={eventDangerClasses}
+                                    key={item.id}
+                                    onClick={() => openModal(item.id)}
+                                >
+                                    <DangerIcon
+                                        fill={
+                                            theme === 'dark'
+                                                ? 'white'
+                                                : '#6C7281'
+                                        }
+                                    />
+                                    <div className='flex flex-col gap-1'>
+                                        <p className='leading-5'>
+                                            {t('vulnerable software found')}
+                                        </p>
+                                        <p className='text-sm'>
+                                            {toDate(item.createTst)}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })}
+                            )
+                        })
+                    ) : (
+                        <p className='text-lg flex items-center justify-center h-full'>
+                            {t('no vulnerabilities')}
+                        </p>
+                    )}
                 </Loader>
             </div>
             <GetDangerItemModal id={taskId} />

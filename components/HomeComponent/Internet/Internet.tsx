@@ -1,4 +1,5 @@
 import { Loader } from 'components/Loader'
+import { useTranslation } from 'next-i18next'
 import { useEffect, useState } from 'react'
 import { XAxis, YAxis, ResponsiveContainer, LineChart, Line } from 'recharts'
 import { useGetGrahpicQuery } from 'state/rtk/home.rtk'
@@ -10,6 +11,7 @@ interface IGrafhData {
 }
 
 export const Internet = () => {
+    const { t } = useTranslation('home')
     const { data, isLoading, isError } = useGetGrahpicQuery()
     const [renderData, setRenderData] = useState([] as IGrafhData[])
 
@@ -34,19 +36,19 @@ export const Internet = () => {
 
     return (
         <div className={blockClasses}>
-            <p className={titleClasses}>Интернет</p>
+            <p className={titleClasses}>{t('internet')}</p>
             <hr className={hrClasses} />
             <div className='flex flex-col gap-1 h-[260px]'>
                 <div className='flex flex-row justify-between'>
-                    <p>Трафик Mbit/s</p>
+                    <p>{t('traffic')} Mbit/s</p>
                     <div className='flex flex-row gap-4'>
                         <div className='flex flex-row gap-1 items-center'>
                             <div className='h-[2px] w-7 bg-graph'></div>
-                            <p className='text-graph'>Прием</p>
+                            <p className='text-graph'>{t('reception')}</p>
                         </div>
                         <div className='flex flex-row gap-1 items-center'>
                             <div className='h-[2px] w-7 bg-graph-upload'></div>
-                            <p className='text-graph-upload'>Передача</p>
+                            <p className='text-graph-upload'>{t('transmission')}</p>
                         </div>
                     </div>
                 </div>

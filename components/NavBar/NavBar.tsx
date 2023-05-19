@@ -17,6 +17,7 @@ import {
 } from '../Icons/Icons'
 import { useLazyLogoutUserQuery } from 'state/rtk/auth.rtk'
 import { useTheme } from 'helpers/hooks/useTheme'
+import { useTranslation } from 'next-i18next'
 
 interface IMenuItem {
     id: number
@@ -26,18 +27,19 @@ interface IMenuItem {
 }
 
 const menuItems: IMenuItem[] = [
-    { id: 1, name: 'Главная', icon: HomeIcon, link: '/' },
-    { id: 2, name: 'Карта сети', icon: NetIcon, link: '/map' },
+    { id: 1, name: 'home', icon: HomeIcon, link: '/' },
+    { id: 2, name: 'network map', icon: NetIcon, link: '/map' },
     { id: 3, name: 'VPN', icon: NetIcon, link: '/vpn' },
-    { id: 4, name: 'Уязвимости', icon: DangerIcon, link: '/danger' },
-    { id: 5, name: 'События', icon: EventIcon, link: '/event' },
-    { id: 6, name: 'Устройства', icon: DevicesIcon, link: '/devices' },
-    { id: 7, name: 'Пользователи', icon: UsersIcon, link: '/users' },
-    { id: 8, name: 'Настройки', icon: SettingsIcon, link: '/settings' },
-    { id: 9, name: 'Система', icon: SystemIcon, link: '/system' },
+    { id: 4, name: 'tasks', icon: DangerIcon, link: '/danger' },
+    { id: 5, name: 'events', icon: EventIcon, link: '/event' },
+    { id: 6, name: 'devices', icon: DevicesIcon, link: '/devices' },
+    { id: 7, name: 'users', icon: UsersIcon, link: '/users' },
+    { id: 8, name: 'settings', icon: SettingsIcon, link: '/settings' },
+    { id: 9, name: 'system', icon: SystemIcon, link: '/system' },
 ]
 
 export const NavBar = () => {
+    const { t } = useTranslation('navbar')
     const { theme } = useTheme()
     const { route } = useRouter()
     const [toggleCollapse, setToggleCollapse] = useState(false)
@@ -123,7 +125,7 @@ export const NavBar = () => {
                                     </div>
                                     {!toggleCollapse && (
                                         <span className='text-md font-medium text-text-light dark:text-text-lightD'>
-                                            {item.name}
+                                            {t(item.name)}
                                         </span>
                                     )}
                                 </Link>
@@ -142,7 +144,7 @@ export const NavBar = () => {
                 </div>
                 {!toggleCollapse && (
                     <span className='text-md font-medium text-text-light dark:text-text-lightD'>
-                        Выход
+                        {t('exit')}
                     </span>
                 )}
             </Link>

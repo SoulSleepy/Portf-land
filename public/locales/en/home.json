@@ -1,0 +1,23 @@
+{
+    "internet": "Internet",
+    "traffic": "Traffic",
+    "reception": "Reception",
+    "transmission": "Transmission",
+    "home network": "Home Network",
+    "GHz": "GHz",
+    "channel": "channel",
+    "off": "Off",
+    "on": "On",
+    "internet connection speed": "Internet Connection Speed",
+    "PING": "PING",
+    "receive": "Receive",
+    "transmit": "Transmit",
+    "network ports": "Network Ports",
+    "devices on network": "Devices on Network",
+    "cable": "Cable",
+    "recent events": "Recent Events",
+    "no events": "No events",
+    "recent vulnerabilities": "Recent Vulnerabilities",
+    "no vulnerabilities": "No vulnerabilities",
+    "vulnerable software found": "Vulnerable software found"
+}

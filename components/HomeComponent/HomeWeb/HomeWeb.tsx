@@ -11,8 +11,10 @@ import { useState } from 'react'
 import cn from 'classnames'
 import { WifiOffIcon, WifiOnIcon } from 'components/Icons/Icons'
 import { Loader } from 'components/Loader'
+import { useTranslation } from 'next-i18next'
 
 export const HomeWeb = () => {
+    const { t } = useTranslation('home')
     const [timeoutOn, setOnTimeout] = useState(false)
     const { data, isLoading } = useGetToggleWiFiQuery()
     const [getNewToggleWifi] = useLazyGetToggleWiFiQuery()
@@ -40,7 +42,7 @@ export const HomeWeb = () => {
     return (
         <div className={blockClasses}>
             <div className='flex flex-row items-center justify-between h-8'>
-                <p className={titleClasses}>Домашняя сеть</p>
+                <p className={titleClasses}>{t('home network')}</p>
                 <Loader size={75} children={''} isLoading={timeoutOn}/>
             </div>
             <hr className={hrClasses} />
@@ -65,7 +67,7 @@ export const HomeWeb = () => {
                                             {item.name}
                                         </p>
                                         <p className='text-sm'>
-                                            {item.range} Ггц, канал{' '}
+                                            {item.range} {t('GHz')}, {t('channel')}{' '}
                                             {item.channel}
                                         </p>
                                     </div>
@@ -80,8 +82,8 @@ export const HomeWeb = () => {
                                     className={btnClasses}
                                 >
                                     {item.enabled === true
-                                        ? 'Выключить'
-                                        : 'Включить'}
+                                        ? t('off')
+                                        : t('on')}
                                 </button>
                             </div>
                         )

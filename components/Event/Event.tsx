@@ -10,8 +10,10 @@ import { GetEventItemModal } from '../Modals/GetEventItemModal'
 import { eventTypeObj } from 'helpers/consts'
 import { useTheme } from 'helpers/hooks/useTheme'
 import { Loader } from '../Loader'
+import { useTranslation } from 'next-i18next'
 
 export const Event = () => {
+    const { t } = useTranslation('events')
     const { theme } = useTheme()
     const dispatch = useAppDispatch()
     const [taskId, setTaskId] = useState(0)
@@ -94,7 +96,7 @@ export const Event = () => {
                             })
                         ) : (
                             <p className='flex flex-col items-center justify-center text-2xl h-full'>
-                                События отсутствуют
+                                {t('no events found')}
                             </p>
                         )}
                     </Loader>
@@ -102,7 +104,7 @@ export const Event = () => {
             </div>
             <div className={blockClasses}>
                 <p className='flex font-medium h-10 items-center text-lg'>
-                    Фильтр
+                    {t('filter')}
                 </p>
                 <hr className={hrClasses} />
                 <FilterEvent />

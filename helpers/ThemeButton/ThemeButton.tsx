@@ -27,7 +27,7 @@ export const ThemeButton = () => {
             </style>
             {mounted && (
                 <button
-                    className='absolute top-0 flex items-center justify-center p-1'
+                    className=''
                     onClick={setTheme}
                 >
                     <Image

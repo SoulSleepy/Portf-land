@@ -7,9 +7,11 @@ import { useEffect, useState } from 'react'
 import { UpdateIcon } from 'components/Icons/Icons'
 import cn from 'classnames'
 import { useTheme } from 'helpers/hooks/useTheme'
-import { Loader } from '@/components/Loader'
+import { Loader } from 'components/Loader'
+import { useTranslation } from 'next-i18next'
 
 export const Speed = () => {
+    const { t } = useTranslation('home')
     const { theme } = useTheme()
     const [test, setTest] = useState(false)
 
@@ -41,7 +43,7 @@ export const Speed = () => {
     return (
         <div className={blockClasses}>
             <div className='flex flex-row items-center justify-between h-8'>
-                <p className={titleClasses}>Скорость интернет соединения</p>
+                <p className={titleClasses}>{t('internet connection speed')}</p>
                 <Loader size={75} children={''} isLoading={test} />
             </div>
             <hr className={hrClasses} />
@@ -50,14 +52,14 @@ export const Speed = () => {
                     <div className='flex flex-row gap-3 items-center h-[45px]'>
                         <div className='w-14'>
                             <p className='text-xs uppercase'>
-                                <b>PING</b> MS
+                                <b>{t('PING')}</b> MS
                             </p>
                             <p className='font-medium text-xl'>{data?.ping}</p>
                         </div>
                         <div className={dotClasses} />
-                        <div className='w-20'>
+                        <div className='w-24'>
                             <p className='text-xs uppercase'>
-                                <b>Прием</b> MBPS
+                                <b>{t('receive')}</b> MBPS
                             </p>
                             <p className='font-medium text-xl'>
                                 {data?.download}
@@ -66,7 +68,7 @@ export const Speed = () => {
                         <div className={dotClasses} />
                         <div className='w-28'>
                             <p className='text-xs uppercase'>
-                                <b>Передача</b> MBPS
+                                <b>{t('transmit')}</b> MBPS
                             </p>
                             <p className='font-medium text-xl'>
                                 {data?.upload}

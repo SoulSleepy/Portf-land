@@ -1,0 +1,11 @@
+{
+    "server": "сервер",
+    "description": "Описание",
+    "generate keys": "Генерировать ключи",
+    "client": "клиент",
+    "paths for configuring certificates": "Пути для конфигурации сертификатов",
+    "load configuration to server": "Загрузить на сервер конфигурацию",
+    "load root certificate": "Загрузить сертификат центра сертификации",
+    "load client certificate": "Загрузить клиентский сертификат",
+    "load client key": "Загрузить клиентский ключ"
+}

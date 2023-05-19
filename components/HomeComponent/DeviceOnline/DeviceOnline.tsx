@@ -1,4 +1,5 @@
 import { Loader } from 'components/Loader'
+import { useTranslation } from 'next-i18next'
 import { IDevicesLocalNetwork } from 'types/types'
 
 interface IProps {
@@ -7,6 +8,7 @@ interface IProps {
 }
 
 export const DeviceOnline = ({ deviceOnline, isLoading }: IProps) => {
+    const { t } = useTranslation('home')
     const blockClasses =
         'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl pt-3 px-3 p-2  shadow-dark gap-2'
     const titleClasses = 'flex font-medium h-8 items-center text-lg'
@@ -18,7 +20,7 @@ export const DeviceOnline = ({ deviceOnline, isLoading }: IProps) => {
 
     return (
         <div className={blockClasses}>
-            <p className={titleClasses}>Устройства в сети</p>
+            <p className={titleClasses}>{t('devices on network')}</p>
             <hr className={hrClasses} />
             <div className='flex flex-row h-[80px] items-center justify-center mt-[6px] gap-16'>
                 <Loader size={75} isLoading={isLoading}><div className='flex flex-col items-center'>
@@ -32,7 +34,7 @@ export const DeviceOnline = ({ deviceOnline, isLoading }: IProps) => {
                             {deviceOnline?.cable.count}
                         </p>
                     </div>
-                    <p>Кабель</p>
+                    <p>{t('cable')}</p>
                 </div>
                 <div className='flex flex-col items-center'>
                     <div className={devicesOnlineClasses}>

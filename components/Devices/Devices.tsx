@@ -7,8 +7,10 @@ import { toDate } from 'helpers/softFunctions'
 import { DevicesIcon } from '../Icons/Icons'
 import { useTheme } from 'helpers/hooks/useTheme'
 import { Loader } from '../Loader'
+import { useTranslation } from 'next-i18next'
 
 export const Devices = () => {
+    const { t } = useTranslation('devices')
     const { theme } = useTheme()
     const { data, isLoading } = useGetDevicesListQuery()
     const [activeItem, setActiveItem] = useState({ id: 1 } as IDeviceItem)
@@ -32,11 +34,11 @@ export const Devices = () => {
     return (
         <div className='grid grid-cols-[1fr_2.4fr] gap-3 text-text-light'>
             <div className={blockClasses}>
-                <div className=''>
+                <div>
                     <input
                         className='p-1 h-[32px] w-full outline outline-1 rounded-md hover:outline-2 dark:bg-darkD outline-text-light dark:outline-text-lightD'
                         type='text'
-                        placeholder='Search for device'
+                        placeholder='search on devices'
                     />
                 </div>
                 <div className='flex flex-col gap-2 h-[600px] overflow-auto'>
@@ -81,7 +83,7 @@ export const Devices = () => {
                                             })}
                                         >
                                             {item.online !== true
-                                                ? `был ${toDate(
+                                                ? `${t('logged')} ${toDate(
                                                       item.online as any
                                                   )}`
                                                 : item.ip}

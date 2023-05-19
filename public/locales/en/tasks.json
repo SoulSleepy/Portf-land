@@ -1,0 +1,14 @@
+{
+    "in progress": "In Progress",
+    "completed": "Completed",
+    "filter": "Filter",
+    "devices": "Devices",
+    "all": "all",
+    "severity": "Severity",
+    "from": "From",
+    "to": "To",
+    "apply": "Apply",
+    "reset": "Reset",
+    "no vulnerabilities found": "No Vulnerabilities Found",
+    "vulnerable software found": "Vulnerable Software Found"
+}

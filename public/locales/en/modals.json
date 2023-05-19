@@ -1,0 +1,18 @@
+{
+    "device": "Device",
+    "creation time": "Creation time",
+    "risk metric": "Risk metric",
+    "vulnerability type": "Vulnerability type",
+    "sources": "Sources",
+    "create new user": "Create new user",
+    "login": "Login",
+    "password": "Password",
+    "create": "Create",
+    "edit user": "Edit user",
+    "change": "Change",
+    "are you sure?": "Are you sure?",
+    "yes": "Yes",
+    "no": "No",
+    "enter": "Enter",
+    "add": "Add"
+}

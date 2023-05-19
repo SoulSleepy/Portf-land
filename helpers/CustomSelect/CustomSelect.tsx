@@ -36,6 +36,7 @@ export const CustomSelect = ({
     const arrOptions = toSelectOptions(selectOptions)
     const [activeValue, setActiveValue] = useState(arrOptions[0].name)
     const [toggleSelect, setToggleSelect] = useState(false)
+
     const iconClasses = cn('absolute top-[2px] right-0', {
         'rotate-180': toggleSelect,
     })

@@ -1,5 +1,6 @@
 import { DevicesIcon } from 'components/Icons/Icons'
 import { useTheme } from 'helpers/hooks/useTheme'
+import { useTranslation } from 'next-i18next'
 import { IMapItem } from 'types/types'
 
 interface IProps {
@@ -7,6 +8,7 @@ interface IProps {
 }
 
 export const WifiMap = ({ data }: IProps) => {
+    const { t } = useTranslation('map')
     const { theme } = useTheme()
 
     const blockDevicesClasses = 'grid grid-cols-3 gap-2 '
@@ -39,7 +41,7 @@ export const WifiMap = ({ data }: IProps) => {
                                                 }
                                             )
                                         ) : (
-                                            <p>нет</p>
+                                            <p>{t('no')}</p>
                                         )}
                                     </div>
                                 </div>

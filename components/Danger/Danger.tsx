@@ -3,8 +3,10 @@ import { useState } from 'react'
 import { Completed } from './Completed'
 import { FilterDanger } from './FilterDanger'
 import { InWork } from './InWork'
+import { useTranslation } from 'next-i18next'
 
 export const Danger = () => {
+    const { t } = useTranslation('tasks')
     const [activeBtn, setActiveBtn] = useState(false)
 
     const blockClasses =
@@ -12,7 +14,8 @@ export const Danger = () => {
     const btnTitleClasses =
         'border-b text-center h-7 hover:border-b-2 hover:font-medium cursor-pointer text-lg'
     const activeBtnClasses = 'border-b-2 font-medium dark:text-light'
-    const hrClasses = 'border-none bg-text-light dark:bg-text-lightD h-[1.5px] w-full mb-3'
+    const hrClasses =
+        'border-none bg-text-light dark:bg-text-lightD h-[1.5px] w-full mb-3'
 
     return (
         <div className='grid grid-cols-[2.4fr_1fr] gap-3 text-text-light h-[670px]'>
@@ -24,7 +27,7 @@ export const Danger = () => {
                         })}
                         onClick={() => setActiveBtn(false)}
                     >
-                        В работе
+                        {t('in progress')}
                     </button>
                     <button
                         className={cn(btnTitleClasses, {
@@ -32,19 +35,17 @@ export const Danger = () => {
                         })}
                         onClick={() => setActiveBtn(true)}
                     >
-                        Завершенные
+                        {t('completed')}
                     </button>
                 </div>
-                {!activeBtn ? (
-                    <InWork />
-                ) : (
-                    <Completed />
-                )}
+                {!activeBtn ? <InWork /> : <Completed />}
             </div>
             <div className={blockClasses}>
-                <p className='flex font-medium h-10 items-center text-lg'>Фильтр</p>
+                <p className='flex font-medium h-10 items-center text-lg'>
+                    {t('filter')}
+                </p>
                 <hr className={hrClasses} />
-                <FilterDanger isClosed={activeBtn}/>
+                <FilterDanger isClosed={activeBtn} />
             </div>
         </div>
     )

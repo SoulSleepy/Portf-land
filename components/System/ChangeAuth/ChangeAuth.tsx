@@ -2,8 +2,10 @@ import cn from 'classnames'
 import { useState } from 'react'
 import { HideInputIcon, ShowInputIcon } from 'components/Icons/Icons'
 import { useTheme } from 'helpers/hooks/useTheme'
+import { useTranslation } from 'next-i18next'
 
 export const ChangeAuth = () => {
+    const { t } = useTranslation('system')
     const { theme } = useTheme()
     const [show, setShow] = useState(false)
 
@@ -20,15 +22,15 @@ export const ChangeAuth = () => {
 
     return (
         <div className={blockClasses}>
-            <p className={titleClasses}>Смена авторизационных данных</p>
+            <p className={titleClasses}>{t('change authorization data')}</p>
             <hr className={hrClasses} />
             <div className='flex flex-col gap-5 mt-2 h-[88px]'>
                 <div className='relative w-[250px]'>
-                    <label className={labelClasses}>Логин</label>
+                    <label className={labelClasses}>{t('login')}</label>
                     <input className={inputClasses} type='text' />
                 </div>
                 <div className='relative w-[250px]'>
-                    <label className={labelClasses}>Пароль</label>
+                    <label className={labelClasses}>{t('password')}</label>
                     <input
                         className={inputClasses}
                         type={show ? 'text' : 'password'}
@@ -46,7 +48,7 @@ export const ChangeAuth = () => {
                 </div>
             </div>
             <button className={cn(btnClasses, 'h-8 w-[120px] mt-2')}>
-                Сохранить
+                {t('save')}
             </button>
         </div>
     )
