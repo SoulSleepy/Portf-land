@@ -100,8 +100,6 @@ export interface IToggleWiFiResponse {
     explain: string
 }
 
-export interface IToggleWifiItems {}
-
 export interface IToggleWiFiItem {
     name: string
     channel: string

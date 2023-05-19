@@ -16,16 +16,16 @@ export const Internet = () => {
     const [renderData, setRenderData] = useState([] as IGrafhData[])
 
     useEffect(() => {
-        if(data && !isError) {
-            const newData: IGrafhData[] = data
+        if(typeof data !== 'string' && !isError) {
+            const newData = data
             ?.map((item, index) => ({
                 date: `${index}`,
                 out: item.out / 1024,
                 in: item.in / 1024,
             }))
-            .filter((_, idx) => idx % 5 === 0)
+            .filter((_, idx) => idx % 5 === 0) as IGrafhData[]
             setRenderData(newData)
-        }
+        } return
     }, [data])
 
     const blockClasses =

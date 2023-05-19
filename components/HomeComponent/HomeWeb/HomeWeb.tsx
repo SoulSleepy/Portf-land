@@ -1,6 +1,3 @@
-import Image from 'next/image'
-import wifiIcon from '../../../images/wifiIcon.svg'
-import noWifiIcon from '../../../images/noWifiIcon.svg'
 import {
     useGetToggleWiFiQuery,
     useLazyGetToggleWiFiQuery,
@@ -48,7 +45,7 @@ export const HomeWeb = () => {
             <hr className={hrClasses} />
             <div className='flex flex-col gap-4 h-28'>
                 <Loader isLoading={isLoading}>
-                    {data?.map((item) => {
+                    {typeof data !== 'string' && data?.map((item) => {
                         return (
                             <div
                                 key={item.name}

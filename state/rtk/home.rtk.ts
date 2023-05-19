@@ -26,7 +26,10 @@ export const homeApi = createApi({
             }),
             transformResponse: ({ data }: IToggleWiFiResponse) => data,
         }),
-        setToggleWiFi: builder.query<ISetToggleWifiResponse,ISetToggleWifiRequest>({
+        setToggleWiFi: builder.query<
+            ISetToggleWifiResponse,
+            ISetToggleWifiRequest
+        >({
             query: (params) => ({
                 url: `setting-toggleWifi`,
                 method: 'POST',

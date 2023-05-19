@@ -9,6 +9,7 @@ interface IProps {
 
 export const DeviceOnline = ({ deviceOnline, isLoading }: IProps) => {
     const { t } = useTranslation('home')
+
     const blockClasses =
         'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl pt-3 px-3 p-2  shadow-dark gap-2'
     const titleClasses = 'flex font-medium h-8 items-center text-lg'
@@ -38,11 +39,11 @@ export const DeviceOnline = ({ deviceOnline, isLoading }: IProps) => {
                 </div>
                 <div className='flex flex-col items-center'>
                     <div className={devicesOnlineClasses}>
-                        {!isLoading && deviceOnline.wifi.new > 0 && (
-                            <p className={newDevice}>{deviceOnline.wifi.new}</p>
+                        {!isLoading && deviceOnline?.wifi.new > 0 && (
+                            <p className={newDevice}>{deviceOnline?.wifi.new}</p>
                         )}
                         <p className='text-xl font-medium'>
-                            {!isLoading && deviceOnline.wifi.count}
+                            {!isLoading && deviceOnline?.wifi.count}
                         </p>
                     </div>
                     <p>Wi-Fi</p>
