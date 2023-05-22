@@ -77,7 +77,7 @@ export const WiFi5 = () => {
             <p className={titleClasses}>Wi-Fi 5</p>
             <hr className={hrClasses} />
             <Loader isLoading={isLoading}>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
                     <div className='flex flex-col gap-6 mt-4'>
                         <div className='relative'>
                             <label className={labelClasses}>
@@ -92,6 +92,7 @@ export const WiFi5 = () => {
                         <div className='relative'>
                             <label className={labelClasses}>{t('password')}</label>
                             <input
+                                autoComplete="new-password"
                                 className={inputClasses}
                                 type={show ? 'text' : 'password'}
                                 {...register('passwd')}

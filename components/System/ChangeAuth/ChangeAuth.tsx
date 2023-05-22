@@ -32,6 +32,7 @@ export const ChangeAuth = () => {
                 <div className='relative w-[250px]'>
                     <label className={labelClasses}>{t('password')}</label>
                     <input
+                        autoComplete="new-password"
                         className={inputClasses}
                         type={show ? 'text' : 'password'}
                     />

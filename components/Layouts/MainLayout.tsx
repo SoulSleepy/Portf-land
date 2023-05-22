@@ -16,7 +16,7 @@ const MainLayout: FC<IProps> = ({ children }) => {
     const { pathname } = useRouter()
 
     useEffect(() => {
-        if (pathname === '/') setTest(localStorage.isAuth !== 'true')
+        setTest(localStorage.isAuth !== 'true')
     }, [pathname])
 
     return (

@@ -62,6 +62,7 @@ export const CreateUserModal = () => {
                     </div>
                     <div className='relative'>
                         <input
+                            autoComplete='new-password'
                             className={inputClasses}
                             type={show ? 'text' : 'password'}
                             {...register('password')}
