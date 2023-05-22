@@ -1,9 +1,8 @@
 import { ReactNode } from 'react'
 import styles from './loader.module.css'
 import cn from 'classnames'
-import { useTheme } from '@/helpers/hooks/useTheme'
-import { useRouter } from 'next/router'
-import { useLazyLogoutUserQuery } from '@/state/rtk/auth.rtk'
+import { useTheme } from 'helpers/hooks/useTheme'
+import { useLazyLogoutUserQuery } from 'state/rtk/auth.rtk'
 
 interface IProps {
     children: ReactNode

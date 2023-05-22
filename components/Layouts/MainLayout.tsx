@@ -1,15 +1,24 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, useEffect, useState } from 'react'
 import { NavBar } from '../NavBar'
 import { ThemeButton } from 'helpers/ThemeButton'
 import Image from 'next/image'
 import bgImage from '../../images/bg.png'
-import { LangButton } from '@/helpers/LangButton'
+import { LangButton } from 'helpers/LangButton'
+import { Loader } from '../Loader'
+import { useRouter } from 'next/router'
 
 interface IProps {
     children: ReactNode
 }
 
 const MainLayout: FC<IProps> = ({ children }) => {
+    const [test, setTest] = useState(true)
+    const { pathname } = useRouter()
+
+    useEffect(() => {
+        if (pathname === '/') setTest(localStorage.isAuth !== 'true')
+    }, [pathname])
+
     return (
         <div className='h-full flex flex-row justify-start relative'>
             <NavBar />
@@ -22,7 +31,7 @@ const MainLayout: FC<IProps> = ({ children }) => {
                 <div className='absolute top-0 flex flex-row gap-3 items-center justify-center p-1'>
                     <ThemeButton /> <LangButton />
                 </div>
-                {children}
+                <Loader isLoading={test}>{children}</Loader>
             </main>
         </div>
     )
