@@ -14,6 +14,7 @@ import filterSlice from './slices/filter.slice'
 import userSlice from './slices/auth.slice'
 import mainSlice from './slices/main.slice'
 import { mapApi } from './rtk/map'
+import systemSlice from './slices/system.slice'
 
 const store = configureStore({
     reducer: {
@@ -29,6 +30,7 @@ const store = configureStore({
         filter: filterSlice,
         modals: modalsSlice,
         main: mainSlice,
+        system: systemSlice,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({ serializableCheck: false }).concat([
@@ -39,7 +41,7 @@ const store = configureStore({
             homeApi.middleware,
             dangerAndEventApi.middleware,
             devicesApi.middleware,
-            mapApi.middleware
+            mapApi.middleware,
         ]),
 })
 

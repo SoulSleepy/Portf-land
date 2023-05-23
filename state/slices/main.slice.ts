@@ -1,6 +1,4 @@
-import { IFilter, IFilterDevice } from 'types/types'
 import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
 
 interface initState {
     theme: 'light' | 'dark'
@@ -11,7 +9,7 @@ const initialState: initState = {
 }
 
 export const main = createSlice({
-    name: 'filterDanger',
+    name: 'main',
     initialState,
     reducers: {
         setStateTheme: (state, { payload }) => {

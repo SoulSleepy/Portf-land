@@ -16,11 +16,6 @@ export const AuthProvider: FC<Props> = ({ children }) => {
     const { authUser, activeUser } = useAppSelector((store) => store.auth)
     const dispatch = useAppDispatch()
 
-    // const [test, setTest] = useState(true)
-    // useEffect(() => {
-    //     setTest(localStorage.isAuth !== 'true')
-    // }, [children])
-
     useEffect(() => {
         const isAuth: boolean = JSON.parse(localStorage.isAuth || 'false')
         dispatch(setAuthUser(isAuth))

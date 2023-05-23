@@ -857,7 +857,7 @@ export interface UpdateSettings {
     times?: number[]
 }
 
-// system => ChangeUpdating interfaces //
+// system => ChangeUpdate interfaces //
 export interface IChangeUpdateResponse {
     status: boolean
     data: string
@@ -925,8 +925,53 @@ export interface IRebootResponse {
     explain: string
 }
 
-// system => ChangeUpdating interfaces //
-export interface IChangeUpdatingResponse {}
+// system => RegisterSerever interfaces //
+export interface IRegisterServerResponse {
+    status: boolean
+    data: IRegisterItems[]
+    msg: string
+    error: null
+    explain: string
+}
+
+export interface IRegisterItems {
+    name: string
+    title: string
+    type: string
+    value: string
+}
+
+export interface IRegisterServerForm {
+    domain: string
+    init_key: string
+}
+
+// system => AnketaSerever interfaces //
+export interface IAnketaServerResponse {
+    status: boolean
+    data: []
+    msg: string
+    error: null
+    explain: string
+}
+
+// system => ServerOnOff interfaces //
+export interface IServerOnOffResponse {
+    status: boolean
+    data: []
+    msg: boolean
+    error: null
+    explain: string
+}
+
+// system => DisconnectServer interfaces //
+export interface IDisconnectServerResponse {
+    status: boolean
+    data: []
+    msg: string
+    error: null
+    explain: string
+}
 
 // auth interfaces //
 export interface IAuthResponse {

@@ -21,6 +21,8 @@
     "connection to server": "Connection to the IS server",
     "login": "Login",
     "password": "Password",
+    "online": "Online",
+    "offline": "Offline",
     "connect": "Connect",
     "disconnect": "Disconnect",
     "text1": "This feature allows the information security department to stay informed about the current state of the local network infrastructure and provide timely recommendations to the user. To connect, you must enter the host and key provided by the company or administrator."

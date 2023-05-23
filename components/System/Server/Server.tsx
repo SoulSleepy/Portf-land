@@ -1,11 +1,30 @@
-import { useGetServerInfoQuery } from 'state/rtk/system.rtk'
+import {
+    useLazyGetServerInfoQuery,
+    useGetServerOnOffQuery,
+    useLazyGetServerOnOffQuery,
+} from 'state/rtk/system.rtk'
 import cn from 'classnames'
 import { Loader } from 'components/Loader'
 import { useTranslation } from 'next-i18next'
+import { ConnectServerModal } from 'components/Modals/ConnectServerModal'
+import { useAppDispatch, useAppSelector } from 'state/store'
+import {
+    openConnectServerModal,
+    openDisconnectServerModal,
+} from 'state/slices/modals.slice'
+import { DisconnectServerModal } from 'components/Modals/DisconnectServerModal'
+import { useEffect, useState } from 'react'
 
 export const Server = () => {
+    const { connect } = useAppSelector((store) => store.system)
+    const dispatch = useAppDispatch()
     const { t } = useTranslation('system')
-    const { data, isLoading } = useGetServerInfoQuery()
+    const { data: server, isLoading } = useGetServerOnOffQuery()
+    const [serverInfo, { data }] = useLazyGetServerInfoQuery()
+
+    useEffect(() => {
+        connect && serverInfo()
+    }, [connect])
 
     const blockClasses =
         'flex flex-col bg-light dark:bg-darkD rounded-xl p-3 shadow-dark gap-2'
@@ -20,26 +39,38 @@ export const Server = () => {
             <p className={titleClasses}>{t('connection to server')}</p>
             <hr className={hrClasses} />
             <Loader isLoading={isLoading}>
-                {false ? (
+                {connect ? (
                     <div className='flex flex-col gap-5 justify-between mt-2 h-[88px]'>
                         <div className='flex flex-row justify-between h-[30px] items-center'>
                             <p>IP:</p>
-                            {isLoading ? <p>loading</p> : <p>{data?.ip}</p>}
+                            <p>{data?.ip}</p>
                         </div>
                         <div className='flex flex-row justify-between items-center h-[30px]'>
                             <p>Status:</p>
-                            <p>Не в сети</p>
+                            <p>{connect ? t('online') : t('offline')}</p>
                         </div>
                     </div>
                 ) : (
-                    <p>
-                        {t('text1')}
-                    </p>
+                    <p>{t('text1')}</p>
                 )}
             </Loader>
-            <button className={cn(btnClasses, 'h-8 w-[120px] mt-2')}>
-                {t('connect')}
-            </button>
+            {connect ? (
+                <button
+                    className={cn(btnClasses, 'h-8 w-[120px] mt-2')}
+                    onClick={() => dispatch(openDisconnectServerModal())}
+                >
+                    {t('disconnect')}
+                </button>
+            ) : (
+                <button
+                    className={cn(btnClasses, 'h-8 w-[120px] mt-2')}
+                    onClick={() => dispatch(openConnectServerModal())}
+                >
+                    {t('connect')}
+                </button>
+            )}
+            <DisconnectServerModal />
+            <ConnectServerModal />
         </div>
     )
 }

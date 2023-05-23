@@ -3,13 +3,20 @@ import {
     IChangeUpdateResponse,
     IParamsChangeUpdate,
     IRebootResponse,
+    IRegisterServerResponse,
+    IRegisterServerForm,
     IResetResponse,
     IServerInfoResponse,
     ISystemInfoResponse,
     ISystemVersionResponse,
+    IRegisterItems,
+    IAnketaServerResponse,
+    IServerOnOffResponse,
+    IDisconnectServerResponse,
 } from 'types/types'
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { fetchBase } from './config'
+import { setConnect } from '../slices/system.slice'
 
 export const systemApi = createApi({
     reducerPath: 'systemApi',
@@ -98,6 +105,71 @@ export const systemApi = createApi({
                 },
             }),
         }),
+        getRegistrationServer: builder.query<IRegisterServerResponse['data'], IRegisterServerForm>({
+            query: (params) => ({
+                url: `server-registration`,
+                method: 'POST',
+                body: {
+                    args: {
+                        ...params
+                    },
+                    path: 'server/registration',
+                    token: 'DEBUG',
+                },
+            }),
+            transformResponse: ({ data }: IRegisterServerResponse) => data,
+        }),
+        setAnketaServer: builder.query<IAnketaServerResponse, IRegisterItems[]>({
+            query: (anketa) => ({
+                url: `server-anketa`,
+                method: 'POST',
+                body: {
+                    args: {anketa},
+                    path: 'server/anketa',
+                    token: 'DEBUG',
+                },
+            }),
+            onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
+                const { data } = await queryFulfilled
+                if (data.msg === 'anketa-success') {
+                    dispatch(setConnect(true))
+                }
+            },
+        }),
+        getServerOnOff: builder.query<IServerOnOffResponse, void>({
+            query: () => ({
+                url: `main-isServerConnected`,
+                method: 'POST',
+                body: {
+                    args: {},
+                    path: 'main/isServerConnected',
+                    token: 'DEBUG',
+                },
+            }),
+            onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
+                const { data } = await queryFulfilled
+                if (data.msg) {
+                    dispatch(setConnect(data.msg))
+                }
+            },
+        }),
+        getDisconnectServer: builder.query<IDisconnectServerResponse, void>({
+            query: () => ({
+                url: `server-disconnect`,
+                method: 'POST',
+                body: {
+                    args: {},
+                    path: 'server/disconnect',
+                    token: 'DEBUG',
+                },
+            }),
+            onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
+                const { data } = await queryFulfilled
+                if (data.msg === 'disconnect-successfully') {
+                    dispatch(setConnect(false))
+                }
+            },
+        }),
     }),
 })
 
@@ -105,8 +177,13 @@ export const {
     useGetSystemInfoQuery,
     useLazyGetSystemVersionQuery,
     useGetAdminOutsideQuery,
-    useGetServerInfoQuery,
+    useLazyGetServerInfoQuery,
     useLazyGetResetQuery,
     useLazyGetRebootQuery,
     useLazyGetChangeUpdateQuery,
+    useLazyGetRegistrationServerQuery,
+    useLazySetAnketaServerQuery,
+    useGetServerOnOffQuery,
+    useLazyGetServerOnOffQuery,
+    useLazyGetDisconnectServerQuery,
 } = systemApi

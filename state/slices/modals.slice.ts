@@ -13,6 +13,8 @@ export interface IState {
     isOpenAddWhiteIp: boolean
     isOpenGetTaskItem: boolean
     isOpenGetEventItem: boolean
+    isOpenConnectServer: boolean
+    isOpenDisconnectServer: boolean
 }
 
 const initialState: IState = {
@@ -28,6 +30,8 @@ const initialState: IState = {
     isOpenAddWhiteIp: false,
     isOpenGetTaskItem: false,
     isOpenGetEventItem: false,
+    isOpenConnectServer: false,
+    isOpenDisconnectServer: false,
 }
 
 export const modals = createSlice({
@@ -106,6 +110,18 @@ export const modals = createSlice({
         closeGetEventItemModal: (state) => {
             state.isOpenGetEventItem = false
         },
+        openConnectServerModal: (state) => {
+            state.isOpenConnectServer = true
+        },
+        closeConnectServerModal: (state) => {
+            state.isOpenConnectServer = false
+        },
+        openDisconnectServerModal: (state) => {
+            state.isOpenDisconnectServer = true
+        },
+        closeDisconnectServerModal: (state) => {
+            state.isOpenDisconnectServer = false
+        },
     },
 })
 
@@ -133,7 +149,11 @@ export const {
     openGetTaskItemModal,
     closeGetTaskItemModal,
     openGetEventItemModal,
-    closeGetEventItemModal
+    closeGetEventItemModal,
+    openConnectServerModal,
+    closeConnectServerModal,
+    openDisconnectServerModal,
+    closeDisconnectServerModal,
 } = modals.actions
 
 export default modals.reducer
