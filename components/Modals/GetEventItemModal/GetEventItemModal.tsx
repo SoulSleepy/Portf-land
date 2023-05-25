@@ -6,9 +6,9 @@ import { useLazyGetEventItemQuery } from 'state/rtk/dangerAndEvent.rtk'
 import { ClockIcon, DevicesIcon, EventIcon } from 'components/Icons/Icons'
 import { toDate } from 'helpers/softFunctions'
 import { EventItemInfo } from './EventItemInfo'
-import { eventTypeObj } from 'helpers/consts'
 import { useTheme } from 'helpers/hooks/useTheme'
 import { Loader } from 'components/Loader'
+import { useTranslation } from 'next-i18next'
 
 interface IProps {
     id: number
@@ -17,6 +17,7 @@ interface IProps {
 export const GetEventItemModal = ({ id }: IProps) => {
     const { theme } = useTheme()
     const [getEventItem, { data, isLoading }] = useLazyGetEventItemQuery()
+    const { t } = useTranslation('modals')
 
     useEffect(() => {
         if (isOpenGetEventItem) {
@@ -53,14 +54,14 @@ export const GetEventItemModal = ({ id }: IProps) => {
                                 />
                             </div>
                             <p className={titleClasses}>
-                                {eventTypeObj[data?.type as number]?.title}
+                                {t(`list.${data?.type}.title`)}
                             </p>
                             <p className='ml-auto'>#{data?.id}</p>
                         </div>
                         <hr className={hrClasses} />
                         <div className='flex flex-row gap-4 items-center justify-between h-10'>
                             <div className='flex flex-row gap-2'>
-                                <p>Устройство</p>
+                                <p>{t('device')}</p>
                                 <DevicesIcon
                                     fill={
                                         theme === 'dark' ? '#bebebe' : '#6C7281'
@@ -69,7 +70,7 @@ export const GetEventItemModal = ({ id }: IProps) => {
                                 <p>{data?.deviceInfo.name}</p>
                             </div>
                             <div className='flex flex-row gap-2'>
-                                <p>Время создания</p>
+                                <p>{t('creation time')}</p>
                                 <ClockIcon
                                     fill={
                                         theme === 'dark' ? '#bebebe' : '#6C7281'

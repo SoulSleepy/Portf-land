@@ -6,8 +6,10 @@ import { useState } from 'react'
 import { ConnectServer2 } from './ConnectServer2'
 import { useLazyGetRegistrationServerQuery } from 'state/rtk/system.rtk'
 import { IRegisterItems, IRegisterServerForm } from 'types/types'
+import { useTranslation } from 'next-i18next'
 
 export const ConnectServerModal = () => {
+    const { t } = useTranslation('modals')
     const [path, setPath] = useState('1')
     const [registerKey, { data, isLoading }] =
         useLazyGetRegistrationServerQuery()
@@ -46,7 +48,7 @@ export const ConnectServerModal = () => {
                     onClick={(event) => event.stopPropagation()}
                 >
                     <p className='font-medium text-xl tracking-wider'>
-                        Введите ключ
+                        {t('enter key')}
                     </p>
                     <form
                         className='flex flex-col gap-6 mt-3'
@@ -58,7 +60,7 @@ export const ConnectServerModal = () => {
                                 className={inputClasses}
                                 {...register('domain')}
                             />
-                            <label className={labelClasses}>Domain</label>
+                            <label className={labelClasses}>{t('domain')}</label>
                         </div>
                         <div className='relative'>
                             <input
@@ -67,11 +69,11 @@ export const ConnectServerModal = () => {
                                 type='text'
                                 {...register('init_key')}
                             />
-                            <label className={labelClasses}>Ваш ключ</label>
+                            <label className={labelClasses}>{t('your key')}</label>
                         </div>
                         <div className='relative'>
                             <button className={btnClasses} type='submit'>
-                                Отправить
+                                {t('send')}
                             </button>
                         </div>
                     </form>

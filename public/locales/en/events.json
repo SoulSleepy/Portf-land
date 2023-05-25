@@ -6,5 +6,41 @@
     "to": "To",
     "apply": "Apply",
     "reset": "Reset",
-    "no events found": "No events found"
+    "recent events": "Recent events",
+    "no events found": "No events found",
+    "list": {
+        "0": {
+            "title": "title"
+        },
+        "1": {
+            "title": "Phishing attack detected on WI-FI"
+        },
+        "2": {
+            "title": "Incorrect admin panel password entered"
+        },
+        "3": {
+            "title": "DNS-rebinding"
+        },
+        "4": {
+            "title": "Traffic interception detected (ARP-Spoofing)"
+        },
+        "5": {
+            "title": "Sending packets to disconnect users from wifi network"
+        },
+        "7": {
+            "title": "DHCP Spoofing attack performed"
+        },
+        "13": {
+            "title": "Device opened a new network port"
+        },
+        "14": {
+            "title": "Hosts file modification"
+        },
+        "16": {
+            "title": "New device detected"
+        },
+        "17": {
+            "title": "New wifi network detected"
+        }
+    }
 }

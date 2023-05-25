@@ -3,6 +3,7 @@ import { useAppDispatch } from 'state/store'
 
 import { useEffect } from 'react'
 import { BASE_URL, fetchStatus } from 'state/rtk/config'
+import Cookies from 'js-cookie'
 
 export const useStatus = () => {
     const dispath = useAppDispatch()
@@ -14,7 +15,7 @@ export const useStatus = () => {
                 dispath(setActiveUser(data !== 'wizard'))
                 if (data === 'cubic-is-not-auth') {
                     dispath(setAuthUser(false))
-                    localStorage.removeItem('isAuth')
+                    Cookies.remove('isAuth')
                 }
             })
     }

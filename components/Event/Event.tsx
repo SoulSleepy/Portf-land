@@ -55,11 +55,7 @@ export const Event = () => {
                                         </div>
                                         <div className='flex flex-col gap-2'>
                                             <p className='font-medium text-lg'>
-                                                {
-                                                    eventTypeObj[
-                                                        item.type as number
-                                                    ]?.title
-                                                }
+                                                {t(`list.${item.type}.title`)}
                                             </p>
                                             <div className='flex flex-col gap-1'>
                                                 <div className='flex flex-row gap-2'>

@@ -2,6 +2,7 @@ import { BASE_URL, fetchStatus, fetchTimeout } from 'state/rtk/config'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'state/store'
 import { setAuthUser } from 'state/slices/auth.slice'
+import Cookies from 'js-cookie'
 
 let idInterval: NodeJS.Timer | null = null
 
@@ -16,7 +17,7 @@ export const useUpdateToken = () => {
             .then(({ data }) => {
                 if (data === 'cubic-is-not-auth') {
                     dispath(setAuthUser(false))
-                    localStorage.removeItem('isAuth')
+                    Cookies.remove('isAuth')
                 }
             })
     }

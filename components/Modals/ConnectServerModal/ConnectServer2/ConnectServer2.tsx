@@ -2,6 +2,7 @@ import { IRegisterItems } from 'types/types'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Loader } from 'components/Loader'
 import { useLazySetAnketaServerQuery } from 'state/rtk/system.rtk'
+import { useTranslation } from 'next-i18next'
 
 interface IProps {
     items: IRegisterItems[]
@@ -9,11 +10,8 @@ interface IProps {
     onClose: () => void
 }
 
-export const ConnectServer2 = ({
-    items,
-    isLoading,
-    onClose,
-}: IProps) => {
+export const ConnectServer2 = ({ items, isLoading, onClose }: IProps) => {
+    const { t } = useTranslation('modals')
     const [setAnketa, { isLoading: isLoad }] = useLazySetAnketaServerQuery()
 
     const {

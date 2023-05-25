@@ -6,7 +6,7 @@ import { useLazyLogoutUserQuery } from 'state/rtk/auth.rtk'
 
 interface IProps {
     children: ReactNode
-    isLoading: boolean
+    isLoading: boolean | null
     isError?: boolean
     size?: number
 }

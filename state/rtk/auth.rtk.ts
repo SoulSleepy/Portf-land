@@ -2,6 +2,7 @@ import { IAuthForm, IAuthResponse } from 'types/types'
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { setActiveUser, setAuthUser } from 'state/slices/auth.slice'
 import { fetchBaseAuth } from './config'
+import Cookies from 'js-cookie'
 
 export const authApi = createApi({
     reducerPath: 'authApi',
@@ -21,7 +22,7 @@ export const authApi = createApi({
                 const { data } = await queryFulfilled
                 if (data.status) {
                     dispatch(setAuthUser(true))
-                    localStorage.setItem('isAuth', 'true')
+                    Cookies.set('isAuth', 'true')
                 }
             },
         }),
@@ -37,7 +38,7 @@ export const authApi = createApi({
             }),
             onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
                 dispatch(setAuthUser(false))
-                localStorage.removeItem('isAuth')
+                Cookies.remove('isAuth')
             },
         }),
         crateUser: builder.query<IAuthResponse, IAuthForm>({
@@ -55,7 +56,7 @@ export const authApi = createApi({
                 if (data.status) {
                     dispatch(setActiveUser(true))
                     dispatch(setAuthUser(true))
-                    localStorage.setItem('isAuth', 'true')
+                    Cookies.set('isAuth', 'true')
                 }
             },
         }),

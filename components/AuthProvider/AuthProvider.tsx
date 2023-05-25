@@ -4,6 +4,8 @@ import { FC, ReactNode, useEffect } from 'react'
 import { useUpdateToken } from 'helpers/hooks/useUpdateToken'
 import { setAuthUser } from 'state/slices/auth.slice'
 import { useStatus } from 'helpers/hooks/useStatus'
+import Cookies from 'js-cookie'
+import { Loader } from '../Loader'
 
 type Props = {
     children: ReactNode
@@ -17,7 +19,7 @@ export const AuthProvider: FC<Props> = ({ children }) => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        const isAuth: boolean = JSON.parse(localStorage.isAuth || 'false')
+        const isAuth: boolean = JSON.parse(Cookies.get('isAuth') || 'false')
         dispatch(setAuthUser(isAuth))
     }, [])
 

@@ -1,7 +1,6 @@
 import {
     useLazyGetServerInfoQuery,
     useGetServerOnOffQuery,
-    useLazyGetServerOnOffQuery,
 } from 'state/rtk/system.rtk'
 import cn from 'classnames'
 import { Loader } from 'components/Loader'
@@ -13,13 +12,13 @@ import {
     openDisconnectServerModal,
 } from 'state/slices/modals.slice'
 import { DisconnectServerModal } from 'components/Modals/DisconnectServerModal'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 export const Server = () => {
     const { connect } = useAppSelector((store) => store.system)
     const dispatch = useAppDispatch()
     const { t } = useTranslation('system')
-    const { data: server, isLoading } = useGetServerOnOffQuery()
+    const { isLoading } = useGetServerOnOffQuery()
     const [serverInfo, { data }] = useLazyGetServerInfoQuery()
 
     useEffect(() => {

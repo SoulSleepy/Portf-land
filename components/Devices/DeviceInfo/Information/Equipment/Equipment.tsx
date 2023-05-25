@@ -1,4 +1,4 @@
-import { getNoun } from '@/helpers/softFunctions'
+import { getNoun } from 'helpers/softFunctions'
 import { useTranslation } from 'next-i18next'
 import { IAgentInfoEq } from 'types/types'
 
@@ -32,7 +32,7 @@ export const Equipment = ({ equipment }: IProps) => {
                               </div>
                           )
                       })
-                    : null}
+                    : <></>}
                 {equipment.totalRAM ? (
                     <div className='flex justify-between'>
                         <p>{t('RAM')}</p>
@@ -73,8 +73,8 @@ export const Equipment = ({ equipment }: IProps) => {
                             </div>
                         </div>
                     </div>
-                ) : null}
-                {equipment.videoInfo.length
+                ) : <></>}
+                {equipment.videoInfo
                     ? equipment.videoInfo.map((item, index) => {
                           return (
                               <div key={index} className='flex justify-between'>
@@ -91,8 +91,8 @@ export const Equipment = ({ equipment }: IProps) => {
                               </div>
                           )
                       })
-                    : null}
-                {equipment.physicalDrives.length
+                    : <></>}
+                {equipment.physicalDrives
                     ? equipment.physicalDrives.map((item, index) => {
                           return (
                               <div key={index} className='flex justify-between'>
@@ -107,7 +107,7 @@ export const Equipment = ({ equipment }: IProps) => {
                               </div>
                           )
                       })
-                    : null}
+                    : <></>}
             </div>
         </div>
     )

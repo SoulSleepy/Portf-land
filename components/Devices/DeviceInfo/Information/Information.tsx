@@ -26,19 +26,19 @@ export const Information = ({ deviceId }: IProps) => {
         <Loader isLoading={isLoading}>
             <div className='flex flex-col gap-3 overflow-auto h-[530px]'>
                 <Resume resume={data?.resume ? data?.resume : null} />
-                {data?.agentInfo?.users.length && (
+                {data?.agentInfo?.users.length ? (
                     <UsersDevice users={data?.agentInfo?.users} />
-                )}
-                {data?.agentInfo?.main && (
+                ) : null}
+                {data?.agentInfo?.main ? (
                     <Basic main={data?.agentInfo?.main} />
-                )}
+                ) : null}
                 <Ports ports={data?.ports ? data?.ports : null} />
-                {data?.agentInfo?.eq && (
+                {data?.agentInfo?.eq ? (
                     <Equipment equipment={data?.agentInfo?.eq} />
-                )}
-                {data?.agentInfo?.usbDevices.length && (
+                ) : null}
+                {data?.agentInfo?.usbDevices.length ? (
                     <USBDevices usbDevices={data?.agentInfo?.usbDevices} />
-                )}
+                ) : null}
             </div>
         </Loader>
     )

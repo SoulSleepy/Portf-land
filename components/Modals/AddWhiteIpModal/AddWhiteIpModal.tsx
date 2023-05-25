@@ -4,12 +4,14 @@ import { closeAddWhiteIpModal } from 'state/slices/modals.slice'
 import { useState } from 'react'
 import { useAddSettingsIpFirewallMutation } from 'state/rtk/settings.rtk'
 import { IAddIpFirewallForm } from 'types/types'
+import { useTranslation } from 'next-i18next'
 
 interface IProps {
     body: IAddIpFirewallForm
 }
 
 export const AddWhiteIpModal = ({ body }: IProps) => {
+    const { t } = useTranslation('modals')
     const [value, setValue] = useState('')
 
     const [addIpFirewall] = useAddSettingsIpFirewallMutation()
@@ -37,7 +39,7 @@ export const AddWhiteIpModal = ({ body }: IProps) => {
                 className='flex flex-col p-6 items-center gap-5 bg-light rounded-md text-text-light dark:text-text-lightD dark:bg-darkD'
                 onClick={(event) => event.stopPropagation()}
             >
-                <p className='font-medium text-xl tracking-wider'>Введите Ip</p>
+                <p className='font-medium text-xl tracking-wider'>{t('enter')} Ip</p>
                 <div className='flex flex-col items-center gap-6'>
                     <input
                         type='text'
@@ -50,7 +52,7 @@ export const AddWhiteIpModal = ({ body }: IProps) => {
                         type='button'
                         onClick={() => setIp(value)}
                     >
-                        Добавить
+                        {t('add')}
                     </button>
                 </div>
             </div>
