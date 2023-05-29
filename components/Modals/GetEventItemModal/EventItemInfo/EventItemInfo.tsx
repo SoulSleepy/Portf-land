@@ -1,5 +1,6 @@
 import { useTranslation } from 'next-i18next'
 import json from '../../../../public/locales/ru/modals.json'
+import { IModalsEvent } from 'types/types'
 
 interface IProps {
     type: number
@@ -7,20 +8,20 @@ interface IProps {
 
 export const EventItemInfo = ({ type }: IProps) => {
     const { t } = useTranslation('modals')
-
-    const description = json.list[type]
+    const { list }: IModalsEvent = json
+    const {details} = list[type]
 
     return (
         <div className='flex flex-col gap-3'>
-            {description?.details.map((item: any, index: number) => {
+            {details.map((_, index) => {
                 return (
                     <div key={index} className='flex flex-col gap-1'>
                         <p className='font-medium text-lg'>
                             {t(`list.${type}.details.${index}.subtitle`)}
                         </p>
-                        {description.details[index].list ? (
-                            description.details[index].list.map(
-                                (item: any, key: number) => {
+                        {details[index].list ? (
+                            details[index].list?.map(
+                                (_, key) => {
                                     return (
                                         <p key={key}>
                                             {t(
@@ -30,11 +31,7 @@ export const EventItemInfo = ({ type }: IProps) => {
                                     )
                                 }
                             )
-                        ) : Array.isArray(
-                              description.details[index].description
-                          ) ? (
-                            description.details[index].description?.map(
-                                (item: any, key: number) => {
+                        ) : Array.isArray(details[index].description) ? ((details[index].description as string[]).map((_, key) => {
                                     return (
                                         <p key={key}>
                                             {t(

@@ -612,7 +612,7 @@ export interface IMapItem {
     wired: boolean
     wifiWired: boolean
     ports: object | []
-  }
+}
 
 // settings => WiFi interfaces //
 export interface IWiFiResponse {
@@ -986,4 +986,39 @@ export interface IAuthForm {
     login: string
     password: string
     password2?: string
+}
+
+export interface IModalsEvent {
+    device: string
+    'creation time': string
+    'risk metric': string
+    'vulnerability type': string
+    sources: string
+    'create new user': string
+    login: string
+    password: string
+    create: string
+    'edit user': string
+    change: string
+    'are you sure?': string
+    yes: string
+    no: string
+    enter: string
+    add: string
+    'enter key': string
+    'your key': string
+    send: string
+    domain: string
+    list: { [key: string]: List }
+}
+
+export interface List {
+    title: string
+    details: Detail[]
+}
+
+export interface Detail {
+    subtitle: string
+    description?: string[] | string
+    list?: string[]
 }
