@@ -17,7 +17,7 @@ export const Ports = ({ ports }: IProps) => {
 
     return (
         <div className={blockClasses}>
-            <p className={titleClasses}>Порты</p>
+            <p className={titleClasses}>{t('ports')}</p>
             <hr className={hrClasses} />
             <div className='flex flex-col'>
                 <div className='grid grid-cols-4 items-center text-sm font-medium text-text-light dark:text-text-lightD  border-t-[1px] border-l-[1px]'>

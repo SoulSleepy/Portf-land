@@ -19,6 +19,7 @@
     "your key": "Your key",
     "send": "Send",
     "domain": "Domain",
+    "vulnerable software found": "Vulnerable software found",
     "list": {
         "0": {
             "title": "title",
@@ -41,17 +42,17 @@
             "title": "Phishing attack detected on WI-FI",
             "details": [
                 {
-                    "subtitle": "Угроза",
-                    "description": "Обнаружена фишинговая атака."
+                    "subtitle": "Threat",
+                    "description": "A phishing attack has been detected"
                 },
                 {
-                    "subtitle": "Описание",
-                    "description": "Фишинг атака на Wi-Fi сети = Атака «человек посередине» + фишинговая страница Атака 'человек по середине' осуществляется следующим образом:",
+                    "subtitle": "Description",
+                    "description": "Phishing attack on Wi-Fi networks = 'Man in the middle' attack + phishing page. The 'Man in the middle' attack is carried out as follows:",
                     "list": [
-                        "Поднимается фишинговая точка доступа, с названием атакуемой сети, но без пароля",
-                        "Производится отключение всех или конкретного клиента от атакуемой точки доступа",
-                        "При подключении клиента к фишинговой сети, атакующий получает контроль над не зашифрованным трафиком",
-                        "Имея контроль над трафиком, происходит клиента на фишинговую страницу, которая запрашивает пароль от WI-FI"
+                        "A phishing access point is established with the name of the targeted network, but without a password",
+                        "All or specific clients are disconnected from the targeted access point",
+                        "When a client connects to the phishing network, the attacker gains control of unencrypted traffic",
+                        "Having control of the traffic, the client is directed to a phishing page that requests the Wi-Fi password"
                     ]
                 }
             ]
@@ -60,8 +61,8 @@
             "title": "Incorrect admin panel password entered",
             "details": [
                 {
-                    "subtitle": "Угроза",
-                    "description": "Была попытка ввода пароля с ip-адреса {{ip}} с user-agent {{userAgent}} \nПароль: {{password}}, Логин: {{login}}"
+                    "subtitle": "Threat",
+                    "description": "There was an attempt to enter a password from IP address {{ip}} with user-agent {{userAgent}}. \nPassword: {{password}}, Login: {{login}}"
                 }
             ]
         },
@@ -69,24 +70,24 @@
             "title": "DNS-rebinding",
             "details": [
                 {
-                    "subtitle": "Уязвимость",
-                    "description": "Позволяет атакующему получить доступ к веб-интерфейсам в локальной сети, заманив пользователя на специально сформированную WEB-страницу."
+                    "subtitle": "Vulnerability",
+                    "description": "Allows an attacker to gain access to web interfaces in the local network by luring the user to a specially crafted web page."
                 },
                 {
-                    "subtitle": "Атака",
+                    "subtitle": "Attack",
                     "description": [
-                        "С ip-адреса {{ip}} была произведена попытка подключиться по доменному имени {{host}}. ",
-                        "Всего попыток было {{count}}. ",
-                        "При попытке был отправлен следующий user-агент {{userAgent}} "
+                        "An attempt was made to connect from IP address {{ip}} using the domain name {{host}}. ",
+                        "There were {{count}} attempts in total. ",
+                        "The following user agent was sent during the attempt: {{userAgent}} "
                     ]
                 },
                 {
-                    "subtitle": "Описание",
-                    "description": "Злоумышленник регистрирует домен (например, dnsrebind.ru) и устанавливает контроль над DNS-сервером, обслуживающим домен. DNS-сервер настраивается так, чтобы его ответы содержали очень короткое время жизни (TTL) записей, предотвращая кэширование ответа клиентом или резолвером. Когда жертва начинает переход на вредоносный домен, DNS-сервер атакующего сначала возвращает настоящий IP-адрес веб-сервера, который содержит вредоносный код JavaScript. Этот вредоносный код на стороне клиента совершает дополнительные обращения к исходному имени домена (dnsrebind.ru), с целью спровоцировать устаревания предыдущего DNS-ответа, после чего браузер производит новый запрос DNS для данного домена. Запрос опять поступает к dns-серверу атакующего, но на этот раз, DNS-сервер отвечает, что теперь домен dnsrebind.ru, как будто бы находится на некоем новом IP-адресе, например, на внутреннем IP-адресе локальной сети или IP-адресе какого-то иного веб-сайта. Запрос скрипта попадает к другому серверу. В итоге, браузер видит, что запросы отправляются внутри одного домена, и никак не блокирует их, что позволяет атакующему отправлять/получать любые данные к/от веб-сервера c атакуемым IP-адресом. Как правило, данная атака используется для получения доступа к локальным веб серверам, таким как административная панель роутера, принтера, камеры, или любого другого устройства с WEB-интерфейсом в локальной сети."
+                    "subtitle": "Description",
+                    "description": "The attacker registers a domain (e.g. dnsrebind.ru) and takes control of the DNS server that serves the domain. The DNS server is configured so that its responses have a very short time-to-live (TTL) for the records, preventing the client or resolver from caching the response. When the victim begins to navigate to the malicious domain, the attacker's DNS server initially returns the real IP address of the web server, which contains malicious JavaScript code. This malicious client-side code makes additional requests to the original domain name (dnsrebind.ru) in order to trigger expiration of the previous DNS response, after which the browser performs a new DNS query for the domain. The query again goes to the attacker's DNS server, but this time, the DNS server responds that the domain dnsrebind.ru is now located at some new IP address, such as the internal IP address of the local network or the IP address of some other website. The script request goes to another server. In the end, the browser sees that requests are being sent within the same domain and does not block them, allowing the attacker to send/receive any data to/from the web server with the targeted IP address. Typically, this attack is used to gain access to local web servers, such as the administrative panel of a router, printer, camera, or any other device with a web interface in the local network."
                 },
                 {
-                    "subtitle": "Рекомендации",
-                    "description": "Запретить выдачу содержимого WEB-интерфейса при запросе, содержащим произвольное имя домена в HTTP-заголовке \"host\"."
+                    "subtitle": "Recommendations",
+                    "description": "Disable the issuance of web interface content for requests containing an arbitrary domain name in the HTTP header \"host\"."
                 }
             ]
         },
@@ -94,16 +95,16 @@
             "title": "Traffic interception detected (ARP-Spoofing)",
             "details": [
                 {
-                    "subtitle": "Угроза",
-                    "description": "Атакующий осуществил атаку ARP-Spoofing, позволяющую как перехватить, так и модифицировать исходящий/входящий сетевой трафик между устройствами"
+                    "subtitle": "Threat",
+                    "description": "The attacker carried out an ARP-Spoofing attack, which allows both interception and modification of incoming/outgoing network traffic between devices."
                 },
                 {
-                    "subtitle": "Описание",
-                    "description": "\t\t1. Два компьютера A и B в локальной сети Ethernet обмениваются сообщениями. Злоумышленник X, находящийся в этой же сети, хочет перехватывать сообщения между этими узлами. До применения атаки ARP-spoofing на сетевом интерфейсе узла A ARP-таблица содержит IP и MAC-адреса узла B. Также на сетевом интерфейсе узла B ARP-таблица содержит IP и MAC-адреса узла A.\n\t\t2. Во время атаки ARP-spoofing узел X (злоумышленник) отсылает два ARP-ответа (без запроса) — узлу A и узлу B. ARP-ответ узлу A содержит IP-адрес B и MAC-адрес X. ARP-ответ узлу B содержит IP-адрес A и MAC-адрес X.\n\t\t3. Так как компьютеры A и B поддерживают самопроизвольный ARP, то, после получения ARP-ответа, они изменяют свои ARP-таблицы, и теперь ARP-таблица A содержит MAC адрес X, привязанный к IP-адресу B, а ARP-таблица B содержит MAC адрес X, привязанный к IP-адресу A.\n\t\t4. Тем самым атака ARP-spoofing выполнена, и теперь все пакеты (трафик) между A и B проходят через X. К примеру, если A хочет передать пакет компьютеру B, то A смотрит в свою ARP-таблицу, находит запись с IP-адресом узла B, выбирает оттуда MAC-адрес (а там уже MAC-адрес узла X) и передает пакет. Пакет поступает на интерфейс X, анализируется им, после чего перенаправляется узлу B.\n"
+                    "subtitle": "Description",
+                    "description": "\t\t1. Two computers A and B on the local Ethernet network exchange messages. The attacker X, who is also on this network, wants to intercept messages between these nodes. Before the ARP-spoofing attack is applied, the ARP table on node A's network interface contains the IP and MAC addresses of node B. Similarly, the ARP table on node B's network interface contains the IP and MAC addresses of node A.\n\t\t2. During the ARP-spoofing attack, node X (the attacker) sends two ARP replies (without a request) - to node A and node B. The ARP reply to node A contains the IP address of B and the MAC address of X. The ARP reply to node B contains the IP address of A and the MAC address of X.\n\t\t3. Since computers A and B support self-generated ARP, after receiving the ARP reply, they change their ARP tables, and now the ARP table of A contains the MAC address of X associated with the IP address of B, and the ARP table of B contains the MAC address of X associated with the IP address of A.\n\t\t4. Thus, the ARP-spoofing attack is executed, and now all packets (traffic) between A and B pass through X. For example, if A wants to send a packet to computer B, A looks in its ARP table, finds the record with the IP address of node B, selects the MAC address from there (and there is already the MAC address of node X) and sends the packet. The packet goes to X's interface, is analyzed by it, and then forwarded to node B.\n"
                 },
                 {
-                    "subtitle": "Рекомендации",
-                    "description": "При наличии у маршрутизатора настройки фильтрации ARP трафика, активировать данную настройку. При отсутствии данной настройки, заменить маршрутизатор на неуязвимый к ARP-Spoofing."
+                    "subtitle": "Recommendations",
+                    "description": "If the router has ARP traffic filtering settings, activate this setting. If this setting is not available, replace the router with one that is not vulnerable to ARP-Spoofing."
                 }
             ]
         },
@@ -111,16 +112,16 @@
             "title": "Sending packets to disconnect users from wifi network",
             "details": [
                 {
-                    "subtitle": "Угроза",
-                    "description": "1. Возможен перехват сетевого трафика при отсутствии шифрования протокола или с использованием уязвимостей в шифровании.\n2. Возможен перехват паролей от веб-сайтов или WI-FI точки доступа, используя фишинговые страницы.\n3. Возможна принудительная переадресация пользователя на произвольный веб-сайт при подключении к точке доступа (CAPTIVE PORTAL)."
+                    "subtitle": "Threat",
+                    "description": "1. Network traffic interception is possible in the absence of protocol encryption or using vulnerabilities in encryption.\n2. Passwords from websites or WI-FI access points can be intercepted using phishing pages.\n3. Forced redirection of the user to an arbitrary website is possible when connecting to an access point (CAPTIVE PORTAL)."
                 },
                 {
-                    "subtitle": "Описание",
-                    "description": "Пакет деаунтефикации - пакет, в котором роутер получает от клиента инструкции отключение. И настоящее время злоумышленние может прислать пакет под видом клиента и клиент отключится от сути. При многократной рассылке пакетов деаунтефикации у пользователя нет возможности подключиться к точке доступа, т.к. он при подключении сразу же отключается."
+                    "subtitle": "Description",
+                    "description": "A deauthentication packet - a packet in which the router receives instructions from the client to disconnect. Currently, an attacker can send a packet disguised as a client, and the client will disconnect. When deauthentication packets are sent multiple times, the user cannot connect to the access point, because they are immediately disconnected upon connection."
                 },
                 {
-                    "subtitle": "Рекомендации",
-                    "description": "Оповестить всех пользователей, подключенных по WI-FI о недопустимости подключения к открытым точкам доступа. Провести инструктаж по распознанию элементов системного интерфейса, реальзованого с помощью веб-страниц."
+                    "subtitle": "Recommendations",
+                    "description": "Notify all users connected via WI-FI about the inadmissibility of connecting to open access points. Conduct training on recognizing elements of the system interface implemented using web pages."
                 }
             ]
         },
@@ -128,8 +129,8 @@
             "title": "DHCP Spoofing attack performed",
             "details": [
                 {
-                    "subtitle": "Угроза",
-                    "description": "В локальной сети был поднят ложный DHCP-сервер с ip-адресом {{dhcp_server}}, который выдал устройствам с mac-адресами {{target_mac}} свой пул ip адресов, тем самым создал подсеть, где может указать себя как шлюз для них и прослушивать трафик."
+                    "subtitle": "Threat",
+                    "description": "A fake DHCP server was set up in the local network with the IP address {{dhcp_server}}, which issued a pool of IP addresses to devices with MAC addresses {{target_mac}}, thereby creating a subnet where it can specify itself as a gateway for them and listen to their traffic."
                 }
             ]
         },
@@ -137,15 +138,15 @@
             "title": "Device opened a new network port",
             "details": [
                 {
-                    "subtitle": "Заглушка",
+                    "subtitle": "Placeholder",
                     "description": "description"
                 },
                 {
-                    "subtitle": "Заглушка",
+                    "subtitle": "Placeholder",
                     "description": "description"
                 },
                 {
-                    "subtitle": "Заглушка",
+                    "subtitle": "Placeholder",
                     "description": "description"
                 }
             ]
@@ -154,18 +155,18 @@
             "title": "Hosts file modification",
             "details": [
                 {
-                    "subtitle": "Угроза",
-                    "description": "Перенаправление трафика в сети, посредством подмены IP-адреса у домена. В данном случае совершены следующие подмены:"
+                    "subtitle": "Threat",
+                    "description": "Traffic redirection in the network by replacing the IP address of the domain. In this case, the following replacements were made:"
                 },
                 {
-                    "subtitle": "Описание",
-                    "description": "Файл hosts используется ОС для сопоставления доменов и IP адресов, вне зависимости от того, что определено в DNS сервисе. Этот механизм часто используется злоумышленниками, как для хищения данных, передаваемых в сеть установленным на устройстве ПО, так и для перенаправления пользователей на фишинговые WEB-страницы."
+                    "subtitle": "Description",
+                    "description": "The hosts file is used by the OS to match domains and IP addresses, regardless of what is defined in the DNS service. This mechanism is often used by attackers both for stealing data transmitted over the network by software installed on the device, and for redirecting users to phishing web pages."
                 },
                 {
-                    "subtitle": "Рекомендация",
+                    "subtitle": "Recommendation",
                     "list": [
-                        "Удалить нелегитимные записи из файла hosts.",
-                        "Установить источник появления данных записей и устранить их появление в будущем."
+                        "Remove illegitimate entries from the hosts file.",
+                        "Determine the source of appearance of these entries and eliminate their appearance in the future."
                     ]
                 }
             ]
@@ -174,18 +175,18 @@
             "title": "New device detected",
             "details": [
                 {
-                    "subtitle": "Угроза",
-                    "description": "Неопознанное устройство \"<Имя, если есть>\" с IP-адресом \"<таким-то>\", MAC-адресом \"<таким-то>\" произвело подключение к сети. Возможно, данное устройство используется в целях проведения атаки."
+                    "subtitle": "Threat",
+                    "description": "An unidentified device \"<Name, if available>\" with IP address \"<such-and-such>\", MAC address \"<such-and-such>\" has connected to the network. It is possible that this device is being used for attack purposes."
                 },
                 {
-                    "subtitle": "Рекомендации",
-                    "description": "Если Вы идентифицировали данное устройство, как легитимное, рекомендуем добавить его в \"белый список\", чтобы оно не вызывало инцидент в будущем. В противном случае рекомендуется идентифицировать точку подключения и провести необходимый ряд мероприятий по устранению возможности подключения."
+                    "subtitle": "Recommendations",
+                    "description": "If you have identified this device as legitimate, we recommend adding it to a \"white list\" so that it does not cause an incident in the future. Otherwise, we recommend identifying the connection point and taking the necessary measures to prevent further access."
                 },
                 {
-                    "subtitle": "Противодействие",
+                    "subtitle": "Counteraction",
                     "list": [
-                        "Провести разведку - просканировать устройство атакующего.",
-                        "Блокировать атакующего - использовать \"ARP-клетку\""
+                        "Conduct reconnaissance - scan the attacker's device.",
+                        "Block the attacker - use an \"ARP cage.\""
                     ]
                 }
             ]
@@ -194,18 +195,18 @@
             "title": "New wifi network detected",
             "details": [
                 {
-                    "subtitle": "Угроза",
-                    "description": "Обнаружена WI-FI сеть {{asd}} без пароля, она может использоваться для проведения фишинг атаки на пользователей."
+                    "subtitle": "Threat",
+                    "description": "An unprotected WI-FI network {{asd}} has been detected. It can be used to conduct phishing attacks on users."
                 },
                 {
-                    "subtitle": "Рекомендации",
-                    "description": "Если Вы идентифицировали данную WI-FI сеть, как легитимную, рекомендуем добавить её в \"белый список\", чтобы она не вызывала инцидент в будущем."
+                    "subtitle": "Recommendations",
+                    "description": "If you have identified this WI-FI network as legitimate, we recommend adding it to a \"white list\" so that it does not cause an incident in the future."
                 },
                 {
-                    "subtitle": "Противодействие",
+                    "subtitle": "Counteraction",
                     "list": [
-                        "Провести разведку - подключиться к WI-FI атакующего и просканировать сеть.",
-                        "Блокировать - принудительно отключать от данной WI-FI сети всех клиентов."
+                        "Conduct reconnaissance - connect to the attacker's WI-FI network and scan the network.",
+                        "Block - forcibly disconnect all clients from this WI-FI network."
                     ]
                 }
             ]

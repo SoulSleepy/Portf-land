@@ -87,7 +87,7 @@ export const DeviceInfo = ({ device }: { device: IDeviceItem }) => {
                         })}
                         onClick={() => setActiveBtn('dangers')}
                     >
-                        {t('tasks')}
+                        {t('vulns')}
                     </button>
                     <button
                         className={cn(btnTitleClasses, {

@@ -9,6 +9,7 @@ import { EventItemInfo } from './EventItemInfo'
 import { useTheme } from 'helpers/hooks/useTheme'
 import { Loader } from 'components/Loader'
 import { useTranslation } from 'next-i18next'
+import { IEventInfoBody } from 'types/types'
 
 interface IProps {
     id: number
@@ -18,6 +19,8 @@ export const GetEventItemModal = ({ id }: IProps) => {
     const { theme } = useTheme()
     const [getEventItem, { data, isLoading }] = useLazyGetEventItemQuery()
     const { t } = useTranslation('modals')
+    const dispatch = useAppDispatch()
+    const { isOpenGetEventItem } = useAppSelector((store) => store.modals)
 
     useEffect(() => {
         if (isOpenGetEventItem) {
@@ -25,8 +28,7 @@ export const GetEventItemModal = ({ id }: IProps) => {
         }
     }, [id])
 
-    const dispatch = useAppDispatch()
-    const { isOpenGetEventItem } = useAppSelector((store) => store.modals)
+
     const onClose = () => {
         dispatch(closeGetEventItemModal())
     }
@@ -79,7 +81,7 @@ export const GetEventItemModal = ({ id }: IProps) => {
                                 <p>{toDate(data?.createTst as number)}</p>
                             </div>
                         </div>
-                        <EventItemInfo type={data?.type as number} />
+                        <EventItemInfo type={data?.type || 0} body={data?.body as IEventInfoBody}/>
                     </div>
                 </Loader>
             </div>

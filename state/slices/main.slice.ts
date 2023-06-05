@@ -5,7 +5,7 @@ interface initState {
 }
 
 const initialState: initState = {
-    theme: 'light',
+    theme: 'light'
 }
 
 export const main = createSlice({
@@ -14,7 +14,7 @@ export const main = createSlice({
     reducers: {
         setStateTheme: (state, { payload }) => {
             state.theme = payload
-        },
+        }
     },
 })
 

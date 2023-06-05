@@ -8,6 +8,7 @@ interface IProps {
 
 export const Basic = ({ main }: IProps) => {
     const { t } = useTranslation('devices')
+
     const blockClasses =
         'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2'
     const titleClasses = 'flex font-medium h-10 items-center text-lg'

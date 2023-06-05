@@ -22,8 +22,8 @@ interface IProps {
 }
 
 export const FilterDanger = ({ isClosed }: IProps) => {
-    const { t } = useTranslation('tasks')
-    const [selectOptions, setSelectOptions] = useState(['всe'])
+    const { t } = useTranslation('vulns')
+    const [selectOptions, setSelectOptions] = useState([`${t('all')}`])
     const [minValue, setMinValue] = useState(0)
     const [maxValue, setMaxValue] = useState(10)
 
@@ -37,7 +37,6 @@ export const FilterDanger = ({ isClosed }: IProps) => {
 
     useEffect(() => {
         if (dataFilter) {
-            console.log('Сработал!')
             setSelectOptions([
                 ...selectOptions,
                 ...dataFilter?.map(({ name }) => name),
@@ -55,7 +54,7 @@ export const FilterDanger = ({ isClosed }: IProps) => {
             },
         })
 
-    const defaultValueDevice = t(watch('device'))
+    const defaultValueDevice = watch('device')
     const onChangeValue = (value: string) => {
         setValue('device', value)
     }
@@ -213,7 +212,7 @@ export const FilterDanger = ({ isClosed }: IProps) => {
                 <button
                     className={btnFilter}
                     type='button'
-                    onClick={() => toDefaultValue()}
+                    onClick={toDefaultValue}
                 >
                     {t('reset')}
                 </button>

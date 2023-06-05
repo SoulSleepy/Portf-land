@@ -3,7 +3,7 @@
     "logged": "came in",
     "information": "Information",
     "programs": "Programs",
-    "tasks": "Vulnerabilities",
+    "vulns": "Vulnerabilities",
     "events": "Events",
     "agent installed": "Agent installed",
     "agent running": "Agent running",
@@ -11,6 +11,7 @@
     "name": "Name",
     "type": "Type",
     "OS": "OS",
+    "router": "Router",
     "users": "Users",
     "basic": "Basic",
     "domain/name": "Domain/Name",
@@ -38,5 +39,6 @@
     "date": "Date",
     "no vulnerabilities found": "No vulnerabilities found",
     "no events found": "No events found",
-    "unknown": "unknown"
+    "unknown": "unknown",
+    "vulnerable software found": "Vulnerable software found"
 }

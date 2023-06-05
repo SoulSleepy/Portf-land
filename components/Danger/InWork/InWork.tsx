@@ -9,9 +9,10 @@ import { openGetTaskItemModal } from 'state/slices/modals.slice'
 import { useTheme } from 'helpers/hooks/useTheme'
 import { Loader } from 'components/Loader'
 import { useTranslation } from 'next-i18next'
+import cn from 'classnames'
 
 export const InWork = () => {
-    const { t } = useTranslation('tasks')
+    const { t } = useTranslation('vulns')
     const { theme } = useTheme()
     const dispatch = useAppDispatch()
     const [taskId, setTaskId] = useState(0)
@@ -35,8 +36,8 @@ export const InWork = () => {
                                 key={item.id}
                                 className='flex flex-row gap-4 hover:bg-light-lighter dark:hover:bg-light-lighterD cursor-pointer'
                             >
-                                <div className='flex flex-col items-center justify-center relative pl-3'>
-                                    <div className='scale-[2.0]'>
+                                <div className='flex flex-col items-center justify-center relative pl-3 w-[30px]'>
+                                    <div className='scale-[2.0] absolute'>
                                         <DangerLevelIcon
                                             fill={
                                                 theme === 'dark'
@@ -45,12 +46,18 @@ export const InWork = () => {
                                             }
                                         />
                                     </div>
-                                    <p className='absolute top-[27px] font-medium text-[black] dark:text-light'>
+                                    <p
+                                        className={cn(
+                                            'absolute top-[27px] font-medium dark:text-light',
+                                            { 'text-[red]': +item.crt >= 7 },
+                                            { 'text-[orange]': +item.crt < 7 }
+                                        )}
+                                    >
                                         {item.crt}
                                     </p>
                                 </div>
                                 <div className='flex flex-col gap-2'>
-                                    <p className='font-medium text-lg'>
+                                    <p className='font-medium text-lg h-[28px]'>
                                         {item.titles?.ru}
                                     </p>
                                     <div className='flex flex-col gap-1'>

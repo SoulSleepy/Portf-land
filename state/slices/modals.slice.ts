@@ -15,6 +15,7 @@ export interface IState {
     isOpenGetEventItem: boolean
     isOpenConnectServer: boolean
     isOpenDisconnectServer: boolean
+    isOpenGenerateKeysVPN: boolean
 }
 
 const initialState: IState = {
@@ -32,6 +33,7 @@ const initialState: IState = {
     isOpenGetEventItem: false,
     isOpenConnectServer: false,
     isOpenDisconnectServer: false,
+    isOpenGenerateKeysVPN: false,
 }
 
 export const modals = createSlice({
@@ -122,6 +124,12 @@ export const modals = createSlice({
         closeDisconnectServerModal: (state) => {
             state.isOpenDisconnectServer = false
         },
+        openGenerateKeysVPNModal: (state) => {
+            state.isOpenGenerateKeysVPN = true
+        },
+        closeGenerateKeysVPNModal: (state) => {
+            state.isOpenGenerateKeysVPN = false
+        },
     },
 })
 
@@ -154,6 +162,8 @@ export const {
     closeConnectServerModal,
     openDisconnectServerModal,
     closeDisconnectServerModal,
+    openGenerateKeysVPNModal,
+    closeGenerateKeysVPNModal
 } = modals.actions
 
 export default modals.reducer

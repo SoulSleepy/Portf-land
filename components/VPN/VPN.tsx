@@ -1,8 +1,12 @@
 import { useTranslation } from "next-i18next"
+import { GenerateKeysVPNModal } from "../Modals/GenerateKeysVPNModal"
+import { useAppDispatch } from "state/store"
+import { openGenerateKeysVPNModal } from "state/slices/modals.slice"
 
 export const VPN = () => {
     const { t } = useTranslation('vpn')
-    
+    const dispatch = useAppDispatch()
+
     const blockClasses = 'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2'
     const titleClasses = 'flex font-medium h-10 items-center text-lg'
     const hrClasses = 'border-none bg-text-light dark:bg-text-lightD h-[1.5px] w-full'
@@ -16,7 +20,7 @@ export const VPN = () => {
                 <div className='flex flex-col items-start gap-2'>
                     <p className='font-medium'>{t('description')}</p>
                     <p>Какое то описание</p>
-                    <button className={btnClasses}>{t('generate keys')}</button>
+                    <button onClick={() => dispatch(openGenerateKeysVPNModal())} className={btnClasses}>{t('generate keys')}</button>
                 </div>
             </div>
             <div className={blockClasses}>
@@ -38,6 +42,7 @@ export const VPN = () => {
                     </div>
                 </div>
             </div>
+            <GenerateKeysVPNModal />
         </div>
     )
 }

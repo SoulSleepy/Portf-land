@@ -1,6 +1,6 @@
-import { IAuthForm, IAuthResponse } from 'types/types'
+import { IAuthForm, IAuthResponse, IAuthTimeoutResponse } from 'types/types'
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { setActiveUser, setAuthUser } from 'state/slices/auth.slice'
+import { setActiveUser, setAuthUser, setStartTimeoutLogin } from 'state/slices/auth.slice'
 import { fetchBaseAuth } from './config'
 import Cookies from 'js-cookie'
 
@@ -20,9 +20,12 @@ export const authApi = createApi({
             }),
             onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
                 const { data } = await queryFulfilled
-                if (data.status) {
+                if (data.data === 'auth-success') {
                     dispatch(setAuthUser(true))
                     Cookies.set('isAuth', 'true')
+                }
+                if (data.msg === 'timeout') {
+                    dispatch(setStartTimeoutLogin())
                 }
             },
         }),
@@ -60,7 +63,25 @@ export const authApi = createApi({
                 }
             },
         }),
+        authTimeout: builder.query<IAuthTimeoutResponse['data'], void>({
+            query: (params) => ({
+                url: `auth-timeout`,
+                method: 'POST',
+                body: {
+                    args: params,
+                    path: 'auth/timeout',
+                    token: 'DEBUG',
+                },
+            }),
+            transformResponse: ({ data }: IAuthTimeoutResponse) => data,
+        }),
     }),
 })
 
-export const { useLazyAuthUserQuery, useLazyLogoutUserQuery, useLazyCrateUserQuery } = authApi
+export const {
+    useLazyAuthUserQuery,
+    useLazyLogoutUserQuery,
+    useLazyCrateUserQuery,
+    useAuthTimeoutQuery,
+    useLazyAuthTimeoutQuery,
+} = authApi

@@ -1,12 +1,12 @@
 import { Modal } from '../Modal'
 import { useAppDispatch, useAppSelector } from 'state/store'
 import { closeDisconnectServerModal } from 'state/slices/modals.slice'
-import {
-    useLazyGetDisconnectServerQuery,
-} from 'state/rtk/system.rtk'
+import { useLazyGetDisconnectServerQuery } from 'state/rtk/system.rtk'
 import { Loader } from 'components/Loader'
+import { useTranslation } from 'next-i18next'
 
 export const DisconnectServerModal = () => {
+    const { t } = useTranslation('modals')
     const [disconnect, { data, isLoading }] = useLazyGetDisconnectServerQuery()
 
     const dispatch = useAppDispatch()
@@ -31,17 +31,17 @@ export const DisconnectServerModal = () => {
                     onClick={(event) => event.stopPropagation()}
                 >
                     <p className='font-medium text-xl tracking-wider'>
-                        Вы уверены?
+                        {t('are you sure?')}
                     </p>
                     <div className='flex flex-row gap-2'>
                         <button
                             className={btnClasses}
-                            onClick={() => serverOff()}
+                            onClick={serverOff}
                         >
-                            Да
+                            {t('yes')}
                         </button>
                         <button className={btnClasses} onClick={onClose}>
-                            Нет
+                            {t('no')}
                         </button>
                     </div>
                 </div>

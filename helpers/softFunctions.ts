@@ -1,4 +1,4 @@
-import { eventTypeObj, translateObj } from "./consts"
+import { translateObj } from './consts'
 
 export const toDate = (time: number) => {
     return new Date(time * 1000).toLocaleString('ru-RU', {
@@ -35,19 +35,13 @@ export const getNoun = (
 export const toCVSS3 = (item: string) => {
     const itemArr = item.split('/').map((elem) => {
         const typeAndValue = elem.split(':')
-        const type = typeAndValue[0];
-        const value = typeAndValue[1];
+        const type = typeAndValue[0]
+        const value = typeAndValue[1]
         const bm = translateObj[type]
-        if(!bm) return `Нет данных о типе ${type} и значение ${value}`;
+        if (!bm) return `Нет данных о типе ${type} и значение ${value}`
         return `${bm.title} ${
             bm[value] ? bm[value] : `Нет данных о значение ${value}`
         }`
     })
     return itemArr
 }
-
-export const subtitleEvent = (value: number) => {
-    return eventTypeObj[value]?.subtitle
-}
-
-

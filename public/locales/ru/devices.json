@@ -3,7 +3,7 @@
     "logged": "был",
     "information": "Информация",
     "programs": "Программы",
-    "tasks": "Уязвимости",
+    "vulns": "Уязвимости",
     "events": "События",
     "agent installed": "Агент установлен",
     "agent running": "Агент запущен",
@@ -11,6 +11,7 @@
     "name": "Имя",
     "type": "Тип",
     "OS": "OC",
+    "router": "Маршрутизатор",
     "users": "Пользователи",
     "basic": "Основное",
     "domain/name": "Домен/Имя",
@@ -38,5 +39,6 @@
     "date": "Дата",
     "no vulnerabilities found": "Уязвимости отсутствуют",
     "no events found": "События отсутствуют",
-    "unknown": "неизвестно"
+    "unknown": "неизвестно",
+    "vulnerable software found": "Найдено уязвимое ПО"
 }

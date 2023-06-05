@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { toCVSS3 } from 'helpers/softFunctions'
 import { useTheme } from 'helpers/hooks/useTheme'
+import { useTranslation } from 'next-i18next'
 
 interface IProps {
     item: IGetDangerCvec
@@ -14,12 +15,13 @@ export const TaskItemInfo = ({ item }: IProps) => {
     const { theme } = useTheme()
     const [activeDes, setActiveDes] = useState(0)
     const [openDescription, setOpenDescription] = useState(false)
+    const { t } = useTranslation('modals')
 
     return (
         <div className='flex flex-col gap-1 p-2'>
             <div className='flex flex-row justify-between h-9 text-lg'>
-                <p>Метрика риска</p>
-                <p>Тип уязвимости</p>
+                <p>{t('risk metric')}</p>
+                <p>{t('vulnerability type')}</p>
             </div>
             <div className='flex flex-row gap-4'>
                 <div className='flex flex-row gap-4'>
@@ -104,7 +106,7 @@ export const TaskItemInfo = ({ item }: IProps) => {
                             )
                     })}
                     <div className='flex flex-col'>
-                        <p className='font-medium mb-1'>Источники</p>
+                        <p className='font-medium mb-1'>{t('sources')}</p>
                         {item.urls.map((item) => {
                             return (
                                 <Link

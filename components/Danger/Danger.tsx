@@ -6,7 +6,7 @@ import { InWork } from './InWork'
 import { useTranslation } from 'next-i18next'
 
 export const Danger = () => {
-    const { t } = useTranslation('tasks')
+    const { t } = useTranslation('vulns')
     const [activeBtn, setActiveBtn] = useState(false)
 
     const blockClasses =

@@ -9,6 +9,7 @@ import { TaskItemsList } from './TaskItemsList'
 import { IGetDangerCvec } from 'types/types'
 import { useTheme } from 'helpers/hooks/useTheme'
 import { Loader } from 'components/Loader'
+import { useTranslation } from 'next-i18next'
 
 interface IProps {
     id: number
@@ -17,6 +18,7 @@ interface IProps {
 export const GetDangerItemModal = ({ id }: IProps) => {
     const { theme } = useTheme()
     const [getTaskItem, { data, isLoading }] = useLazyGetTaskItemQuery()
+    const { t } = useTranslation('modals')
 
     useEffect(() => {
         if (isOpenGetTaskItem) {
@@ -53,14 +55,14 @@ export const GetDangerItemModal = ({ id }: IProps) => {
                                 />
                             </div>
                             <p className={titleClasses}>
-                                {'Найдено уязвимое ПО ' + data?.body.title}
+                                {`${t('vulnerable software found')} ${data?.body.title}`}
                             </p>
                             <p className='ml-auto'>#{data?.id}</p>
                         </div>
                         <hr className={hrClasses} />
                         <div className='flex flex-row gap-4 items-center justify-between h-10'>
                             <div className='flex flex-row gap-2'>
-                                <p>Устройство</p>
+                                <p>{t('device')}</p>
                                 <DevicesIcon
                                     fill={
                                         theme === 'dark' ? '#bebebe' : '#6C7281'
@@ -69,7 +71,7 @@ export const GetDangerItemModal = ({ id }: IProps) => {
                                 <p>{data?.deviceInfo.name}</p>
                             </div>
                             <div className='flex flex-row gap-2'>
-                                <p>Время создания</p>
+                                <p>{t('creation time')}</p>
                                 <ClockIcon
                                     fill={
                                         theme === 'dark' ? '#bebebe' : '#6C7281'

@@ -15,8 +15,10 @@ import userSlice from './slices/auth.slice'
 import mainSlice from './slices/main.slice'
 import { mapApi } from './rtk/map'
 import systemSlice from './slices/system.slice'
+import { vpnApi } from './rtk/vpn.rtk'
+import { createWrapper } from 'next-redux-wrapper'
 
-const store = configureStore({
+const store = () => configureStore({
     reducer: {
         [authApi.reducerPath]: authApi.reducer,
         [usersApi.reducerPath]: usersApi.reducer,
@@ -25,6 +27,7 @@ const store = configureStore({
         [homeApi.reducerPath]: homeApi.reducer,
         [dangerAndEventApi.reducerPath]: dangerAndEventApi.reducer,
         [devicesApi.reducerPath]: devicesApi.reducer,
+        [vpnApi.reducerPath]: vpnApi.reducer,
         [mapApi.reducerPath]: mapApi.reducer,
         auth: userSlice,
         filter: filterSlice,
@@ -41,13 +44,16 @@ const store = configureStore({
             homeApi.middleware,
             dangerAndEventApi.middleware,
             devicesApi.middleware,
+            vpnApi.middleware,
             mapApi.middleware,
         ]),
 })
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
-export default store
+type AppStore = ReturnType<typeof store>;
+type AppState = ReturnType<AppStore['getState']>;
+type AppDispatch = AppStore['dispatch'];
 
+
+export const wrapper = createWrapper<AppStore>(store, {debug: false})
 export const useAppDispatch: () => AppDispatch = useDispatch
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector

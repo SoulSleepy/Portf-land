@@ -5,8 +5,10 @@ import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useLazyCrateUserQuery } from 'state/rtk/auth.rtk'
 import { Loader } from 'components/Loader'
+import { useTranslation } from 'next-i18next'
 
 export const Registration = () => {
+    const { t } = useTranslation('login')
     const [show1, setShow1] = useState(false)
     const [show2, setShow2] = useState(false)
     const [error, setError] = useState(false)
@@ -42,7 +44,7 @@ export const Registration = () => {
         <Loader isLoading={isLoading}>
             <div className='flex flex-col bg-light rounded-xl p-3 shadow-dark gap-2 z-10 w-[400px]'>
                 <p className='flex font-medium h-10 items-center text-lg border-b-[1px] pb-1'>
-                    Регистрация нового пользователя
+                    {t('registration')}
                 </p>
                 <form
                     className='flex flex-col gap-6'
@@ -52,14 +54,14 @@ export const Registration = () => {
                     <input
                         className={inputClasses}
                         type='text'
-                        placeholder='Логин'
+                        placeholder={`${t('login')}`}
                         {...register('login')}
                     />
                     <div className='relative'>
                         <input
                             className={inputClasses}
                             type={show1 ? 'text' : 'password'}
-                            placeholder='Пароль'
+                            placeholder={`${t('password')}`}
                             {...register('password')}
                         />
                         <div
@@ -77,7 +79,7 @@ export const Registration = () => {
                         <input
                             className={inputClasses}
                             type={show2 ? 'text' : 'password'}
-                            placeholder='Повторите пароль'
+                            placeholder={`${t('repeat password')}`}
                             {...register('password2')}
                         />
                         <div
@@ -102,11 +104,11 @@ export const Registration = () => {
                             )}
                             type='submit'
                         >
-                            Создать
+                            {t('create')}
                         </button>
                         {error && (
                             <div className='text-lightRed absolute -top-7 -left-10 flex items-center justify-center h-10 w-[250px]'>
-                                Пароли не совпадают
+                                {t('passwords do not match')}
                             </div>
                         )}
                     </div>

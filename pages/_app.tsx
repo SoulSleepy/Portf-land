@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { ReactElement, ReactNode } from 'react'
 import { GetStaticProps, NextPage } from 'next'
 import { Roboto } from 'next/font/google'
-import store from 'state/store'
+import { wrapper } from 'state/store'
 import MainLayout from 'components/Layouts/MainLayout'
 import { AuthProvider } from 'components/AuthProvider'
 import { appWithTranslation} from 'next-i18next'
@@ -23,7 +23,11 @@ type AppPropsWithLayout = AppProps & {
     Component: NextPageWithLayout
 }
 
-function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+
+function MyApp({ Component, ...rest }: AppPropsWithLayout) {
+
+    const {store, props} = wrapper.useWrappedStore(rest);
+    const { pageProps } = props;
     const getLayout =
         Component.getLayout ?? ((page) => <MainLayout>{page}</MainLayout>)
 
@@ -48,7 +52,7 @@ export default appWithTranslation(MyApp)
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
     return {
         props: {
-            ...(await serverSideTranslations(locale as string, ['navbar', 'home', 'vpn', 'devices', 'events', 'map', 'settings', 'system', 'users', 'tasks', 'modals'])),
+            ...(await serverSideTranslations(locale as string, ['navbar', 'home', 'vpn', 'devices', 'events', 'map', 'settings', 'system', 'users', 'vulns', 'modals', 'login'])),
         }
     }
 }

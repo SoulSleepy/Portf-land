@@ -6,12 +6,14 @@ import {
     useLazySetDHCPSettingsQuery,
     useLazySetLanSettingsQuery,
 } from 'state/rtk/settings.rtk'
+import { useTranslation } from 'next-i18next'
 
 interface IProps {
     params: INetworkForm
 }
 
 export const SetLanSettingsModal = ({ params }: IProps) => {
+    const { t } = useTranslation('modals')
     const [setDHCPSettings] = useLazySetDHCPSettingsQuery()
     const [setLanSettings] = useLazySetLanSettingsQuery()
 
@@ -45,14 +47,14 @@ export const SetLanSettingsModal = ({ params }: IProps) => {
                 onClick={(event) => event.stopPropagation()}
             >
                 <p className='font-medium text-xl tracking-wider'>
-                    Вы уверены?
+                    {t('are you sure?')}
                 </p>
                 <div className='flex flex-row gap-2'>
-                    <button className={btnClasses} onClick={() => setLan()}>
-                        Да
+                    <button className={btnClasses} onClick={setLan}>
+                        {t('yes')}
                     </button>
                     <button className={btnClasses} onClick={onClose}>
-                        Нет
+                        {t('no')}
                     </button>
                 </div>
             </div>

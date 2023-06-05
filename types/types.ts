@@ -310,7 +310,17 @@ export interface IEventInfo {
 }
 
 export interface IEventInfoBody {
-    sender: string
+    sender?: string
+    tst?: number
+    ip?: string
+    login?: string
+    password?: string
+    userAgent?: string
+    count?: number
+    host?: string
+    dhcp_server?: string
+    asd?: string
+    target_mac?: string
 }
 
 export interface IEventInfoDeviceInfo {
@@ -588,6 +598,24 @@ export interface IDeviceProgramItem {
     location: string
     icon: string
     instTst: string
+}
+
+// vpn => GenerateKeys interfaces // 
+export interface IGenerateKeysResponse {
+    status: boolean
+    data: Object
+    msg: string
+    error: null
+    explain: string
+}
+
+// vpn => CheckGenerate interfaces // 
+export interface ICheckGenerateResponse {
+    status: boolean
+    data: string
+    msg: string
+    error: null
+    explain: string
 }
 
 // map => MapList interfaces //
@@ -1021,4 +1049,18 @@ export interface Detail {
     subtitle: string
     description?: string[] | string
     list?: string[]
+}
+
+// auth => AuthTimeout interfaces //
+export interface IAuthTimeoutResponse {
+    status: boolean
+    data: ITimeoutItem
+    msg: string
+    error: null
+    explain: string
+}
+
+export interface ITimeoutItem {
+    timeout: number
+    count: number
 }

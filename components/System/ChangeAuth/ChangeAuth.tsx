@@ -24,7 +24,7 @@ export const ChangeAuth = () => {
         <div className={blockClasses}>
             <p className={titleClasses}>{t('change authorization data')}</p>
             <hr className={hrClasses} />
-            <div className='flex flex-col gap-5 mt-2 h-[88px]'>
+            {false ? <div className='flex flex-col gap-5 mt-2 h-[88px]'>
                 <div className='relative w-[250px]'>
                     <label className={labelClasses}>{t('login')}</label>
                     <input className={inputClasses} type='text' />
@@ -47,7 +47,8 @@ export const ChangeAuth = () => {
                                     }/>}
                     </div>
                 </div>
-            </div>
+            </div> : <div className='flex flex-col gap-5 mt-2 h-[88px]'>{t('temporarily unavailable')}</div>}
+            {/* разобраться не работает исходный код на старом фронте */}
             <button className={cn(btnClasses, 'h-8 w-[120px] mt-2')}>
                 {t('save')}
             </button>

@@ -3,12 +3,14 @@ import { Modal } from '../Modal'
 import { useAppDispatch, useAppSelector } from 'state/store'
 import { IWanSettingsForm } from 'components/Settings/Provider/Provider'
 import { useLazySetWanSettingsQuery } from 'state/rtk/settings.rtk'
+import { useTranslation } from 'next-i18next'
 
 interface IProps {
     settings: IWanSettingsForm
 }
 
 export const SetProviderSettingsModal = ({ settings }: IProps) => {
+    const { t } = useTranslation('modals')
     const [setWanSettings] = useLazySetWanSettingsQuery()
 
     const dispatch = useAppDispatch()
@@ -38,7 +40,7 @@ export const SetProviderSettingsModal = ({ settings }: IProps) => {
                 dns: settings.maskStatic,
             },
         }
-        if ( settings.state === 'dhcp' || settings.state === 'um' ) {
+        if (settings.state === 'dhcp' || settings.state === 'um') {
             setWanSettings(paramsDHCPandUnmanaged)
         } else if (settings.state === 'pppoe') {
             setWanSettings(paramsPppoe)
@@ -56,17 +58,17 @@ export const SetProviderSettingsModal = ({ settings }: IProps) => {
                 onClick={(event) => event.stopPropagation()}
             >
                 <p className='font-medium text-xl tracking-wider'>
-                    Вы уверены?
+                    {t('are you sure?')}
                 </p>
                 <div className='flex flex-row gap-2'>
                     <button
                         className={btnClasses}
-                        onClick={() => setProvider()}
+                        onClick={setProvider}
                     >
-                        Да
+                        {t('yes')}
                     </button>
                     <button className={btnClasses} onClick={onClose}>
-                        Нет
+                        {t('no')}
                     </button>
                 </div>
             </div>

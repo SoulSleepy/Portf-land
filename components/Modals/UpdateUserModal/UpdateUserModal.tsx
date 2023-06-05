@@ -7,12 +7,14 @@ import { useGetUpdateUserMutation } from 'state/rtk/users.rtk'
 import { IUpdateUserForm, IUserItem } from 'types/types'
 import { useTheme } from 'helpers/hooks/useTheme'
 import { HideInputIcon, ShowInputIcon } from 'components/Icons/Icons'
+import { useTranslation } from 'next-i18next'
 
 interface IProps {
     user: IUserItem
 }
 
 export const UpdateUserModal = ({ user }: IProps) => {
+    const { t } = useTranslation('modals')
     const { theme } = useTheme()
     const [getUpdateUser] = useGetUpdateUserMutation()
     const [show, setShow] = useState(false)
@@ -55,7 +57,7 @@ export const UpdateUserModal = ({ user }: IProps) => {
                 onClick={(event) => event.stopPropagation()}
             >
                 <p className='font-medium text-xl tracking-wider'>
-                    Редактировать пользователя
+                    {t('edit user')}
                 </p>
                 <form
                     className='flex flex-col gap-6 mt-3'
@@ -67,7 +69,7 @@ export const UpdateUserModal = ({ user }: IProps) => {
                             className={inputClasses}
                             {...register('login')}
                         />
-                        <label className={labelClasses}>Логин</label>
+                        <label className={labelClasses}>{t('login')}</label>
                     </div>
                     <div className='relative'>
                         <input
@@ -75,7 +77,7 @@ export const UpdateUserModal = ({ user }: IProps) => {
                             type={show ? 'text' : 'password'}
                             {...register('password')}
                         />
-                        <label className={labelClasses}>Пароль</label>
+                        <label className={labelClasses}>{t('password')}</label>
                         <div
                             className='absolute cursor-pointer right-1 top-2'
                             onClick={() => setShow(!show)}
@@ -97,7 +99,7 @@ export const UpdateUserModal = ({ user }: IProps) => {
                     </div>
                     <div className='relative'>
                         <button className={btnClasses} type='submit'>
-                            Изменить
+                        {t('change')}
                         </button>
                     </div>
                 </form>

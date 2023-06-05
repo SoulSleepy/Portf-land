@@ -130,7 +130,7 @@ export const Update = () => {
                         </div>
                         {loadUpdate.length <= 14 ? null : (
                             <button className={cn(settingsBtnClasses, 'h-9')}>
-                                Обновить
+                                {t('update1')}
                             </button>
                         )}
                     </div>
@@ -138,7 +138,7 @@ export const Update = () => {
             </div>
             <hr className={hrClasses} />
             <button className={settingsBtnClasses} onClick={saveSystem}>
-                Сохранить
+                {t('save')}
             </button>
         </div>
     )

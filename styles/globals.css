@@ -54,3 +54,11 @@ a {
     /* color: #1c1a33f5; */
     box-sizing: border-box;
 }
+
+input.flex:-webkit-autofill,
+input.flex:-webkit-autofill:hover,
+input.flex:-webkit-autofill:focus,
+input.flex:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 50px #141935 inset;
+    -webkit-text-fill-color: #6c7281;
+}

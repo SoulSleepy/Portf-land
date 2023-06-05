@@ -3,13 +3,14 @@ import { Modal } from '../Modal'
 import { useAppDispatch, useAppSelector } from 'state/store'
 import { IWiFiForm } from 'types/types'
 import { useSetWifiSettingsMutation } from 'state/rtk/settings.rtk'
+import { useTranslation } from 'next-i18next'
 
 interface IProps {
     params: IWiFiForm
 }
 
 export const SetWifi5SettingsModal = ({params}: IProps) => {
-
+    const { t } = useTranslation('modals')
     const [getChangeSettingWifi] = useSetWifiSettingsMutation()
 
     const dispatch = useAppDispatch()
@@ -31,10 +32,10 @@ export const SetWifi5SettingsModal = ({params}: IProps) => {
                 className='flex flex-col p-5 items-center gap-5 bg-light rounded-md text-text-light dark:text-text-lightD dark:bg-darkD'
                 onClick={(event) => event.stopPropagation()}
             >
-                <p className='font-medium text-xl tracking-wider'>Вы уверены?</p>
+                <p className='font-medium text-xl tracking-wider'>{t('are you sure?')}</p>
                 <div className='flex flex-row gap-2'>
-                    <button className={btnClasses} onClick={() => changeSettingWifi()}>Да</button>
-                    <button className={btnClasses} onClick={onClose}>Нет</button>
+                    <button className={btnClasses} onClick={changeSettingWifi}>{t('yes')}</button>
+                    <button className={btnClasses} onClick={onClose}>{t('no')}</button>
                 </div>
             </div>
         </Modal>

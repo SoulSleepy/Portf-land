@@ -7,8 +7,10 @@ import { useGetNewUserMutation } from 'state/rtk/users.rtk'
 import { INewUserForm } from 'types/types'
 import { HideInputIcon, ShowInputIcon } from 'components/Icons/Icons'
 import { useTheme } from 'helpers/hooks/useTheme'
+import { useTranslation } from 'next-i18next'
 
 export const CreateUserModal = () => {
+    const { t } = useTranslation('modals')
     const { theme } = useTheme()
     const [getNewUser] = useGetNewUserMutation()
     const [show, setShow] = useState(false)
@@ -46,7 +48,7 @@ export const CreateUserModal = () => {
                 onClick={(event) => event.stopPropagation()}
             >
                 <p className='font-medium text-xl tracking-wider'>
-                    Создайте нового пользователя
+                    {t('create new user')}
                 </p>
                 <form
                     className='flex flex-col gap-6 mt-3'
@@ -58,7 +60,7 @@ export const CreateUserModal = () => {
                             className={inputClasses}
                             {...register('login')}
                         />
-                        <label className={labelClasses}>Логин</label>
+                        <label className={labelClasses}>{t('login')}</label>
                     </div>
                     <div className='relative'>
                         <input
@@ -67,7 +69,7 @@ export const CreateUserModal = () => {
                             type={show ? 'text' : 'password'}
                             {...register('password')}
                         />
-                        <label className={labelClasses}>Пароль</label>
+                        <label className={labelClasses}>{t('password')}</label>
                         <div
                             className='absolute cursor-pointer right-1 top-2'
                             onClick={() => setShow(!show)}
@@ -89,7 +91,7 @@ export const CreateUserModal = () => {
                     </div>
                     <div className='relative'>
                         <button className={btnClasses} type='submit'>
-                            Создать
+                            {t('create')}
                         </button>
                     </div>
                 </form>
