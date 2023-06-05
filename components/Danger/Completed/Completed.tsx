@@ -50,7 +50,7 @@ export const Completed = () => {
                                     </div>
                                     <p
                                         className={cn(
-                                            'absolute top-[27px] font-medium dark:text-light',
+                                            'absolute top-[27px] font-medium',
                                             { 'text-[red]': +item.crt >= 7 },
                                             { 'text-[orange]': +item.crt < 7 }
                                         )}
