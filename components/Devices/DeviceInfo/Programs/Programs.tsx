@@ -22,7 +22,7 @@ export const Programs = ({ deviceId }: IProps) => {
 
     const tableTitleClasses = 'border-r-[1px] border-b-[1px] pl-1 pt-[3px] h-7'
     const tableItemClasses =
-        ' flex items-center border-r-[1px] border-b-[1px] p-1 h-8 truncate ...'
+        ' flex items-center border-r-[1px] border-b-[1px] p-1 h-8 truncate'
 
     return (
         <div className='flex flex-col bg-light dark:bg-darkD border shadow-dark overflow-auto h-[530px] relative'>
@@ -41,7 +41,7 @@ export const Programs = ({ deviceId }: IProps) => {
                                 key={item.name}
                                 className='grid grid-cols-5 items-center text-sm text-text-light dark:text-text-lightD border-l-[1px]'
                             >
-                                <div className='flex flex-row gap-1 border-r-[1px] border-b-[1px] pl-1 pt-[3px] h-8 truncate ...'>
+                                <div className='flex flex-row gap-1 border-r-[1px] border-b-[1px] pl-1 pt-[3px] h-8 truncate'>
                                     <div>
                                         {item.icon ? (
                                             <img
@@ -61,15 +61,15 @@ export const Programs = ({ deviceId }: IProps) => {
                                             />
                                         )}
                                     </div>
-                                    <p>{item.name}</p>
+                                    <p title={item.name}>{item.name}</p>
                                 </div>
                                 <p className={tableItemClasses}>
                                     {item.version}
                                 </p>
-                                <p className={tableItemClasses}>
+                                <p title={item.location} className={tableItemClasses}>
                                     {item.location}
                                 </p>
-                                <p className={tableItemClasses}>
+                                <p title={item.publisher} className={tableItemClasses}>
                                     {item.publisher}
                                 </p>
                                 <p className={tableItemClasses}>

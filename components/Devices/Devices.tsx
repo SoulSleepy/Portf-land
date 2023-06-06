@@ -8,16 +8,24 @@ import { DevicesIcon } from '../Icons/Icons'
 import { useTheme } from 'helpers/hooks/useTheme'
 import { Loader } from '../Loader'
 import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
 
 export const Devices = () => {
     const { t } = useTranslation('devices')
     const { theme } = useTheme()
     const { data, isLoading } = useGetDevicesListQuery()
     const [activeItem, setActiveItem] = useState({ id: 1 } as IDeviceItem)
+    const { query } = useRouter()
 
     useEffect(() => {
         if (data) {
-            setActiveItem(data?.[0])
+            if (query.id === undefined) {
+                setActiveItem(data?.[0])
+            } else {
+                setActiveItem(
+                    (data as IDeviceItem[]).find((item) => item.id === Number(query.id)) as IDeviceItem
+                )
+            }
         }
     }, [data])
 
@@ -38,7 +46,7 @@ export const Devices = () => {
                     <input
                         className='p-1 h-[32px] w-full outline outline-1 rounded-md hover:outline-2 dark:bg-darkD outline-text-light dark:outline-text-lightD'
                         type='text'
-                        placeholder='search on devices'
+                        placeholder={`${t('search')}`}
                     />
                 </div>
                 <div className='flex flex-col gap-2 h-[600px] overflow-auto'>
@@ -95,7 +103,9 @@ export const Devices = () => {
                     </Loader>
                 </div>
             </div>
-            <Loader isLoading={isLoading}><DeviceInfo device={activeItem} /></Loader>
+            <Loader isLoading={isLoading}>
+                <DeviceInfo device={activeItem} />
+            </Loader>
         </div>
     )
 }

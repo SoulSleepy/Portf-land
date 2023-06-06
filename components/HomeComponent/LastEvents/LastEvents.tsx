@@ -37,7 +37,7 @@ export const LastEvents = ({ eventList, isLoading }: IProps) => {
         <div className={blockClasses}>
             <p className={titleClasses}>{t('recent events')}</p>
             <hr className={hrClasses} />
-            <div className='flex flex-col h-[250px] overflow-auto gap-2'>
+            <div className='flex flex-col h-[250px] overflow-auto gap-2 '>
                 <Loader size={75} isLoading={isLoading}>
                     {eventList?.length ? (
                         eventList?.map((item) => {

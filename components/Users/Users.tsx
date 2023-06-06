@@ -44,7 +44,7 @@ export const Users = () => {
                 <input
                     className='p-1 h-[32px] w-full outline outline-1 rounded-md hover:outline-2 outline-text-light dark:outline-text-lightD dark:bg-darkD'
                     type='text'
-                    placeholder='Search for users'
+                    placeholder={`${t('search')}`}
                 />
                 <div className='flex flex-col gap-2 h-[570px] overflow-auto'>
                     <Loader isLoading={isLoading}>

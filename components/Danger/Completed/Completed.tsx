@@ -13,7 +13,7 @@ import { useRouter } from 'next/router'
 import cn from 'classnames'
 
 export const Completed = () => {
-    const { locale } = useRouter()
+    const { push } = useRouter()
     const { t } = useTranslation('vulns')
     const { theme } = useTheme()
     const dispatch = useAppDispatch()
@@ -22,6 +22,9 @@ export const Completed = () => {
     const openModal = (value: number) => {
         setTaskId(value)
         dispatch(openGetTaskItemModal())
+    }
+    const onToDevice = (value: number) => {
+        push(`/devices?id=${value}`, '/devices')
     }
 
     const { filter } = useFilter()
@@ -50,7 +53,7 @@ export const Completed = () => {
                                     </div>
                                     <p
                                         className={cn(
-                                            'absolute top-[27px] font-medium',
+                                            'absolute top-[31px] font-medium',
                                             { 'text-[red]': +item.crt >= 7 },
                                             { 'text-[orange]': +item.crt < 7 }
                                         )}
@@ -73,7 +76,12 @@ export const Completed = () => {
                                             />
                                             <p>{toDate(item.createTst)}</p>
                                         </div>
-                                        <div className='flex flex-row gap-2'>
+                                        <div
+                                            className='flex flex-row gap-2 h-[34px]'
+                                            onClick={(event) =>
+                                                event.stopPropagation()
+                                            }
+                                        >
                                             <DevicesIcon
                                                 fill={
                                                     theme === 'dark'
@@ -81,7 +89,17 @@ export const Completed = () => {
                                                         : '#6C7281'
                                                 }
                                             />
-                                            <p>{item.deviceInfo.name}</p>
+                                            <p
+                                                className='hover:text-graph cursor-pointer hover:underline hover:underline-offset-8'
+                                                onClick={() =>
+                                                    onToDevice(
+                                                        item?.deviceInfo
+                                                            .entityId as number
+                                                    )
+                                                }
+                                            >
+                                                {item?.deviceInfo.name}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

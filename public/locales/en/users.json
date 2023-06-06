@@ -8,5 +8,6 @@
     "time": "Time",
     "event": "Event",
     "parameters": "Parameters",
-    "create": "Create"
+    "create": "Create",
+    "search": "Search for users"
 }

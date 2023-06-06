@@ -1,3 +1,4 @@
+import cn from 'classnames'
 import { useTranslation } from 'next-i18next'
 import { IPorts } from 'types/types'
 
@@ -21,7 +22,7 @@ export const Ports = ({ ports }: IProps) => {
             <hr className={hrClasses} />
             <div className='flex flex-col'>
                 <div className='grid grid-cols-4 items-center text-sm font-medium text-text-light dark:text-text-lightD  border-t-[1px] border-l-[1px]'>
-                    <p className={tableItemClasses}>{t('number')}</p>
+                    <p className={tableItemClasses}>{t('number port')}</p>
                     <p className={tableItemClasses}>{t('device type')}</p>
                     <p className={tableItemClasses}>{t('protocol')}</p>
                     <p className={tableItemClasses}>{t('banner')}</p>
@@ -35,7 +36,7 @@ export const Ports = ({ ports }: IProps) => {
                             <p className={tableItemClasses}>{item.number}</p>
                             <p className={tableItemClasses}>{item.type}</p>
                             <p className={tableItemClasses}>{item.protocol}</p>
-                            <p className={tableItemClasses}>{item.banner}</p>
+                            <p title={item.banner} className={cn(tableItemClasses, 'truncate')}>{item.banner}</p>
                         </div>
                     )
                 })}

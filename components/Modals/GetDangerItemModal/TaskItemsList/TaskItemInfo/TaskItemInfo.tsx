@@ -39,16 +39,25 @@ export const TaskItemInfo = ({ item }: IProps) => {
                     </p>
                     <div
                         className='cursor-pointer relative'
-                        onClick={() => setOpenDescription(!openDescription)}
+                        onMouseEnter={() => setOpenDescription(true)}
+                        onMouseLeave={() => setOpenDescription(false)}
                     >
-                        <TaskDescriptionIcon fill={theme === 'dark' ? '#bebebe' : '#6C7281'}/>
+                        <TaskDescriptionIcon
+                            fill={theme === 'dark' ? '#bebebe' : '#6C7281'}
+                        />
                         {openDescription && (
-                            <div className='absolute -top-[80px] left-7 p-1 bg-text-light dark:bg-text-lightD text-light dark:text-darkD flex flex-col w-[430px] rounded-md'>
-                                {toCVSS3(item.securityMetrics.str).map(
-                                    (elem) => {
-                                        return <p className='text-sm'>{elem}</p>
-                                    }
-                                )}
+                            <div className='absolute -top-[80px] left-4 pl-2'>
+                                <div className='p-1 bg-text-light dark:bg-text-lightD text-light dark:text-darkD flex flex-col w-[430px] rounded-md'>
+                                    {toCVSS3(item.securityMetrics.str).map(
+                                        (elem) => {
+                                            return (
+                                                <p className='text-sm'>
+                                                    {elem}
+                                                </p>
+                                            )
+                                        }
+                                    )}
+                                </div>
                             </div>
                         )}
                     </div>

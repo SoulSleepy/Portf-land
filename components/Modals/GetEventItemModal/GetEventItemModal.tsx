@@ -10,12 +10,14 @@ import { useTheme } from 'helpers/hooks/useTheme'
 import { Loader } from 'components/Loader'
 import { useTranslation } from 'next-i18next'
 import { IEventInfoBody } from 'types/types'
+import { useRouter } from 'next/router'
 
 interface IProps {
     id: number
 }
 
 export const GetEventItemModal = ({ id }: IProps) => {
+    const { push } = useRouter()
     const { theme } = useTheme()
     const [getEventItem, { data, isLoading }] = useLazyGetEventItemQuery()
     const { t } = useTranslation('modals')
@@ -28,9 +30,12 @@ export const GetEventItemModal = ({ id }: IProps) => {
         }
     }, [id])
 
-
     const onClose = () => {
         dispatch(closeGetEventItemModal())
+    }
+    const onToDevice = (value: number) => {
+        onClose()
+        push(`/devices?id=${value}`, '/devices')
     }
 
     const blockClasses =
@@ -69,7 +74,16 @@ export const GetEventItemModal = ({ id }: IProps) => {
                                         theme === 'dark' ? '#bebebe' : '#6C7281'
                                     }
                                 />
-                                <p>{data?.deviceInfo.name}</p>
+                                <p
+                                    className='hover:text-graph cursor-pointer hover:underline hover:underline-offset-8'
+                                    onClick={() =>
+                                        onToDevice(
+                                            data?.deviceInfo.entityId as number
+                                        )
+                                    }
+                                >
+                                    {data?.deviceInfo.name}
+                                </p>
                             </div>
                             <div className='flex flex-row gap-2'>
                                 <p>{t('creation time')}</p>
@@ -81,7 +95,10 @@ export const GetEventItemModal = ({ id }: IProps) => {
                                 <p>{toDate(data?.createTst as number)}</p>
                             </div>
                         </div>
-                        <EventItemInfo type={data?.type || 0} body={data?.body as IEventInfoBody}/>
+                        <EventItemInfo
+                            type={data?.type || 0}
+                            body={data?.body as IEventInfoBody}
+                        />
                     </div>
                 </Loader>
             </div>

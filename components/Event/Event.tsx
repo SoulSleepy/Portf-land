@@ -10,8 +10,10 @@ import { GetEventItemModal } from '../Modals/GetEventItemModal'
 import { useTheme } from 'helpers/hooks/useTheme'
 import { Loader } from '../Loader'
 import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
 
 export const Event = () => {
+    const { push } = useRouter()
     const { t } = useTranslation('events')
     const { theme } = useTheme()
     const dispatch = useAppDispatch()
@@ -20,6 +22,10 @@ export const Event = () => {
     const openModal = (value: number) => {
         setTaskId(value)
         dispatch(openGetEventItemModal())
+    }
+
+    const onToDevice = (value: number) => {
+        push(`/devices?id=${value}`, '/devices')
     }
 
     const { filter } = useFilter()
@@ -41,7 +47,7 @@ export const Event = () => {
                                     <div
                                         onClick={() => openModal(item.id)}
                                         key={item.id}
-                                        className='flex flex-row gap-5 items-center pl-2  hover:bg-light-lighter dark:hover:bg-light-lighterD cursor-pointer'
+                                        className='flex flex-row gap-5 items-center pl-2 hover:bg-light-lighter dark:hover:bg-light-lighterD cursor-pointer'
                                     >
                                         <div className='scale-[2.0]'>
                                             <EventIcon
@@ -69,7 +75,12 @@ export const Event = () => {
                                                         {toDate(item.createTst)}
                                                     </p>
                                                 </div>
-                                                <div className='flex flex-row gap-2'>
+                                                <div
+                                                    className='flex flex-row gap-2 h-[34px]'
+                                                    onClick={(event) =>
+                                                        event.stopPropagation()
+                                                    }
+                                                >
                                                     <DevicesIcon
                                                         fill={
                                                             theme === 'dark'
@@ -77,7 +88,15 @@ export const Event = () => {
                                                                 : '#6C7281'
                                                         }
                                                     />
-                                                    <p>
+                                                    <p
+                                                        className='hover:text-graph cursor-pointer hover:underline hover:underline-offset-8 transition-all'
+                                                        onClick={() =>
+                                                            onToDevice(
+                                                                item?.deviceInfo
+                                                                    .entityId as number
+                                                            )
+                                                        }
+                                                    >
                                                         {item.deviceInfo.name}
                                                     </p>
                                                 </div>

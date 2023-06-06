@@ -10,6 +10,7 @@ import { IGetDangerCvec } from 'types/types'
 import { useTheme } from 'helpers/hooks/useTheme'
 import { Loader } from 'components/Loader'
 import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
 
 interface IProps {
     id: number
@@ -19,6 +20,7 @@ export const GetDangerItemModal = ({ id }: IProps) => {
     const { theme } = useTheme()
     const [getTaskItem, { data, isLoading }] = useLazyGetTaskItemQuery()
     const { t } = useTranslation('modals')
+    const { push } = useRouter()
 
     useEffect(() => {
         if (isOpenGetTaskItem) {
@@ -30,6 +32,11 @@ export const GetDangerItemModal = ({ id }: IProps) => {
     const { isOpenGetTaskItem } = useAppSelector((store) => store.modals)
     const onClose = () => {
         dispatch(closeGetTaskItemModal())
+    }
+
+    const onToDevice = (value: number) => {
+        onClose()
+        push(`/devices?id=${value}`, '/devices')
     }
 
     const blockClasses =
@@ -55,7 +62,9 @@ export const GetDangerItemModal = ({ id }: IProps) => {
                                 />
                             </div>
                             <p className={titleClasses}>
-                                {`${t('vulnerable software found')} ${data?.body.title}`}
+                                {`${t('vulnerable software found')} ${
+                                    data?.body.title
+                                }`}
                             </p>
                             <p className='ml-auto'>#{data?.id}</p>
                         </div>
@@ -68,7 +77,15 @@ export const GetDangerItemModal = ({ id }: IProps) => {
                                         theme === 'dark' ? '#bebebe' : '#6C7281'
                                     }
                                 />
-                                <p>{data?.deviceInfo.name}</p>
+                                <p className='hover:text-graph cursor-pointer hover:underline underline-offset-8'
+                                    onClick={() =>
+                                        onToDevice(
+                                            data?.deviceInfo.entityId as number
+                                        )
+                                    }
+                                >
+                                    {data?.deviceInfo.name}
+                                </p>
                             </div>
                             <div className='flex flex-row gap-2'>
                                 <p>{t('creation time')}</p>
