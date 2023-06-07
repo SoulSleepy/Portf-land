@@ -25,13 +25,13 @@ export const TaskItemsList = ({ cves }: IProps) => {
                                 : () => setShow('')
                         }
                         key={item.name}
-                        className={cn('cursor-pointer flex flex-col gap-1 h-10', {
+                        className={cn('flex flex-col gap-1 h-10', {
                             'h-80': item.name === show,
                         })}
                     >
                         <div
                             className={cn(
-                                'flex flex-row items-center gap-3 border-b-2 h-9 p-1',
+                                'cursor-pointer flex flex-row items-center gap-3 border-b-2 h-9 p-1',
                                 {
                                     'border-none': show === item.name,
                                 }
