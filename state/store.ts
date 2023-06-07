@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import { mapApi } from './rtk/map'
+import { createWrapper } from 'next-redux-wrapper'
 
 import { authApi } from './rtk/auth.rtk'
 import { usersApi } from './rtk/users.rtk'
@@ -8,15 +10,14 @@ import { systemApi } from './rtk/system.rtk'
 import { homeApi } from './rtk/home.rtk'
 import { dangerAndEventApi } from './rtk/dangerAndEvent.rtk'
 import { devicesApi } from './rtk/devices.rtk'
+import { vpnApi } from './rtk/vpn.rtk'
 
 import modalsSlice from './slices/modals.slice'
 import filterSlice from './slices/filter.slice'
 import userSlice from './slices/auth.slice'
 import mainSlice from './slices/main.slice'
-import { mapApi } from './rtk/map'
 import systemSlice from './slices/system.slice'
-import { vpnApi } from './rtk/vpn.rtk'
-import { createWrapper } from 'next-redux-wrapper'
+import navbarSlice from './slices/navbar.slice'
 
 const store = () => configureStore({
     reducer: {
@@ -30,6 +31,7 @@ const store = () => configureStore({
         [vpnApi.reducerPath]: vpnApi.reducer,
         [mapApi.reducerPath]: mapApi.reducer,
         auth: userSlice,
+        navbar: navbarSlice,
         filter: filterSlice,
         modals: modalsSlice,
         main: mainSlice,

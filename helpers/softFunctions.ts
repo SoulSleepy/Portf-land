@@ -1,4 +1,4 @@
-import { translateObj } from './consts'
+import { translateObjRu, translateObjEn } from './consts'
 
 export const toDate = (time: number) => {
     return new Date(time * 1000).toLocaleString('ru-RU', {
@@ -32,16 +32,24 @@ export const getNoun = (
     return five
 }
 
-export const toCVSS3 = (item: string) => {
+export const toCVSS3 = (item: string, locale: string) => {
     const itemArr = item.split('/').map((elem) => {
         const typeAndValue = elem.split(':')
         const type = typeAndValue[0]
         const value = typeAndValue[1]
-        const bm = translateObj[type]
-        if (!bm) return `Нет данных о типе ${type} и значение ${value}`
-        return `${bm.title} ${
-            bm[value] ? bm[value] : `Нет данных о значение ${value}`
-        }`
+        if (locale === 'ru') {
+            const bm = translateObjRu[type]
+            if (!bm) return `Нет данных о типе ${type} и значение ${value}`
+            return `${bm.title} ${
+                bm[value] ? bm[value] : `Нет данных о значение ${value}`
+            }`
+        } else {
+            const bm = translateObjEn[type]
+            if (!bm) return `No data on type ${type} and value ${value}`
+            return `${bm.title} ${
+                bm[value] ? bm[value] : `No value data ${value}`
+            }`
+        }
     })
     return itemArr
 }

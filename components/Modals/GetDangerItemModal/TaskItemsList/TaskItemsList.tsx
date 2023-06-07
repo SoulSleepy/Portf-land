@@ -1,30 +1,31 @@
-import { IGetDangerCvec } from "types/types"
+import { IGetDangerCvec } from 'types/types'
 import cn from 'classnames'
-import {
-    HideIpsIcon,
-    ShowIpsIcon,
-    TaskItemIcon,
-} from 'components/Icons/Icons'
+import { HideIpsIcon, ShowIpsIcon, TaskItemIcon } from 'components/Icons/Icons'
 
-import { useState } from "react"
-import { TaskItemInfo } from "./TaskItemInfo"
-import { useTheme } from "helpers/hooks/useTheme"
+import { useState } from 'react'
+import { TaskItemInfo } from './TaskItemInfo'
+import { useTheme } from 'helpers/hooks/useTheme'
 
 interface IProps {
     cves: IGetDangerCvec[]
 }
 
-export const TaskItemsList = ({cves}: IProps) => {
+export const TaskItemsList = ({ cves }: IProps) => {
     const { theme } = useTheme()
     const [show, setShow] = useState('')
-    
+
     return (
         <div className='rounded-md bg-light-lighter dark:bg-light-lighterD'>
             {cves?.map((item) => {
                 return (
                     <div
+                        onClick={
+                            show !== item.name
+                                ? () => setShow(item.name)
+                                : () => setShow('')
+                        }
                         key={item.name}
-                        className={cn('flex flex-col gap-1 h-10', {
+                        className={cn('cursor-pointer flex flex-col gap-1 h-10', {
                             'h-80': item.name === show,
                         })}
                     >
@@ -47,23 +48,27 @@ export const TaskItemsList = ({cves}: IProps) => {
                                 <p>{item.title.ru}</p>
                                 <p>{item.name}</p>
                             </div>
-                            <button
-                                type='button'
-                                className='hover:scale-110'
-                                onClick={
-                                    show !== item.name
-                                        ? () => setShow(item.name)
-                                        : () => setShow('')
-                                }
-                            >
+                            <button type='button' className='hover:scale-110'>
                                 {show !== item.name ? (
-                                    <HideIpsIcon fill={theme === 'dark' ? '#bebebe' : '#6C7281'}/>
+                                    <HideIpsIcon
+                                        fill={
+                                            theme === 'dark'
+                                                ? '#bebebe'
+                                                : '#6C7281'
+                                        }
+                                    />
                                 ) : (
-                                    <ShowIpsIcon fill={theme === 'dark' ? '#bebebe' : '#6C7281'}/>
+                                    <ShowIpsIcon
+                                        fill={
+                                            theme === 'dark'
+                                                ? '#bebebe'
+                                                : '#6C7281'
+                                        }
+                                    />
                                 )}
                             </button>
                         </div>
-                        {show === item.name && <TaskItemInfo item={item}/>}
+                        {show === item.name && <TaskItemInfo item={item} />}
                     </div>
                 )
             })}

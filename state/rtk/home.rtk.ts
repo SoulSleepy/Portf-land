@@ -9,6 +9,7 @@ import {
 } from 'types/types'
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { fetchBase } from './config'
+import { setStateIncident, setStateVulner } from '../slices/navbar.slice'
 
 export const homeApi = createApi({
     reducerPath: 'homeApi',
@@ -74,6 +75,13 @@ export const homeApi = createApi({
                 },
             }),
             transformResponse: ({ data }: IHomeInfoResponse) => data,
+            onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
+                const { data } = await queryFulfilled
+                if ( data ) {
+                    dispatch(setStateVulner(data.vulner))
+                    dispatch(setStateIncident(data.incident))
+                }
+            },
         }),
         getGrahpic: builder.query<IGrahpicResponse['data'], void>({
             query: () => ({

@@ -6,12 +6,14 @@ import { useState } from 'react'
 import { toCVSS3 } from 'helpers/softFunctions'
 import { useTheme } from 'helpers/hooks/useTheme'
 import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
 
 interface IProps {
     item: IGetDangerCvec
 }
 
 export const TaskItemInfo = ({ item }: IProps) => {
+    const { locale } = useRouter()
     const { theme } = useTheme()
     const [activeDes, setActiveDes] = useState(0)
     const [openDescription, setOpenDescription] = useState(false)
@@ -48,7 +50,7 @@ export const TaskItemInfo = ({ item }: IProps) => {
                         {openDescription && (
                             <div className='absolute -top-[80px] left-4 pl-2'>
                                 <div className='p-1 bg-text-light dark:bg-text-lightD text-light dark:text-darkD flex flex-col w-[430px] rounded-md'>
-                                    {toCVSS3(item.securityMetrics.str).map(
+                                    {toCVSS3(item.securityMetrics.str, locale as string).map(
                                         (elem) => {
                                             return (
                                                 <p className='text-sm'>

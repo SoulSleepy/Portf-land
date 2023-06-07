@@ -24,5 +24,6 @@
     "name1": "Name",
     "internal port": "Internal port",
     "destination IP": "Destination IP",
-    "extended IP": "Extended IP"
+    "extended IP": "Extended IP",
+    "min 5 char": "Min. 5 characters"
 }

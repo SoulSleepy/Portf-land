@@ -24,5 +24,6 @@
     "name1": "Название",
     "internal port": "Внутренний порт",
     "destination IP": "IP назначение",
-    "extended IP": "Расширенный IP"
+    "extended IP": "Расширенный IP",
+    "min 5 char": "Мин. 5 символов"
 }

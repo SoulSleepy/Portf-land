@@ -73,6 +73,7 @@ export const UpdateUserModal = ({ user }: IProps) => {
                     </div>
                     <div className='relative'>
                         <input
+                            autoComplete='new-password'
                             className={inputClasses}
                             type={show ? 'text' : 'password'}
                             {...register('password')}

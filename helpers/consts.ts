@@ -90,7 +90,7 @@ export const timeOptions = [
     { name: '00:00 - 01:00', value: '0,1' },
 ]
 
-export const translateObj: any = {
+export const translateObjRu: any = {
     AV: {
         title: 'Вектор атаки (AV):',
         N: 'Сетевой (N)',
@@ -149,5 +149,67 @@ export const translateObj: any = {
         M: 'Множественная (M)',
         S: 'Единственная (S)',
         N: 'Не требуется (N)',
+    },
+}
+
+export const translateObjEn: any = {
+    AV: {
+        title: 'Attack Vector (AV):',
+        N: 'Network (N)',
+        A: 'Adjacent Network (A)',
+        L: 'Local (L)',
+        P: 'Physical (P)',
+    },
+    AC: {
+        title: 'Attack Complexity (AC):',
+        H: 'High (H)',
+        L: 'Low (L)',
+        M: 'Medium (M)',
+    },
+    PR: {
+        title: 'Privileges Required (PR):',
+        H: 'High (H)',
+        L: 'Low (L)',
+        N: 'None (N)',
+    },
+    UI: {
+        title: 'User Interaction (UI):',
+        R: 'Required (R)',
+        N: 'None (N)',
+    },
+    S: {
+        title: 'Scope (S):',
+        U: 'Unchanged (U)',
+        C: 'Changed (C)',
+    },
+    C: {
+        title: 'Confidentiality Impact (С):',
+        N: 'None (N)',
+        L: 'Low (L)',
+        H: 'High (H)',
+        P: 'Partial (P)',
+        C: 'Complete (C)',
+    },
+    I: {
+        title: 'Integrity Impact (I):',
+        N: 'None (N)',
+        L: 'Low (L)',
+        H: 'High (H)',
+        P: 'Partial (P)',
+        C: 'Complete (C)',
+    },
+    A: {
+        title: 'Availability Impact (A):',
+        N: 'None (N)',
+        L: 'Low (L)',
+        H: 'High (H)',
+        P: 'Partial (P)',
+        C: 'Complete (C)',
+    },
+    Au: {
+        title: 'Authentication (Au):',
+        M: 'Multiple (M)',
+        S: 'Single (S)',
+        N: 'None (N)',
     },
 }

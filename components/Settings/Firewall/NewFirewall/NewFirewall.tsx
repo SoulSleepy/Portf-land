@@ -13,7 +13,11 @@ export const NewFirewall = () => {
     const inputClasses =
         'flex items-center text-sm h-8 w-[140px] outline outline-1 hover:outline-2 focus:outline-2 rounded-lg pl-2 bg-transparent'
 
-    const { register, handleSubmit } = useForm<INewFirewallForm>({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isValid },
+    } = useForm<INewFirewallForm>({
         mode: 'onBlur',
     })
 
@@ -24,7 +28,7 @@ export const NewFirewall = () => {
 
     return (
         <form
-            className='flex flex-row justify-between'
+            className='flex flex-row items-center justify-between h-12 '
             onSubmit={handleSubmit(onSubmit)}
         >
             <input
@@ -42,17 +46,41 @@ export const NewFirewall = () => {
                 placeholder={t('external port') as string}
                 {...register('src_dport')}
             />
-            <input
-                className={inputClasses}
-                placeholder={t('destination IP') as string}
-                {...register('dest_ip')}
-            />
-            <input
-                className={inputClasses}
-                placeholder={t('extended IP') as string}
-                {...register('src_ip')}
-            />
-            <button className='scale-[1.2] hover:scale-[1.3]' type='submit'>
+            <div className='relative'>
+                <input
+                    className={inputClasses}
+                    placeholder={t('destination IP') as string}
+                    {...register('dest_ip', {
+                        minLength: {
+                            value: 5,
+                            message: `${t('min 5 char')}`,
+                        },
+                    })}
+                />
+                {errors?.dest_ip && (
+                    <p className='absolute top-[31px] text-sm text-lightRed'>
+                        {errors?.dest_ip?.message}
+                    </p>
+                )}
+            </div>
+            <div className='relative'>
+                <input
+                    className={inputClasses}
+                    placeholder={t('extended IP') as string}
+                    {...register('src_ip', {
+                        minLength: {
+                            value: 5,
+                            message: `${t('min 5 char')}`,
+                        },
+                    })}
+                />
+                {errors?.dest_ip && (
+                    <p className='absolute top-[31px] text-sm text-lightRed'>
+                        {errors?.dest_ip?.message}
+                    </p>
+                )}
+            </div>
+            <button disabled={!isValid} className='scale-[1.2] hover:scale-[1.3]' type='submit'>
                 <PlusIcon fill={theme === 'dark' ? '#bebebe' : '#6C7281'} />
             </button>
         </form>

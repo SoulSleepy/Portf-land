@@ -61,7 +61,7 @@ export const Login = () => {
                         <p className='z-10 absolute'>
                             {timeoutLogin
                                 ? `${t('next attempt in')} ${timeoutTime}`
-                                : `${t('attempts сount')}: ${dataTimeout ? dataTimeout?.count : 2}`}
+                                : `${t('attempts сount')}: ${dataTimeout ? dataTimeout?.count : 3}`}
                         </p>
                     </div>
                     <form

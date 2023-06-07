@@ -18,6 +18,7 @@ import {
 import { useLazyLogoutUserQuery } from 'state/rtk/auth.rtk'
 import { useTheme } from 'helpers/hooks/useTheme'
 import { useTranslation } from 'next-i18next'
+import { useAppSelector } from 'state/store'
 
 interface IMenuItem {
     id: number
@@ -39,6 +40,7 @@ const menuItems: IMenuItem[] = [
 ]
 
 export const NavBar = () => {
+    const { vulner, incident } = useAppSelector((store) => store.navbar)
     const { t } = useTranslation('navbar')
     const { theme } = useTheme()
     const { route } = useRouter()
@@ -66,6 +68,15 @@ export const NavBar = () => {
         {
             'rotate-180': toggleCollapse,
         }
+    )
+
+    const mainInfoClasses = cn(
+        'absolute flex items-center justify-center left-1 h-[32px] w-[32px] rounded-2xl',
+        {
+            ['left-[-7px] top-[3px] text-sm h-[23px] w-[23px] dark:bg-darkD bg-light dark:text-primary text-darkDD shadow-none underline underline-offset-2']:
+                toggleCollapse,
+        },
+        { 'bg-primary shadow-dark': !toggleCollapse }
     )
 
     const getNavBarItemsClasses = (link: string) => {
@@ -99,7 +110,9 @@ export const NavBar = () => {
                             className={collapseIconClasses}
                             onClick={toggleNavBar}
                         >
-                            <ShowIcon fill={theme === 'dark' ? 'white' : 'black'}/>
+                            <ShowIcon
+                                fill={theme === 'dark' ? 'white' : 'black'}
+                            />
                         </button>
                     )}
                 </div>
@@ -128,6 +141,20 @@ export const NavBar = () => {
                                             {t(item.name)}
                                         </span>
                                     )}
+                                    <div className='relative flex items-center justify-center'>
+                                        {item.name === 'vulns' && (
+                                            <p className={cn(mainInfoClasses, {['h-4 w-4']: vulner === 0})}>
+                                                {vulner === 0 ? null : vulner}
+                                            </p>
+                                        )}
+                                        {item.name === 'events' && (
+                                            <p className={cn(mainInfoClasses, {['h-4 w-4']: incident === 0})}>
+                                                {incident === 0
+                                                    ? null
+                                                    : incident}
+                                            </p>
+                                        )}
+                                    </div>
                                 </Link>
                             </div>
                         )

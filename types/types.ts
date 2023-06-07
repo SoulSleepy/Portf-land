@@ -1063,4 +1063,5 @@ export interface IAuthTimeoutResponse {
 export interface ITimeoutItem {
     timeout: number
     count: number
+    timeleft?: number
 }
