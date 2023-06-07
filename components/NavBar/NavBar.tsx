@@ -73,7 +73,7 @@ export const NavBar = () => {
     const mainInfoClasses = cn(
         'absolute flex items-center justify-center left-1 h-[32px] w-[32px] rounded-2xl',
         {
-            ['left-[-7px] top-[3px] text-sm h-[23px] w-[23px] dark:bg-darkD bg-light dark:text-primary text-darkDD shadow-none underline underline-offset-2']:
+            ['left-[-12px] top-[-4px] text-sm h-[23px] w-[23px] dark:bg-darkD bg-light dark:text-primary text-darkDD shadow-none underline underline-offset-2']:
                 toggleCollapse,
         },
         { 'bg-primary shadow-dark': !toggleCollapse }
@@ -143,12 +143,12 @@ export const NavBar = () => {
                                     )}
                                     <div className='relative flex items-center justify-center'>
                                         {item.name === 'vulns' && (
-                                            <p className={cn(mainInfoClasses, {['h-4 w-4']: vulner === 0})}>
+                                            <p className={cn(mainInfoClasses, {['scale-50']: vulner === 0})}>
                                                 {vulner === 0 ? null : vulner}
                                             </p>
                                         )}
                                         {item.name === 'events' && (
-                                            <p className={cn(mainInfoClasses, {['h-4 w-4']: incident === 0})}>
+                                            <p className={cn(mainInfoClasses, {['scale-50']: incident === 0})}>
                                                 {incident === 0
                                                     ? null
                                                     : incident}
