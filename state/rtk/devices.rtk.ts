@@ -6,11 +6,14 @@ import {
     IDeviceProgramsResponse,
     IDevicesListResponse,
     IEventListResponse,
+    INewResumeDeviceForm,
+    INewResumeDeviceResponse,
 } from 'types/types'
 
 export const devicesApi = createApi({
     reducerPath: 'devicesApi',
     baseQuery: fetchBase(),
+    tagTypes: ['Device'],
     endpoints: (builder) => ({
         getDevicesList: builder.query<IDevicesListResponse['data'], void>({
             query: () => ({
@@ -23,6 +26,19 @@ export const devicesApi = createApi({
                 },
             }),
             transformResponse: ({ data }: IDevicesListResponse) => data,
+            providesTags: (result) =>
+            result
+                ? [
+                      ...result.map(
+                          (item) =>
+                              ({
+                                  type: 'Device',
+                                  id: item.id,
+                              } as const)
+                      ),
+                      { type: 'Device', id: 'LIST' },
+                  ]
+                : [{ type: 'Device', id: 'LIST' }],
         }),
         getDeviceInfo: builder.query<IDeviceInfoResponse['data'], number>({
             query: (id) => ({
@@ -72,6 +88,18 @@ export const devicesApi = createApi({
             }),
             transformResponse: ({ data }: IDeviceProgramsResponse) => data,
         }),
+        changeNewResumeDevice: builder.mutation<INewResumeDeviceResponse, INewResumeDeviceForm>({
+            query: ({id, name, type}) => ({
+                url: `device-setNewResume`,
+                method: 'POST',
+                body: {
+                    args: { id, name, type },
+                    path: 'device/setNewResume',
+                    token: 'DEBUG',
+                },
+            }),
+            invalidatesTags: [{ type: 'Device', id: 'LIST' }],
+        }),
     }),
 })
 
@@ -81,4 +109,5 @@ export const {
     useLazyGetDeviceTasksQuery,
     useLazyGetDeviceIncidentsQuery,
     useLazyGetDeviceProgramsQuery,
+    useChangeNewResumeDeviceMutation
 } = devicesApi

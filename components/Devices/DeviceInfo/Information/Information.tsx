@@ -14,7 +14,6 @@ interface IProps {
 
 export const Information = ({ deviceId }: IProps) => {
     const [getDeviceInfo, { data, isLoading }] = useLazyGetDeviceInfoQuery()
-    console.log(data?.agentInfo?.usbDevices)
 
     useEffect(() => {
         if (deviceId) {
@@ -25,7 +24,7 @@ export const Information = ({ deviceId }: IProps) => {
     return (
         <Loader isLoading={isLoading}>
             <div className='flex flex-col gap-3 overflow-auto h-[530px]'>
-                <Resume resume={data?.resume ? data?.resume : null} />
+                <Resume resume={data?.resume ? data?.resume : null} id={data ? deviceId : null}/>
                 {data?.agentInfo?.users.length ? (
                     <UsersDevice users={data?.agentInfo?.users} />
                 ) : null}

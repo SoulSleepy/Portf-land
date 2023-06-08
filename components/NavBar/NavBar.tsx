@@ -5,6 +5,7 @@ import { useState } from 'react'
 import {
     HomeIcon,
     ShowIcon,
+    VPNIcon,
     NetIcon,
     DangerIcon,
     EventIcon,
@@ -30,7 +31,7 @@ interface IMenuItem {
 const menuItems: IMenuItem[] = [
     { id: 1, name: 'home', icon: HomeIcon, link: '/' },
     { id: 2, name: 'network map', icon: NetIcon, link: '/map' },
-    { id: 3, name: 'VPN', icon: NetIcon, link: '/vpn' },
+    { id: 3, name: 'VPN', icon: VPNIcon, link: '/vpn' },
     { id: 4, name: 'vulns', icon: DangerIcon, link: '/danger' },
     { id: 5, name: 'events', icon: EventIcon, link: '/event' },
     { id: 6, name: 'devices', icon: DevicesIcon, link: '/devices' },

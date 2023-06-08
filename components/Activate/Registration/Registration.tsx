@@ -6,8 +6,12 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useLazyCrateUserQuery } from 'state/rtk/auth.rtk'
 import { Loader } from 'components/Loader'
 import { useTranslation } from 'next-i18next'
+import { useAppSelector } from 'state/store'
+import { useRouter } from 'next/router'
 
 export const Registration = () => {
+    const { activeUser } = useAppSelector((store) => store.auth)
+    const { push } = useRouter()
     const { t } = useTranslation('login')
     const [show1, setShow1] = useState(false)
     const [show2, setShow2] = useState(false)
@@ -32,6 +36,12 @@ export const Registration = () => {
             }
         }
     }, [password, password2])
+
+    useEffect(() => {
+        if (activeUser) {
+            push('/')
+        }
+    }, [activeUser])
 
     const onSubmit: SubmitHandler<IAuthForm> = (data) => {
         if (!error) {

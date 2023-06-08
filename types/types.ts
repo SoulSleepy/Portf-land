@@ -582,6 +582,21 @@ export interface IAgentInfoUsbDevice {
     location: string
 }
 
+// devices => NewResume interfaces // 
+export interface INewResumeDeviceResponse {
+    status: boolean
+    data: []
+    msg: string
+    error: null
+    explain: string
+}
+
+export interface INewResumeDeviceForm {
+    id: number
+    name: string
+    type: number
+}
+
 // devices => DevicePrograms interfaces //
 export interface IDeviceProgramsResponse {
     status: boolean

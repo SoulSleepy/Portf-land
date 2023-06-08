@@ -81,8 +81,6 @@ export const providerOptions = [
     { name: 'Static address', value: 'static' },
 ]
 
-
-
 export const timeOptions = [
     { name: '6:00 - 7:00', value: '6,7' },
     { name: '12:00 - 13:00', value: '12,13' },

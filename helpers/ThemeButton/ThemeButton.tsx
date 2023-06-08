@@ -1,8 +1,6 @@
-import Image from 'next/image'
-import sunIcon from '../../images/sunIcon.svg'
-import moonIcon from '../../images/moonIcon.svg'
 import { useTheme } from '../hooks/useTheme'
 import { useEffect, useState } from 'react'
+import { DarkModeIcon, LightModeIcon } from '@/components/Icons/Icons'
 
 export const ThemeButton = () => {
     const { theme, setTheme } = useTheme()
@@ -30,10 +28,7 @@ export const ThemeButton = () => {
                     className=''
                     onClick={setTheme}
                 >
-                    <Image
-                        src={theme === 'dark' ? sunIcon : moonIcon}
-                        alt='sun/moon'
-                    />
+                    {theme === 'dark' ? <DarkModeIcon /> : <LightModeIcon />}
                 </button>
             )}
         </div>
