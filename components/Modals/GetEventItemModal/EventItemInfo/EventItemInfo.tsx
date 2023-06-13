@@ -11,7 +11,7 @@ export const EventItemInfo = ({ type, body }: IProps) => {
     const { t } = useTranslation('modals')
     const { list }: IModalsEvent = json
     const { details } = list[type]
-    const paramTramslate = {
+    const paramTranslate = {
         ip: body?.ip,
         login: body?.login,
         password: body?.password,
@@ -47,7 +47,7 @@ export const EventItemInfo = ({ type, body }: IProps) => {
                                     <p key={key}>
                                         {t(
                                             `list.${type}.details.${index}.description.${key}`,
-                                            paramTramslate
+                                            paramTranslate
                                         )}
                                     </p>
                                 )
@@ -56,7 +56,7 @@ export const EventItemInfo = ({ type, body }: IProps) => {
                             <p>
                                 {t(
                                     `list.${type}.details.${index}.description`,
-                                    paramTramslate
+                                    paramTranslate
                                 )}
                             </p>
                         )}

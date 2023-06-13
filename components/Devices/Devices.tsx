@@ -9,22 +9,28 @@ import { useTheme } from 'helpers/hooks/useTheme'
 import { Loader } from '../Loader'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
+import { useAppDispatch, useAppSelector } from 'state/store'
+import { setActiveItem } from 'state/slices/devices.slice'
 
 export const Devices = () => {
     const { t } = useTranslation('devices')
     const { theme } = useTheme()
     const { data, isLoading } = useGetDevicesListQuery()
-    const [activeItem, setActiveItem] = useState({ id: 1 } as IDeviceItem)
+    const dispatch = useAppDispatch()
+    const { activeItem } = useAppSelector((store) => store.devices)
+    // const [activeItem, setActiveItem] = useState({ id: 1 } as IDeviceItem)
     const { query } = useRouter()
 
     useEffect(() => {
         if (data) {
             if (query.id === undefined) {
-                setActiveItem(data?.[0])
+                dispatch(setActiveItem(data?.[0]))
             } else {
-                setActiveItem(
-                    (data as IDeviceItem[]).find((item) => item.id === Number(query.id)) as IDeviceItem
-                )
+                dispatch(setActiveItem(
+                    (data as IDeviceItem[]).find(
+                        (item) => item.id === Number(query.id)
+                    ) as IDeviceItem
+                ))
             }
         }
     }, [data])
@@ -66,7 +72,7 @@ export const Devices = () => {
                                                 item.online === true,
                                         }
                                     )}
-                                    onClick={() => setActiveItem(item)}
+                                    onClick={() => dispatch(setActiveItem(item))}
                                 >
                                     <div className='flex items-center pl-1 scale-110'>
                                         <DevicesIcon

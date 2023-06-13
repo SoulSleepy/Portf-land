@@ -9,6 +9,7 @@ import {
     INewResumeDeviceForm,
     INewResumeDeviceResponse,
 } from 'types/types'
+import { setActiveItem } from '../slices/devices.slice'
 
 export const devicesApi = createApi({
     reducerPath: 'devicesApi',
@@ -27,18 +28,18 @@ export const devicesApi = createApi({
             }),
             transformResponse: ({ data }: IDevicesListResponse) => data,
             providesTags: (result) =>
-            result
-                ? [
-                      ...result.map(
-                          (item) =>
-                              ({
-                                  type: 'Device',
-                                  id: item.id,
-                              } as const)
-                      ),
-                      { type: 'Device', id: 'LIST' },
-                  ]
-                : [{ type: 'Device', id: 'LIST' }],
+                result
+                    ? [
+                          ...result.map(
+                              (item) =>
+                                  ({
+                                      type: 'Device',
+                                      id: item.id,
+                                  } as const)
+                          ),
+                          { type: 'Device', id: 'LIST' },
+                      ]
+                    : [{ type: 'Device', id: 'LIST' }],
         }),
         getDeviceInfo: builder.query<IDeviceInfoResponse['data'], number>({
             query: (id) => ({
@@ -76,7 +77,10 @@ export const devicesApi = createApi({
             }),
             transformResponse: ({ data }: IEventListResponse) => data,
         }),
-        getDevicePrograms: builder.query<IDeviceProgramsResponse['data'], number>({
+        getDevicePrograms: builder.query<
+            IDeviceProgramsResponse['data'],
+            number
+        >({
             query: (id) => ({
                 url: `device-getPrograms`,
                 method: 'POST',
@@ -88,8 +92,11 @@ export const devicesApi = createApi({
             }),
             transformResponse: ({ data }: IDeviceProgramsResponse) => data,
         }),
-        changeNewResumeDevice: builder.mutation<INewResumeDeviceResponse, INewResumeDeviceForm>({
-            query: ({id, name, type}) => ({
+        changeNewResumeDevice: builder.mutation<
+            INewResumeDeviceResponse,
+            INewResumeDeviceForm
+        >({
+            query: ({ id, name, type }) => ({
                 url: `device-setNewResume`,
                 method: 'POST',
                 body: {
@@ -109,5 +116,5 @@ export const {
     useLazyGetDeviceTasksQuery,
     useLazyGetDeviceIncidentsQuery,
     useLazyGetDeviceProgramsQuery,
-    useChangeNewResumeDeviceMutation
+    useChangeNewResumeDeviceMutation,
 } = devicesApi

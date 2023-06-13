@@ -431,16 +431,16 @@ export interface IDevicesListResponse {
 
 export interface IDeviceItem {
     id: number
-    name: string
-    ip: string
-    type: number
-    mac: string
-    online: number | boolean
-    agent: boolean
-    antivirus: boolean
-    isRouter: boolean
-    wired: boolean
-    wifiWired: boolean
+    name?: string
+    ip?: string
+    type?: number
+    mac?: string
+    online?: number | boolean
+    agent?: boolean
+    antivirus?: boolean
+    isRouter?: boolean
+    wired?: boolean
+    wifiWired?: boolean
 }
 
 //devices => IDeviceTasks interfaces //

@@ -18,6 +18,7 @@ import userSlice from './slices/auth.slice'
 import mainSlice from './slices/main.slice'
 import systemSlice from './slices/system.slice'
 import navbarSlice from './slices/navbar.slice'
+import devicesSlice from './slices/devices.slice'
 
 const store = () => configureStore({
     reducer: {
@@ -35,6 +36,7 @@ const store = () => configureStore({
         filter: filterSlice,
         modals: modalsSlice,
         main: mainSlice,
+        devices: devicesSlice,
         system: systemSlice,
     },
     middleware: (getDefaultMiddleware) =>

@@ -3,13 +3,17 @@ import {
     CloseModeIcon,
     SaveModeIcon,
 } from 'components/Icons/Icons'
-import { useChangeNewResumeDeviceMutation } from 'state/rtk/devices.rtk'
+import {
+    useChangeNewResumeDeviceMutation,
+    useLazyGetDeviceInfoQuery,
+} from 'state/rtk/devices.rtk'
 import { CustomSelect } from 'helpers/CustomSelect'
 import { useTranslation } from 'next-i18next'
 import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { IInfo, INewResumeDeviceForm } from 'types/types'
 import { useTheme } from 'helpers/hooks/useTheme'
+import { useRouter } from 'next/router'
 
 interface IProps {
     resume: IInfo | null
@@ -17,6 +21,8 @@ interface IProps {
 }
 
 export const Resume = ({ resume, id }: IProps) => {
+    const [getDeviceInfo] = useLazyGetDeviceInfoQuery()
+    const { push } = useRouter()
     const { theme } = useTheme()
     const { t } = useTranslation('devices')
     const [changing, setChanging] = useState(false)
@@ -45,6 +51,8 @@ export const Resume = ({ resume, id }: IProps) => {
         if (changing) {
             changeResume(data)
             setChanging(false)
+            setTimeout(() => getDeviceInfo(id as number), 800)
+            setTimeout(() => push(`/devices?id=${data.id}`, '/devices'), 1000)
         } else setChanging(true)
     }
 

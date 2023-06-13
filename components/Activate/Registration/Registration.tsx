@@ -21,7 +21,12 @@ export const Registration = () => {
     const inputClasses =
         'flex items-center h-10 w-full outline outline-1 hover:outline-2 focus:outline-2 rounded-lg pl-2 bg-transparent'
 
-    const { register, handleSubmit, watch } = useForm<IAuthForm>({
+    const {
+        register,
+        formState: { errors, isValid },
+        handleSubmit,
+        watch,
+    } = useForm<IAuthForm>({
         mode: 'onBlur',
     })
 
@@ -61,19 +66,50 @@ export const Registration = () => {
                     onSubmit={handleSubmit(onSubmit)}
                     autoComplete='off'
                 >
-                    <input
-                        className={inputClasses}
-                        type='text'
-                        placeholder={`${t('login')}`}
-                        {...register('login')}
-                    />
                     <div className='relative'>
                         <input
                             className={inputClasses}
+                            type='text'
+                            placeholder={`${t('login')}`}
+                            {...register('login', {
+                                minLength: {
+                                    value: 5,
+                                    message: 'minimum 5 characters',
+                                },
+                            })}
+                        />
+                        <div className='text-lightRed absolute top-[31px] left-[2px] flex items-center h-10 w-[250px]'>
+                            {errors?.login && <p>{t(`${errors?.login?.message}`)}</p>}
+                        </div>
+                    </div>
+                    <div className='relative'>
+                        <input
+                            autoComplete='new-password'
+                            className={inputClasses}
                             type={show1 ? 'text' : 'password'}
                             placeholder={`${t('password')}`}
-                            {...register('password')}
+                            {...register('password', {
+                                required: 'field is required',
+                                pattern: {
+                                    value: /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9@#$%]).{5,}/,
+                                    message: 'password is too weak',
+                                },
+                                minLength: {
+                                    value: 5,
+                                    message: 'minimum 5 characters',
+                                },
+                                maxLength: {
+                                    value: 16,
+                                    message: 'maximum 16 characters',
+                                },
+                            })}
                         />
+                        <div className='text-lightRed absolute top-[31px] left-[2px] flex items-center h-10 w-[250px]'>
+                            {errors?.password && (
+                                <p>{t(`${errors?.password?.message}`)}</p>
+                            )}
+                        </div>
+
                         <div
                             className='absolute cursor-pointer right-1 top-2'
                             onClick={() => setShow1(!show1)}
@@ -87,6 +123,7 @@ export const Registration = () => {
                     </div>
                     <div className='relative'>
                         <input
+                            autoComplete='new-password'
                             className={inputClasses}
                             type={show2 ? 'text' : 'password'}
                             placeholder={`${t('repeat password')}`}
@@ -105,10 +142,11 @@ export const Registration = () => {
                     </div>
                     <div className='relative'>
                         <button
+                            disabled={!isValid}
                             className={cn(
                                 'flex mt-2 items-center justify-center h-8 w-full uppercase outline outline-0 bg-light-lighter hover:font-medium hover:outline-1 rounded-sm',
                                 {
-                                    'hover:outline-0 hover:font-normal hover:cursor-default':
+                                    'hover:outline-0 hover:font-normal hover:cursor-default outline-none':
                                         error,
                                 }
                             )}
@@ -116,11 +154,9 @@ export const Registration = () => {
                         >
                             {t('create')}
                         </button>
-                        {error && (
-                            <div className='text-lightRed absolute -top-7 -left-10 flex items-center justify-center h-10 w-[250px]'>
-                                {t('passwords do not match')}
-                            </div>
-                        )}
+                        <div className='text-lightRed absolute -top-7 -left-10 flex items-center justify-center h-10 w-[250px]'>
+                            {error && <p>{t('passwords do not match')}</p>}
+                        </div>
                     </div>
                 </form>
             </div>
