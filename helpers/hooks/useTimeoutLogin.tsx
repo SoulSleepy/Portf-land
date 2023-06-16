@@ -1,35 +1,27 @@
 import { useAppDispatch, useAppSelector } from 'state/store'
 import { useEffect } from 'react'
-import { resetTimeoutTime, setTimeoutTime } from 'state/slices/auth.slice'
-import Cookies from 'js-cookie'
+import { resetTimeoutTime, setTimeoutNewTime } from 'state/slices/auth.slice'
 
 export const useTimeoutLogin = () => {
     const dispatch = useAppDispatch()
     const { timeoutLogin, timeoutTime } = useAppSelector((store) => store.auth)
 
-
-    useEffect(() => {
-        
-    },[])
-
-
     useEffect(() => {
         let timeoutId: NodeJS.Timer
         if (timeoutLogin) {
             timeoutId = setInterval(() => {
-                if (Cookies.get('timeoutTime') !== '0') {
-                    dispatch(setTimeoutTime())
+                if (timeoutTime > 0) {
+                    dispatch(setTimeoutNewTime())
                 } else {
-                    clearInterval(timeoutId)
                     dispatch(resetTimeoutTime())
+                    clearInterval(timeoutId)
                 }
             }, 1000)
         }
-
         return () => {
             clearInterval(timeoutId)
         }
-    }, [timeoutLogin])
+    }, [timeoutLogin, timeoutTime])
 
     return {
         timeoutLogin,

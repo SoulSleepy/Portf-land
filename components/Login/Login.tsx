@@ -12,12 +12,15 @@ import { HideInputIcon, LogoIcon, ShowInputIcon } from '../Icons/Icons'
 import { Loader } from '../Loader'
 import { useTimeoutLogin } from 'helpers/hooks/useTimeoutLogin'
 import { useTranslation } from 'next-i18next'
+import { useAppDispatch } from 'state/store'
 
 export const Login = () => {
+    const dispatch = useAppDispatch()
     const { t } = useTranslation('login')
     const { data: dataTimeout, isLoading: isLoadTimeout } =
         useAuthTimeoutQuery()
-    const [updateTimeout] = useLazyAuthTimeoutQuery()
+    const [updateTimeout, { isLoading: isLoadUpdate }] =
+        useLazyAuthTimeoutQuery()
     const [postAuthUser, { data, isLoading }] = useLazyAuthUserQuery()
 
     const { timeoutLogin, timeoutTime } = useTimeoutLogin()
@@ -56,12 +59,14 @@ export const Login = () => {
                 <p className='z-10 font-medium text-2xl tracking-wider'>
                     {t('authorization')}
                 </p>
-                <Loader isLoading={isLoading}>
+                <Loader isLoading={isLoading || isLoadUpdate}>
                     <div className='flex mb-[-30px] items-center justify-center z-10 relative w-60'>
                         <p className='z-10 absolute'>
                             {timeoutLogin
                                 ? `${t('next attempt in')} ${timeoutTime}`
-                                : `${t('attempts сount')}: ${dataTimeout ? dataTimeout?.count : 3}`}
+                                : `${t('attempts сount')}: ${
+                                      dataTimeout ? dataTimeout?.count : 3
+                                  }`}
                         </p>
                     </div>
                     <form
@@ -83,7 +88,9 @@ export const Login = () => {
                                 type={show ? 'text' : 'password'}
                                 {...register('password')}
                             />
-                            <label className={labelClasses}>{t('password')}</label>
+                            <label className={labelClasses}>
+                                {t('password')}
+                            </label>
                             <div
                                 className='absolute cursor-pointer right-1 top-2'
                                 onClick={() => setShow(!show)}

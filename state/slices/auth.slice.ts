@@ -29,23 +29,18 @@ export const auth = createSlice({
         setActiveUser: (state, action: PayloadAction<boolean>) => {
             state.activeUser = action.payload
         },
-        setTimeoutTime: (state) => {
+        setTimeoutLogin: (state, action: PayloadAction<boolean>) => {
+            state.timeoutLogin = action.payload
+        },
+        setTimeoutTime: (state, action: PayloadAction<number>) => {
+            state.timeoutTime = action.payload
+        },
+        setTimeoutNewTime: (state) => {
             state.timeoutTime = state.timeoutTime - 1
-            Cookies.set('timeoutTime', `${state.timeoutTime}`)
         },
         resetTimeoutTime: (state) => {
             state.timeoutTime = START_TIME_SEC
             state.timeoutLogin = false
-            Cookies.remove('timeoutTime')
-        },
-        setInitTimeoutLogin: (state, { payload }:PayloadAction<number | false>) => {
-            state.timeoutLogin = typeof payload === 'number' ? true : false
-            state.timeoutTime = typeof payload === 'number' ? payload : 60
-        },
-        setStartTimeoutLogin: (state) => {
-            state.timeoutLogin = true
-            state.timeoutTime = START_TIME_SEC
-            Cookies.set('timeoutTime', `${START_TIME_SEC}`)
         },
     },
     extraReducers: {
@@ -60,10 +55,10 @@ export const auth = createSlice({
 export const {
     setAuthUser,
     setActiveUser,
-    setStartTimeoutLogin,
-    setTimeoutTime,
+    setTimeoutNewTime,
     resetTimeoutTime,
-    setInitTimeoutLogin
+    setTimeoutLogin,
+    setTimeoutTime
 } = auth.actions
 
 export default auth.reducer

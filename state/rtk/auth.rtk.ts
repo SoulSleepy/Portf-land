@@ -1,6 +1,6 @@
 import { IAuthForm, IAuthResponse, IAuthTimeoutResponse } from 'types/types'
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { setActiveUser, setAuthUser, setStartTimeoutLogin } from 'state/slices/auth.slice'
+import { resetTimeoutTime, setActiveUser, setAuthUser, setTimeoutLogin, setTimeoutTime } from 'state/slices/auth.slice'
 import { fetchBaseAuth } from './config'
 import Cookies from 'js-cookie'
 
@@ -25,7 +25,7 @@ export const authApi = createApi({
                     Cookies.set('isAuth', 'true')
                 }
                 if (data.msg === 'timeout') {
-                    dispatch(setStartTimeoutLogin())
+                    dispatch(setTimeoutLogin(true))
                 }
             },
         }),
@@ -74,6 +74,13 @@ export const authApi = createApi({
                 },
             }),
             transformResponse: ({ data }: IAuthTimeoutResponse) => data,
+            onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
+                const { data } = await queryFulfilled
+                if (data.count === 0) {
+                    dispatch(setTimeoutLogin(true))
+                    dispatch(setTimeoutTime(data?.timeleft as number))
+                } else dispatch(resetTimeoutTime())
+            },
         }),
     }),
 })

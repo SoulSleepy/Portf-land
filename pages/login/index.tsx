@@ -1,18 +1,11 @@
 import { Login } from 'components/Login'
-import { ReactElement, useEffect } from 'react'
+import { ReactElement } from 'react'
 import { NextPageWithLayout } from '../_app'
 import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { useAppDispatch} from 'state/store'
-import { auth, setInitTimeoutLogin } from 'state/slices/auth.slice'
-import Cookies from 'js-cookie'
+
 
 export const LoginPage: NextPageWithLayout = () => {
-    const dispatch = useAppDispatch()
-    useEffect(() => {
-        const isTimeUser = JSON.parse(Cookies.get('timeoutTime') || 'false')
-        dispatch(setInitTimeoutLogin(isTimeUser))
-    }, [])
     return <Login />
 }
 
