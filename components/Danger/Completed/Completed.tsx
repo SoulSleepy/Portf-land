@@ -63,7 +63,9 @@ export const Completed = () => {
                                 </div>
                                 <div className='flex flex-col gap-2'>
                                     <p className='font-medium text-lg h-[28px]'>
-                                        {item.titles?.ru}
+                                        {`${t('vulnerable software found')} ${
+                                            item.titleVars?.softName
+                                        }`}
                                     </p>
                                     <div className='flex flex-col gap-1'>
                                         <div className='flex flex-row gap-2'>
