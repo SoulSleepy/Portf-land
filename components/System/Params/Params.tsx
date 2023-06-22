@@ -1,7 +1,7 @@
 import { useGetAdminOutsideQuery } from 'state/rtk/system.rtk'
 import cn from 'classnames'
 import { useTranslation } from 'next-i18next'
-import { BASE_URL } from 'state/rtk/config'
+import { AGENT_URL } from 'state/rtk/config'
 
 export const Params = () => {
     const { t } = useTranslation('system')
@@ -27,7 +27,7 @@ export const Params = () => {
             <div className='flex flex-col gap-[14px]'>
                 <div className='flex flex-row justify-between'>
                     <p className={titleClasses}>{t('agent')}</p>
-                    <a download href={`${BASE_URL}agent.exe`}
+                    <a download href={`${AGENT_URL}agent.exe`}
                         className={cn(settingsBtnClasses, 'bg-light-lighter dark:bg-light-lighterD')}
                     >
                         {t('download')}
