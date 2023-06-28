@@ -3,11 +3,13 @@ import { useAppDispatch, useAppSelector } from 'state/store'
 import { closeResetRouterModal } from 'state/slices/modals.slice'
 import { useLazyGetResetQuery } from 'state/rtk/system.rtk'
 import { useTranslation } from 'next-i18next'
+import { useLazyLogoutUserQuery } from 'state/rtk/auth.rtk'
 
 
 export const ResetRouterModal = () => {
     const { t } = useTranslation('modals')
     const [getReset] = useLazyGetResetQuery()
+    const [postLogoutUser] = useLazyLogoutUserQuery()
 
     const dispatch = useAppDispatch()
     const { isOpenResetRouter } = useAppSelector((store) => store.modals)
@@ -16,6 +18,7 @@ export const ResetRouterModal = () => {
     }
 
     const resetRouter = () => {
+        postLogoutUser()
         getReset()
         onClose()
     }

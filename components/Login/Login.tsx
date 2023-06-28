@@ -12,10 +12,8 @@ import { HideInputIcon, LogoIcon, ShowInputIcon } from '../Icons/Icons'
 import { Loader } from '../Loader'
 import { useTimeoutLogin } from 'helpers/hooks/useTimeoutLogin'
 import { useTranslation } from 'next-i18next'
-import { useAppDispatch } from 'state/store'
 
 export const Login = () => {
-    const dispatch = useAppDispatch()
     const { t } = useTranslation('login')
     const { data: dataTimeout, isLoading: isLoadTimeout } =
         useAuthTimeoutQuery()
@@ -64,9 +62,7 @@ export const Login = () => {
                         <p className='z-10 absolute'>
                             {timeoutLogin
                                 ? `${t('next attempt in')} ${timeoutTime}`
-                                : `${t('attempts сount')}: ${
-                                      dataTimeout ? dataTimeout?.count : 3
-                                  }`}
+                                : `${t('attempts сount')}: ${dataTimeout?.count}`}
                         </p>
                     </div>
                     <form
