@@ -41,11 +41,11 @@ export const Users = () => {
     return (
         <div className='grid grid-cols-[1fr_2.4fr] gap-3 text-text-light'>
             <div className={blockClasses}>
-                <input
+                {/* <input
                     className='p-1 h-[32px] w-full outline outline-1 rounded-md hover:outline-2 outline-text-light dark:outline-text-lightD dark:bg-darkD'
                     type='text'
-                    placeholder={`${t('search')}`}
-                />
+                    placeholder={`${t('search')}`} 
+                />МОЖНО ДОПИЛИТЬ ПРИ ВОЗМОЖНОСТИ */}
                 <div className='flex flex-col gap-2 h-[570px] overflow-auto'>
                     <Loader isLoading={isLoading}>
                         {data?.map((item) => {
@@ -88,7 +88,7 @@ export const Users = () => {
                     {t('create')}
                 </button>
             </div>
-            <div className='flex flex-col gap-3 h-[670px] overflow-auto'>
+            <div className='flex flex-col gap-3 h-[675px]'>
                 <div className={blockClasses}>
                     <p className={titleClasses}>{t('user information')}</p>
                     <hr className={hrClasses} />
@@ -119,7 +119,9 @@ export const Users = () => {
                         </button>
                     </div>
                 </div>
-                <Loader isLoading={isLoading}><UserEvents userId={activeItem.id} /></Loader>
+                <Loader isLoading={isLoading}>
+                    <UserEvents userId={activeItem.id} />
+                </Loader>
             </div>
             <UpdateUserModal user={activeItem} />
             <DeleteUserModal id={activeItem.id} />

@@ -18,7 +18,6 @@ export const Devices = () => {
     const { data, isLoading } = useGetDevicesListQuery()
     const dispatch = useAppDispatch()
     const { activeItem } = useAppSelector((store) => store.devices)
-    // const [activeItem, setActiveItem] = useState({ id: 1 } as IDeviceItem)
     const { query } = useRouter()
 
     useEffect(() => {
@@ -49,11 +48,11 @@ export const Devices = () => {
         <div className='grid grid-cols-[1fr_2.4fr] gap-3 text-text-light'>
             <div className={blockClasses}>
                 <div>
-                    <input
+                    {/* <input
                         className='p-1 h-[32px] w-full outline outline-1 rounded-md hover:outline-2 dark:bg-darkD outline-text-light dark:outline-text-lightD'
                         type='text'
                         placeholder={`${t('search')}`}
-                    />
+                    />МОЖНО ДОПИЛИТЬ ПРИ ВОЗМОЖНОСТИ */}
                 </div>
                 <div className='flex flex-col gap-2 h-[600px] overflow-auto'>
                     <Loader isLoading={isLoading}>

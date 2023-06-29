@@ -18,7 +18,7 @@ export const UserEvents = ({ userId }: IProps) => {
     }, [userId])
 
     const blockClasses =
-        'flex flex-col bg-light rounded-xl p-3 shadow-dark gap-2 dark:bg-darkD dark:text-text-lightD'
+        'flex flex-col h-[675px] bg-light rounded-xl p-3 shadow-dark gap-2 dark:bg-darkD dark:text-text-lightD'
     const titleClasses = 'flex font-medium h-10 items-center text-lg'
     const hrClasses =
         'border-none bg-text-light dark:bg-text-lightD h-[1.5px] w-full'

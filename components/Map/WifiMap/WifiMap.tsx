@@ -1,6 +1,6 @@
 import { DevicesIcon } from 'components/Icons/Icons'
-import { useTheme } from 'helpers/hooks/useTheme'
 import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
 import { IMapItem } from 'types/types'
 
 interface IProps {
@@ -8,8 +8,12 @@ interface IProps {
 }
 
 export const WifiMap = ({ data }: IProps) => {
+    const { push } = useRouter()
     const { t } = useTranslation('map')
-    const { theme } = useTheme()
+
+    const onToDevice = (value: number) => {
+        push(`/devices?id=${value}`, '/devices')
+    }
 
     const blockDevicesClasses = 'grid grid-cols-3 gap-2 '
     const borderBlockClasses = 'border-white border border-solid rounded-md'
@@ -29,14 +33,24 @@ export const WifiMap = ({ data }: IProps) => {
                             >
                                 <DevicesIcon fill='white' />
                                 <div className='flex flex-col gap-1'>
-                                    <p className='font-medium'>{item.name}</p>
+                                    <p
+                                        className='font-medium hover:text-graph cursor-pointer hover:underline hover:underline-offset-8 transition-all'
+                                        onClick={() => onToDevice(item.id)}
+                                    >
+                                        {item.name}
+                                    </p>
                                     <p className='text-sm'>{item.ip}</p>
                                     <div className={devicePortClasses}>
                                         {Object.keys(item.ports).length ? (
                                             Object.keys(item.ports).map(
                                                 (port) => {
                                                     return (
-                                                        <p className='px-1 py-[2px] w-20 hover:bg-light-lighterD dark:hover:bg-text' key={port}>{port}</p>
+                                                        <p
+                                                            className='px-1 py-[2px] w-20 hover:bg-light-lighterD dark:hover:bg-text'
+                                                            key={port}
+                                                        >
+                                                            {port}
+                                                        </p>
                                                     )
                                                 }
                                             )
