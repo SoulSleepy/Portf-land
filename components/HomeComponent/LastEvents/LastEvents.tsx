@@ -26,8 +26,8 @@ export const LastEvents = ({ eventList, isLoading }: IProps) => {
     }
 
     const blockClasses =
-        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2 h-[322px]'
-    const titleClasses = 'flex font-medium h-8 items-center text-lg'
+        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl max-sm:p-2 p-3 shadow-dark gap-2 h-[322px]'
+    const titleClasses = 'flex font-medium max-sm:h-6 h-8 items-center max-sm:text-base text-lg'
     const hrClasses =
         'border-none bg-text-light dark:bg-text-lightD h-[1.5px] w-full'
     const eventDangerClasses =
@@ -57,7 +57,7 @@ export const LastEvents = ({ eventList, isLoading }: IProps) => {
                                         />
                                     </div>
                                     <div className='flex flex-col gap-1'>
-                                        <p className='leading-5'>
+                                        <p className='leading-5 '>
                                         {t(`list.${item.type}.title`)}
                                         </p>
                                         <p className='text-sm'>
@@ -68,7 +68,7 @@ export const LastEvents = ({ eventList, isLoading }: IProps) => {
                             )
                         })
                     ) : (
-                        <p className='text-lg flex items-center justify-center h-full'>
+                        <p className='max-sm:text-base text-lg flex items-center justify-center h-full'>
                             {t('no events found')}
                         </p>
                     )}

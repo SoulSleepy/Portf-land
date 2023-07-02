@@ -15,10 +15,10 @@ export const WifiMap = ({ data }: IProps) => {
         push(`/devices?id=${value}`, '/devices')
     }
 
-    const blockDevicesClasses = 'grid grid-cols-3 gap-2 '
+    const blockDevicesClasses = 'grid max-[1111px]:grid-cols-1 max-[1540px]:grid-cols-2 grid-cols-3 gap-2 overflow-auto max-h-[395px]'
     const borderBlockClasses = 'border-white border border-solid rounded-md'
     const devicePortClasses =
-        'flex flex-col gap-1 w-20 h-16 mt-2 overflow-hidden hover:overflow-auto text-sm text-text-light text-text-lightD'
+        'flex flex-col gap-1 w-[150px] h-20 mt-2 overflow-hidden hover:overflow-auto text-sm text-text-light text-text-lightD'
 
     return (
         <div className={borderBlockClasses}>
@@ -34,7 +34,7 @@ export const WifiMap = ({ data }: IProps) => {
                                 <DevicesIcon fill='white' />
                                 <div className='flex flex-col gap-1'>
                                     <p
-                                        className='font-medium hover:text-graph cursor-pointer hover:underline hover:underline-offset-8 transition-all'
+                                        className='font-medium h-12 hover:text-graph cursor-pointer hover:underline hover:underline-offset-8 transition-all'
                                         onClick={() => onToDevice(item.id)}
                                     >
                                         {item.name}

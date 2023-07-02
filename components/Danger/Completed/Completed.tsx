@@ -112,7 +112,7 @@ export const Completed = () => {
                         )
                     })
                 ) : (
-                    <p className='flex flex-col items-center justify-center text-2xl h-full'>
+                    <p className='max-md:text-lg flex flex-col items-center justify-center text-2xl h-full'>
                         {t('no vulnerabilities found')}
                     </p>
                 )}

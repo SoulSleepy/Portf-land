@@ -29,8 +29,8 @@ export const Internet = () => {
     }, [data])
 
     const blockClasses =
-        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2'
-    const titleClasses = 'flex font-medium h-8 items-center text-lg'
+        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl max-sm:p-2 p-3 shadow-dark gap-2'
+    const titleClasses = 'flex font-medium max-sm:h-6 h-8 items-center max-sm:text-base text-lg'
     const hrClasses =
         'border-none dark:bg-text-lightD bg-text-light h-[1.5px] w-full'
 
@@ -38,25 +38,25 @@ export const Internet = () => {
         <div className={blockClasses}>
             <p className={titleClasses}>{t('internet')}</p>
             <hr className={hrClasses} />
-            <div className='flex flex-col gap-1 h-[260px]'>
-                <div className='flex flex-row justify-between'>
+            <div className='flex flex-col gap-1 max-sm:h-[160px] h-[260px]'>
+                <div className='max-sm:text-sm flex flex-row justify-between'>
                     <p>{t('traffic')} Mbit/s</p>
-                    <div className='flex flex-row gap-4'>
+                    <div className='flex max-sm:flex-col flex-row max-sm:gap-0 gap-4 max-sm:absolute max-sm:right-6'>
                         <div className='flex flex-row gap-1 items-center'>
-                            <div className='h-[2px] w-7 bg-graph'></div>
+                            <div className='h-[2px] max-sm:w-4 w-7 bg-graph'></div>
                             <p className='text-graph'>{t('reception')}</p>
                         </div>
                         <div className='flex flex-row gap-1 items-center'>
-                            <div className='h-[2px] w-7 bg-graph-upload'></div>
+                            <div className='h-[2px] max-sm:w-4 w-7 bg-graph-upload'></div>
                             <p className='text-graph-upload'>{t('transmission')}</p>
                         </div>
                     </div>
                 </div>
                 <Loader isLoading={isLoading}>
                     <ResponsiveContainer
-                        className='h-[232px]'
+                        className='max-sm:h-[140px] h-[232px] max-sm:text-sm max-sm:ml-[-15px]'
                         minWidth='100%'
-                        minHeight='232px'
+                        minHeight='140px'
                         height={'100%'}
                     >
                         <LineChart data={renderData}>

@@ -89,6 +89,5 @@ export const {
     useLazyAuthUserQuery,
     useLazyLogoutUserQuery,
     useLazyCrateUserQuery,
-    useAuthTimeoutQuery,
     useLazyAuthTimeoutQuery,
 } = authApi

@@ -15,7 +15,7 @@ export const Ethernet = ({ data }: IProps) => {
         push(`/devices?id=${value}`, '/devices')
     }
 
-    const blockDevicesClasses = 'grid grid-cols-3 gap-2 '
+    const blockDevicesClasses = 'grid max-[1111px]:grid-cols-1 max-[1540px]:grid-cols-2 grid-cols-3 gap-2 overflow-auto max-h-[395px]'
     const borderBlockClasses = 'border-white border border-solid rounded-md'
     const devicePortClasses =
         'flex flex-col gap-1 w-[150px] h-20 mt-2 overflow-hidden hover:overflow-auto text-sm text-text-lightD'

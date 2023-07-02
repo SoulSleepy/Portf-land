@@ -1,5 +1,4 @@
 import {
-    useAuthTimeoutQuery,
     useLazyAuthTimeoutQuery,
     useLazyAuthUserQuery,
 } from 'state/rtk/auth.rtk'
@@ -15,9 +14,7 @@ import { useTranslation } from 'next-i18next'
 
 export const Login = () => {
     const { t } = useTranslation('login')
-    const { data: dataTimeout, isLoading: isLoadTimeout } =
-        useAuthTimeoutQuery()
-    const [updateTimeout, { isLoading: isLoadUpdate }] =
+    const [updateTimeout, { data: dataTimeout, isLoading: isLoadUpdate }] =
         useLazyAuthTimeoutQuery()
     const [postAuthUser, { data, isLoading }] = useLazyAuthUserQuery()
 

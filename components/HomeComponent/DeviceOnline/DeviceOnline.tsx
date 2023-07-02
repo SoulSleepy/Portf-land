@@ -11,13 +11,13 @@ export const DeviceOnline = ({ deviceOnline, isLoading }: IProps) => {
     const { t } = useTranslation('home')
 
     const blockClasses =
-        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl pt-3 px-3 p-2  shadow-dark gap-2'
-    const titleClasses = 'flex font-medium h-8 items-center text-lg'
+        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl max-sm:p-2 p-3 pb-2 shadow-dark gap-2'
+    const titleClasses = 'flex font-medium max-sm:h-6 h-8 items-center max-sm:text-base text-lg'
     const hrClasses = 'border-none bg-text-light dark:bg-text-lightD h-[1.5px] w-full'
     const devicesOnlineClasses =
         'relative flex items-center justify-center h-14 w-14 rounded-[28px] bg-light-lighter dark:bg-light-lighterD border-2'
     const newDevice =
-        'absolute flex items-center justify-center h-7 w-7 -top-2 -right-1 bg-light-lighter dark:bg-light-lighterD border rounded-[20px]'
+        'absolute flex items-center justify-center h-7 w-7 -top-2 -right-1 bg-light-lighter dark:bg-darkDD border rounded-[20px]'
 
     return (
         <div className={blockClasses}>

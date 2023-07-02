@@ -18,12 +18,12 @@ export const HomeWeb = () => {
     const [setWifi] = useLazySetToggleWiFiQuery()
 
     const blockClasses =
-        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2'
-    const titleClasses = 'flex font-medium h-8 items-center text-lg'
+        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl max-sm:p-2 p-3 shadow-dark gap-2'
+    const titleClasses = 'flex font-medium max-sm:h-6 h-8 items-center max-sm:text-base text-lg'
     const hrClasses =
         'border-none bg-text-light dark:bg-text-lightD h-[1.5px] w-full'
     const btnClasses = cn(
-        'dark:bg-light-lighterD flex flex-col items-center justify-center h-8 w-[120px] cursor-pointer outline outline-0 hover:outline-1 hover:font-medium bg-light-lighter rounded-sm ml-auto',
+        'dark:bg-light-lighterD flex flex-col items-center justify-center h-8 max-sm:w-[160px] w-[120px] cursor-pointer outline outline-0 hover:outline-1 hover:font-medium bg-light-lighter rounded-sm max-sm:ml-0 ml-auto',
         { 'opacity-30 hover:outline-none hover:font-normal': timeoutOn }
     )
 
@@ -38,20 +38,20 @@ export const HomeWeb = () => {
 
     return (
         <div className={blockClasses}>
-            <div className='flex flex-row items-center justify-between h-8'>
+            <div className='flex flex-row items-center justify-between max-sm:h-6 h-8'>
                 <p className={titleClasses}>{t('home network')}</p>
                 <Loader size={75} children={''} isLoading={timeoutOn}/>
             </div>
             <hr className={hrClasses} />
-            <div className='flex flex-col gap-4 h-28'>
+            <div className='flex flex-col gap-4 max-sm:h-56 h-28'>
                 <Loader isLoading={isLoading}>
                     {typeof data !== 'string' && data?.map((item) => {
                         return (
                             <div
                                 key={item.name}
-                                className='flex flex-row h-[52px] gap-[10px] items-center'
+                                className='flex max-sm:flex-col flex-row max-sm:h-[104px] h-[52px] max-sm:gap-[5px] gap-[10px] items-center'
                             >
-                                <div className='flex flex-row gap-5 items-center'>
+                                <div className='flex flex-row max-sm:gap-2 gap-5 items-center'>
                                     <div className='scale-75'>
                                         {item.enabled === true ? (
                                             <WifiOnIcon />

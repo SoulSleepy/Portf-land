@@ -1,4 +1,4 @@
-import { IGetDangerInfo, ITaskItem } from 'types/types'
+import { ITaskItem } from 'types/types'
 import { DangerIcon } from 'components/Icons/Icons'
 import { toDate } from 'helpers/softFunctions'
 import { GetDangerItemModal } from 'components/Modals/GetDangerItemModal'
@@ -26,8 +26,8 @@ export const LastDangers = ({ dangerList, isLoading }: IProps) => {
     }
 
     const blockClasses =
-        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2 h-[322px]'
-    const titleClasses = 'flex font-medium h-8 items-center text-lg'
+        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl max-sm:p-2 p-3 shadow-dark gap-2 h-[322px]'
+    const titleClasses = 'flex font-medium max-sm:h-6 h-8 items-center max-sm:text-base text-lg'
     const hrClasses =
         'border-none bg-text-light dark:bg-text-lightD h-[1.5px] w-full'
     const eventDangerClasses =
@@ -66,7 +66,7 @@ export const LastDangers = ({ dangerList, isLoading }: IProps) => {
                             )
                         })
                     ) : (
-                        <p className='text-lg flex items-center justify-center h-full'>
+                        <p className='max-sm:text-base text-lg flex items-center justify-center h-full'>
                             {t('no vulnerabilities')}
                         </p>
                     )}

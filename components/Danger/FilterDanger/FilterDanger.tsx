@@ -205,7 +205,7 @@ export const FilterDanger = ({ isClosed }: IProps) => {
                     />
                 </div>
             </div>
-            <div className='flex flex-row gap-2 justify-around'>
+            <div className='flex max-lg:flex-col flex-row gap-2 justify-around'>
                 <button className={btnFilter} type='submit'>
                     {t('apply')}
                 </button>

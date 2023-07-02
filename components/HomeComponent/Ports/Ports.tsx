@@ -14,8 +14,8 @@ export const Ports = ({ ports, isLoading }: IProps) => {
     const { t } = useTranslation('home')
 
     const blockClasses =
-        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl p-3 shadow-dark gap-2'
-    const titleClasses = 'flex font-medium h-8 items-center text-lg'
+        'flex flex-col bg-light dark:bg-darkD dark:text-text-lightD rounded-xl max-sm:p-2 p-3 shadow-dark gap-2'
+    const titleClasses = 'flex font-medium max-sm:h-6 h-8 items-center max-sm:text-base text-lg'
     const hrClasses =
         'border-none bg-text-light dark:bg-text-lightD h-[1.5px] w-full'
     const portClasses =

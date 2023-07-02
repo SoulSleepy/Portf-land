@@ -28,7 +28,7 @@ export const ThemeButton = () => {
                     className=''
                     onClick={setTheme}
                 >
-                    {theme === 'dark' ? <DarkModeIcon /> : <LightModeIcon />}
+                    {theme === 'dark' ? <DarkModeIcon /> : <LightModeIcon fill='#18162bdc'/>}
                 </button>
             )}
         </div>

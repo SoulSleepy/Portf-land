@@ -7,11 +7,11 @@ export const LangButton = () => {
         <div className='text-lg uppercase h-8'>
             {locale === 'ru' ? (
                 <Link href={pathname} locale={'en'}>
-                    En
+                    English
                 </Link>
             ) : (
                 <Link href={pathname} locale={'ru'}>
-                    Ru
+                    Русский
                 </Link>
             )}
         </div>
