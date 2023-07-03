@@ -46,7 +46,7 @@ export const Users = () => {
                     type='text'
                     placeholder={`${t('search')}`} 
                 />МОЖНО ДОПИЛИТЬ ПРИ ВОЗМОЖНОСТИ */}
-                <div className='flex flex-col gap-2 h-[570px] overflow-auto'>
+                <div className='flex flex-col gap-2 h-[605px] overflow-auto'>
                     <Loader isLoading={isLoading}>
                         {data?.map((item) => {
                             return (

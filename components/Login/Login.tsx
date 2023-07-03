@@ -14,7 +14,7 @@ import { useTranslation } from 'next-i18next'
 
 export const Login = () => {
     const { t } = useTranslation('login')
-    const [updateTimeout, { data: dataTimeout, isLoading: isLoadUpdate }] =
+    const [updateTimeout, { data: dataTimeout }] =
         useLazyAuthTimeoutQuery()
     const [postAuthUser, { data, isLoading }] = useLazyAuthUserQuery()
 
@@ -54,7 +54,7 @@ export const Login = () => {
                 <p className='z-10 font-medium text-2xl tracking-wider'>
                     {t('authorization')}
                 </p>
-                <Loader isLoading={isLoading || isLoadUpdate}>
+                <Loader isLoading={isLoading}>
                     <div className='flex mb-[-30px] items-center justify-center z-10 relative w-60'>
                         <p className='z-10 absolute'>
                             {timeoutLogin

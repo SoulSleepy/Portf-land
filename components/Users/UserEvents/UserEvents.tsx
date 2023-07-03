@@ -3,6 +3,7 @@ import { useLazyGetUserLogQuery } from 'state/rtk/users.rtk'
 import { useEffect } from 'react'
 import { Loader } from 'components/Loader'
 import { useTranslation } from 'next-i18next'
+import cn from 'classnames'
 
 interface IProps {
     userId: number
@@ -46,7 +47,7 @@ export const UserEvents = ({ userId }: IProps) => {
                                     {toDate(item.time)}
                                 </p>
                                 <p className={tableItemClasses}>{item.user}</p>
-                                <p className={tableItemClasses}>
+                                <p title={item.action} className={cn(tableItemClasses, 'truncate')}>
                                     {item.action}
                                 </p>
                                 <p className={tableItemClasses}>
