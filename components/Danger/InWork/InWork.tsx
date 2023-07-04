@@ -32,7 +32,7 @@ export const InWork = () => {
     const { data, isLoading } = useGetDangerListQuery(filter)
 
     return (
-        <div className='flex flex-col gap-2 h-[610px] overflow-auto'>
+        <div className='flex flex-col gap-2 max-m:h-[470px] h-[610px] overflow-auto'>
             <Loader isLoading={isLoading}>
                 {data?.length ? (
                     data?.map((item) => {
@@ -111,7 +111,7 @@ export const InWork = () => {
                         )
                     })
                 ) : (
-                    <p className='max-md:text-lg flex flex-col items-center justify-center text-2xl h-full'>
+                    <p className='flex flex-col items-center justify-center max-md:text-lg text-2xl h-full'>
                         {t('no vulnerabilities found')}
                     </p>
                 )}

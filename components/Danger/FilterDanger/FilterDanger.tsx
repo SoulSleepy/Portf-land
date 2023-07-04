@@ -130,79 +130,89 @@ export const FilterDanger = ({ isClosed }: IProps) => {
         'bg-light dark:bg-darkD font-medium absolute -top-[13px] left-1 leading-[17px]'
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
-            {!isLoading && (
-                <CustomSelect
-                    changeValue={onChangeValue}
-                    defaultValue={t(defaultValueDevice)}
-                    selectName={t('devices')}
-                    selectOptions={selectOptions}
-                />
-            )}
-            <div className='flex flex-col gap-2'>
-                <p>{t('severity')}</p>
-                <div className='flex flex-col'>
-                    <div className='relative h-1 rounded-md bg-text-light'>
-                        <div
-                            className='absolute h-1 bg-primary'
-                            style={{
-                                left: minValue * 10 + '%',
-                                right: (10 - maxValue) * 10 + '%',
-                            }}
-                        ></div>
-                    </div>
-                    <div className='relative'>
-                        <input
-                            onChange={handleMin}
-                            className={inputClasses}
-                            type='range'
-                            min={0}
-                            max={10}
-                            value={minValue}
+        <form
+            onSubmit={handleSubmit(onSubmit)}
+            className='flex flex-col gap-6'
+        >
+            <div className='flex max-s:flex-col max-m:flex-row flex-col max-s:gap-6 max-m:gap-10 gap-6'>
+                <div className='flex flex-col gap-6'>
+                    {!isLoading && (
+                        <CustomSelect
+                            changeValue={onChangeValue}
+                            defaultValue={t(defaultValueDevice)}
+                            selectName={t('devices')}
+                            selectOptions={selectOptions}
                         />
-                        <input
-                            onChange={handleMax}
-                            className={inputClasses}
-                            type='range'
-                            min={0}
-                            max={10}
-                            value={maxValue}
-                        />
-                        <div className='flex flex-row justify-between mt-2'>
-                            {dangerLevel.map((item) => {
-                                return (
-                                    <div
-                                        key={item}
-                                        className={cn('w-[14px] text-center', {
-                                            ['scale-125 font-semibold text-primary']:
-                                                item === minValue ||
-                                                item === maxValue,
-                                        })}
-                                    >
-                                        {item}
-                                    </div>
-                                )
-                            })}
+                    )}
+                    <div className='flex flex-col gap-2'>
+                        <p>{t('severity')}</p>
+                        <div className='flex flex-col'>
+                            <div className='relative h-1 rounded-md bg-text-light'>
+                                <div
+                                    className='absolute h-1 bg-primary'
+                                    style={{
+                                        left: minValue * 10 + '%',
+                                        right: (10 - maxValue) * 10 + '%',
+                                    }}
+                                ></div>
+                            </div>
+                            <div className='relative'>
+                                <input
+                                    onChange={handleMin}
+                                    className={inputClasses}
+                                    type='range'
+                                    min={0}
+                                    max={10}
+                                    value={minValue}
+                                />
+                                <input
+                                    onChange={handleMax}
+                                    className={inputClasses}
+                                    type='range'
+                                    min={0}
+                                    max={10}
+                                    value={maxValue}
+                                />
+                                <div className='flex flex-row justify-between mt-2'>
+                                    {dangerLevel.map((item) => {
+                                        return (
+                                            <div
+                                                key={item}
+                                                className={cn(
+                                                    'w-[14px] text-center',
+                                                    {
+                                                        ['scale-125 font-semibold text-primary']:
+                                                            item === minValue ||
+                                                            item === maxValue,
+                                                    }
+                                                )}
+                                            >
+                                                {item}
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className='flex flex-col gap-6 mt-4'>
-                <div className='relative'>
-                    <label className={labelDate}>{t('from')}</label>
-                    <input
-                        className={inputDate}
-                        type='date'
-                        {...register('startDate')}
-                    />
-                </div>
-                <div className='relative'>
-                    <label className={labelDate}>{t('to')}</label>
-                    <input
-                        className={inputDate}
-                        type='date'
-                        {...register('finishDate')}
-                    />
+                <div className='flex flex-col max-s:gap-6 max-m:gap-12 gap-6 max-m:mt-0 mt-4'>
+                    <div className='relative'>
+                        <label className={labelDate}>{t('from')}</label>
+                        <input
+                            className={inputDate}
+                            type='date'
+                            {...register('startDate')}
+                        />
+                    </div>
+                    <div className='relative'>
+                        <label className={labelDate}>{t('to')}</label>
+                        <input
+                            className={inputDate}
+                            type='date'
+                            {...register('finishDate')}
+                        />
+                    </div>
                 </div>
             </div>
             <div className='flex max-lg:flex-col flex-row gap-2 justify-around'>

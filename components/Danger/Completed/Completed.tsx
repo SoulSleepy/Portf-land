@@ -31,7 +31,7 @@ export const Completed = () => {
     const { data, isLoading } = useGetDangerListQuery(filter)
 
     return (
-        <div className='flex flex-col gap-2 h-[610px] overflow-auto'>
+        <div className='flex flex-col gap-2 max-m:h-[470px] h-[610px] overflow-auto'>
             <Loader isLoading={isLoading}>
                 {data?.length ? (
                     data?.map((item) => {

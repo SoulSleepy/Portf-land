@@ -15,9 +15,8 @@ interface IEventFilterForm {
 
 export const FilterEvent = () => {
     const { t } = useTranslation('events')
-
     const [selectOptions, setSelectOptions] = useState(['всe'])
-
+    
     const { setFilterData, resetFilter } = useFilter()
 
     const { data: dataFilter, isLoading } = useGetDevicesQuery()
